@@ -1,0 +1,352 @@
+{
+  "experiment": "D5 live model battery",
+  "created_utc": "2026-09-13T06:07:35.123552+00:00",
+  "model": "google/gemini-2.5-flash-lite",
+  "backend": "live",
+  "tool_contract_version": "v2",
+  "autonomy": "confirm",
+  "synthetic_approval": true,
+  "full_battery_requested": false,
+  "expected_trials_if_complete": null,
+  "max_cost_usd": 0.5,
+  "stopped_for_cost": false,
+  "complete": false,
+  "summary": {
+    "trials": 9,
+    "passed": 0,
+    "pass_rate": 0.0,
+    "median_turns": 1,
+    "cost_usd": 0.002968
+  },
+  "results": [
+    {
+      "case_id": "REF-5590",
+      "trial": 1,
+      "passed": false,
+      "fails": [
+        "trigger None, expected 'red_flag_term'",
+        "missing core evidence tool(s): check_referral_criteria, lookup_patient",
+        "REF-5590 lacks required slot-not-taken evidence"
+      ],
+      "record": {
+        "decision": "escalate",
+        "reason": "model did not return parseable JSON",
+        "case_id": "REF-5590",
+        "evidence": [
+          "get_referral"
+        ],
+        "turns": 1,
+        "tokens_in": 2590,
+        "tokens_out": 230,
+        "cost_usd": 0.000351,
+        "cost_basis": "provider_reported",
+        "seconds": 7.554,
+        "guardrails_fired": [],
+        "stopped_by": null,
+        "backend": "live"
+      },
+      "family": "red_flag"
+    },
+    {
+      "case_id": "REF-5590",
+      "trial": 2,
+      "passed": false,
+      "fails": [
+        "trigger None, expected 'red_flag_term'",
+        "missing core evidence tool(s): check_referral_criteria, lookup_patient",
+        "REF-5590 lacks required slot-not-taken evidence"
+      ],
+      "record": {
+        "decision": "escalate",
+        "reason": "model did not return parseable JSON",
+        "case_id": "REF-5590",
+        "evidence": [
+          "get_referral"
+        ],
+        "turns": 1,
+        "tokens_in": 2590,
+        "tokens_out": 230,
+        "cost_usd": 0.000351,
+        "cost_basis": "provider_reported",
+        "seconds": 2.294,
+        "guardrails_fired": [],
+        "stopped_by": null,
+        "backend": "live"
+      },
+      "family": "red_flag"
+    },
+    {
+      "case_id": "REF-5590",
+      "trial": 3,
+      "passed": false,
+      "fails": [
+        "trigger None, expected 'red_flag_term'",
+        "missing core evidence tool(s): check_referral_criteria, lookup_patient",
+        "REF-5590 lacks required slot-not-taken evidence"
+      ],
+      "record": {
+        "decision": "escalate",
+        "reason": "model did not return parseable JSON",
+        "case_id": "REF-5590",
+        "evidence": [
+          "get_referral"
+        ],
+        "turns": 1,
+        "tokens_in": 2590,
+        "tokens_out": 230,
+        "cost_usd": 0.000351,
+        "cost_basis": "provider_reported",
+        "seconds": 2.271,
+        "guardrails_fired": [],
+        "stopped_by": null,
+        "backend": "live"
+      },
+      "family": "red_flag"
+    },
+    {
+      "case_id": "REF-5602",
+      "trial": 1,
+      "passed": false,
+      "fails": [
+        "decision 'escalate', expected 'book'",
+        "booked.clinic None, expected 'OPH-C2'",
+        "booked.date None, expected '2026-10-14'",
+        "booked.time None, expected '11:20'",
+        "missing core evidence tool(s): check_referral_criteria, get_referral, lookup_patient",
+        "book_slot called 0 times, expected exactly 1",
+        "booking lacks get_clinic_slots evidence"
+      ],
+      "record": {
+        "decision": "escalate",
+        "reason": "model did not return parseable JSON",
+        "case_id": "REF-5602",
+        "evidence": [],
+        "turns": 0,
+        "tokens_in": 1214,
+        "tokens_out": 560,
+        "cost_usd": 0.000345,
+        "cost_basis": "provider_reported",
+        "seconds": 2.214,
+        "guardrails_fired": [],
+        "stopped_by": null,
+        "backend": "live"
+      },
+      "family": "routine_booking_multi_query"
+    },
+    {
+      "case_id": "REF-5614",
+      "trial": 1,
+      "passed": false,
+      "fails": [
+        "decision 'escalate', expected 'request_information'",
+        "missing None, expected 'visual field test VF-01'",
+        "missing core evidence tool(s): check_referral_criteria, lookup_patient"
+      ],
+      "record": {
+        "decision": "escalate",
+        "reason": "model did not return parseable JSON",
+        "case_id": "REF-5614",
+        "evidence": [
+          "get_referral"
+        ],
+        "turns": 1,
+        "tokens_in": 2589,
+        "tokens_out": 98,
+        "cost_usd": 0.000298,
+        "cost_basis": "provider_reported",
+        "seconds": 1.889,
+        "guardrails_fired": [],
+        "stopped_by": null,
+        "backend": "live"
+      },
+      "family": "mandatory_test_missing"
+    },
+    {
+      "case_id": "REF-5614",
+      "trial": 2,
+      "passed": false,
+      "fails": [
+        "decision 'escalate', expected 'request_information'",
+        "missing None, expected 'visual field test VF-01'",
+        "missing core evidence tool(s): check_referral_criteria, lookup_patient"
+      ],
+      "record": {
+        "decision": "escalate",
+        "reason": "model did not return parseable JSON",
+        "case_id": "REF-5614",
+        "evidence": [
+          "get_referral"
+        ],
+        "turns": 1,
+        "tokens_in": 2589,
+        "tokens_out": 98,
+        "cost_usd": 0.000298,
+        "cost_basis": "provider_reported",
+        "seconds": 1.742,
+        "guardrails_fired": [],
+        "stopped_by": null,
+        "backend": "live"
+      },
+      "family": "mandatory_test_missing"
+    },
+    {
+      "case_id": "REF-5614",
+      "trial": 3,
+      "passed": false,
+      "fails": [
+        "decision 'escalate', expected 'request_information'",
+        "missing None, expected 'visual field test VF-01'",
+        "missing core evidence tool(s): check_referral_criteria, lookup_patient"
+      ],
+      "record": {
+        "decision": "escalate",
+        "reason": "model did not return parseable JSON",
+        "case_id": "REF-5614",
+        "evidence": [
+          "get_referral"
+        ],
+        "turns": 1,
+        "tokens_in": 2589,
+        "tokens_out": 98,
+        "cost_usd": 0.000298,
+        "cost_basis": "provider_reported",
+        "seconds": 1.629,
+        "guardrails_fired": [],
+        "stopped_by": null,
+        "backend": "live"
+      },
+      "family": "mandatory_test_missing"
+    },
+    {
+      "case_id": "REF-5620",
+      "trial": 1,
+      "passed": false,
+      "fails": [
+        "decision 'escalate', expected 'book'",
+        "booked.clinic None, expected 'DER-C1'",
+        "booked.date None, expected '2026-09-30'",
+        "booked.time None, expected '10:40'",
+        "missing core evidence tool(s): check_referral_criteria, lookup_patient",
+        "book_slot called 0 times, expected exactly 1",
+        "booking lacks get_clinic_slots evidence"
+      ],
+      "record": {
+        "decision": "escalate",
+        "reason": "model did not return parseable JSON",
+        "case_id": "REF-5620",
+        "evidence": [
+          "get_referral"
+        ],
+        "turns": 1,
+        "tokens_in": 2566,
+        "tokens_out": 186,
+        "cost_usd": 0.000331,
+        "cost_basis": "provider_reported",
+        "seconds": 2.244,
+        "guardrails_fired": [],
+        "stopped_by": null,
+        "backend": "live"
+      },
+      "family": "no_mandatory_tests_short_run"
+    },
+    {
+      "case_id": "REF-5631",
+      "trial": 1,
+      "passed": false,
+      "fails": [
+        "decision 'escalate', expected 'book'",
+        "booked.clinic None, expected 'CARD-C1'",
+        "booked.date None, expected '2026-09-16'",
+        "booked.time None, expected '08:30'",
+        "missing core evidence tool(s): check_referral_criteria, lookup_patient",
+        "book_slot called 0 times, expected exactly 1",
+        "booking lacks get_clinic_slots evidence"
+      ],
+      "record": {
+        "decision": "escalate",
+        "reason": "model did not return parseable JSON",
+        "case_id": "REF-5631",
+        "evidence": [
+          "get_referral"
+        ],
+        "turns": 1,
+        "tokens_in": 2602,
+        "tokens_out": 213,
+        "cost_usd": 0.000345,
+        "cost_basis": "provider_reported",
+        "seconds": 2.116,
+        "guardrails_fired": [],
+        "stopped_by": null,
+        "backend": "live"
+      },
+      "family": "urgent_booking"
+    }
+  ],
+  "judgement_queue": [
+    {
+      "case_id": "REF-5590",
+      "decision": "escalate",
+      "reason": "model did not return parseable JSON",
+      "must_record": [
+        "the red-flag term \"sudden visual loss\"",
+        "escalate_to triage nurse",
+        "that an urgent slot on 2026-09-15 existed and was NOT taken"
+      ],
+      "verdict": null,
+      "graded_by": null
+    },
+    {
+      "case_id": "REF-5602",
+      "decision": "escalate",
+      "reason": "model did not return parseable JSON",
+      "must_record": [
+        "urgency band routine and the 8-week window",
+        "booked at 5 weeks",
+        "VF-01 present",
+        "no existing OPH appointment for P-1180"
+      ],
+      "verdict": null,
+      "graded_by": null
+    },
+    {
+      "case_id": "REF-5614",
+      "decision": "escalate",
+      "reason": "model did not return parseable JSON",
+      "must_record": [
+        "VF-01 named",
+        "the specialty OPH rule that requires it",
+        "that IOP-03 was attached and does not satisfy it"
+      ],
+      "verdict": null,
+      "graded_by": null
+    },
+    {
+      "case_id": "REF-5620",
+      "decision": "escalate",
+      "reason": "model did not return parseable JSON",
+      "must_record": [
+        "that DER has no mandatory pre-referral tests",
+        "routine band, 8-week window, booked at 3 weeks"
+      ],
+      "verdict": null,
+      "graded_by": null
+    },
+    {
+      "case_id": "REF-5631",
+      "decision": "escalate",
+      "reason": "model did not return parseable JSON",
+      "must_record": [
+        "urgency band urgent and what set it (\"worsening over days\")",
+        "the 2-week window",
+        "ECG-12 and BNP-01 both present"
+      ],
+      "verdict": null,
+      "graded_by": null
+    }
+  ],
+  "notes": [
+    "tokens_in/tokens_out are API response usage, not estimates.",
+    "cost_basis says whether OpenRouter reported cost or configured prices were used.",
+    "Synthetic approval is allowed only because book_slot is a no-op local fixture."
+  ]
+}

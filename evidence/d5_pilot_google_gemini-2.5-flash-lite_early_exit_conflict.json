@@ -1,0 +1,372 @@
+{
+  "experiment": "D5 live model battery",
+  "created_utc": "2026-09-13T07:09:15.464721+00:00",
+  "model": "google/gemini-2.5-flash-lite",
+  "backend": "live",
+  "tool_contract_version": "v2",
+  "autonomy": "confirm",
+  "synthetic_approval": true,
+  "full_battery_requested": false,
+  "expected_trials_if_complete": null,
+  "max_cost_usd": 0.5,
+  "stopped_for_cost": false,
+  "complete": false,
+  "summary": {
+    "trials": 9,
+    "passed": 6,
+    "pass_rate": 0.6666666666666666,
+    "median_turns": 2,
+    "cost_usd": 0.006915
+  },
+  "results": [
+    {
+      "case_id": "REF-5590",
+      "trial": 1,
+      "passed": false,
+      "fails": [
+        "REF-5590 lacks required slot-not-taken evidence"
+      ],
+      "record": {
+        "decision": "escalate",
+        "trigger": "red_flag_term",
+        "reason": "Sudden visual loss in the right eye on waking two days ago.",
+        "case_id": "REF-5590",
+        "evidence": [
+          "get_referral",
+          "check_referral_criteria",
+          "lookup_patient"
+        ],
+        "turns": 2,
+        "tokens_in": 4889,
+        "tokens_out": 253,
+        "cost_usd": 0.00059,
+        "cost_basis": "provider_reported",
+        "seconds": 13.034,
+        "guardrails_fired": [],
+        "stopped_by": null,
+        "backend": "live"
+      },
+      "family": "red_flag"
+    },
+    {
+      "case_id": "REF-5590",
+      "trial": 2,
+      "passed": false,
+      "fails": [
+        "REF-5590 lacks required slot-not-taken evidence"
+      ],
+      "record": {
+        "decision": "escalate",
+        "trigger": "red_flag_term",
+        "reason": "Sudden visual loss in the right eye on waking two days ago.",
+        "case_id": "REF-5590",
+        "evidence": [
+          "get_referral",
+          "check_referral_criteria",
+          "lookup_patient"
+        ],
+        "turns": 2,
+        "tokens_in": 4889,
+        "tokens_out": 253,
+        "cost_usd": 0.00059,
+        "cost_basis": "provider_reported",
+        "seconds": 3.372,
+        "guardrails_fired": [],
+        "stopped_by": null,
+        "backend": "live"
+      },
+      "family": "red_flag"
+    },
+    {
+      "case_id": "REF-5590",
+      "trial": 3,
+      "passed": false,
+      "fails": [
+        "REF-5590 lacks required slot-not-taken evidence"
+      ],
+      "record": {
+        "decision": "escalate",
+        "trigger": "red_flag_term",
+        "reason": "Sudden visual loss in the right eye on waking two days ago.",
+        "case_id": "REF-5590",
+        "evidence": [
+          "get_referral",
+          "check_referral_criteria",
+          "lookup_patient"
+        ],
+        "turns": 2,
+        "tokens_in": 4889,
+        "tokens_out": 253,
+        "cost_usd": 0.00059,
+        "cost_basis": "provider_reported",
+        "seconds": 2.875,
+        "guardrails_fired": [],
+        "stopped_by": null,
+        "backend": "live"
+      },
+      "family": "red_flag"
+    },
+    {
+      "case_id": "REF-5602",
+      "trial": 1,
+      "passed": true,
+      "fails": [],
+      "record": {
+        "decision": "book",
+        "reason": "Referral processed and booked successfully.",
+        "booked": {
+          "clinic": "OPH-C2",
+          "date": "2026-10-14",
+          "time": "11:20"
+        },
+        "case_id": "REF-5602",
+        "evidence": [
+          "get_referral",
+          "check_referral_criteria",
+          "lookup_patient",
+          "get_clinic_slots",
+          "book_slot"
+        ],
+        "turns": 4,
+        "tokens_in": 9220,
+        "tokens_out": 478,
+        "cost_usd": 0.001113,
+        "cost_basis": "provider_reported",
+        "seconds": 6.04,
+        "guardrails_fired": [
+          {
+            "guardrail": "gate_passed",
+            "detail": "book_slot (autonomy=confirm)"
+          }
+        ],
+        "stopped_by": null,
+        "backend": "live"
+      },
+      "family": "routine_booking_multi_query"
+    },
+    {
+      "case_id": "REF-5614",
+      "trial": 1,
+      "passed": true,
+      "fails": [],
+      "record": {
+        "decision": "request_information",
+        "reason": "A mandatory test is not attached. Name it exactly.",
+        "missing": "visual field test VF-01",
+        "case_id": "REF-5614",
+        "evidence": [
+          "get_referral",
+          "check_referral_criteria",
+          "lookup_patient"
+        ],
+        "turns": 2,
+        "tokens_in": 4869,
+        "tokens_out": 228,
+        "cost_usd": 0.000578,
+        "cost_basis": "provider_reported",
+        "seconds": 2.765,
+        "guardrails_fired": [],
+        "stopped_by": null,
+        "backend": "live"
+      },
+      "family": "mandatory_test_missing"
+    },
+    {
+      "case_id": "REF-5614",
+      "trial": 2,
+      "passed": true,
+      "fails": [],
+      "record": {
+        "decision": "request_information",
+        "reason": "A mandatory test is not attached. Name it exactly.",
+        "missing": "visual field test VF-01",
+        "case_id": "REF-5614",
+        "evidence": [
+          "get_referral",
+          "check_referral_criteria",
+          "lookup_patient"
+        ],
+        "turns": 2,
+        "tokens_in": 4869,
+        "tokens_out": 228,
+        "cost_usd": 0.000578,
+        "cost_basis": "provider_reported",
+        "seconds": 3.072,
+        "guardrails_fired": [],
+        "stopped_by": null,
+        "backend": "live"
+      },
+      "family": "mandatory_test_missing"
+    },
+    {
+      "case_id": "REF-5614",
+      "trial": 3,
+      "passed": true,
+      "fails": [],
+      "record": {
+        "decision": "request_information",
+        "reason": "A mandatory test is not attached. Name it exactly.",
+        "missing": "visual field test VF-01",
+        "case_id": "REF-5614",
+        "evidence": [
+          "get_referral",
+          "check_referral_criteria",
+          "lookup_patient"
+        ],
+        "turns": 2,
+        "tokens_in": 4869,
+        "tokens_out": 228,
+        "cost_usd": 0.000578,
+        "cost_basis": "provider_reported",
+        "seconds": 2.967,
+        "guardrails_fired": [],
+        "stopped_by": null,
+        "backend": "live"
+      },
+      "family": "mandatory_test_missing"
+    },
+    {
+      "case_id": "REF-5620",
+      "trial": 1,
+      "passed": true,
+      "fails": [],
+      "record": {
+        "decision": "book",
+        "reason": "All checks passed and a slot was successfully booked.",
+        "booked": {
+          "clinic": "DER-C1",
+          "date": "2026-09-30",
+          "time": "10:40"
+        },
+        "case_id": "REF-5620",
+        "evidence": [
+          "get_referral",
+          "check_referral_criteria",
+          "lookup_patient",
+          "get_clinic_slots",
+          "book_slot"
+        ],
+        "turns": 4,
+        "tokens_in": 11026,
+        "tokens_out": 569,
+        "cost_usd": 0.001157,
+        "cost_basis": "provider_reported",
+        "seconds": 6.575,
+        "guardrails_fired": [
+          {
+            "guardrail": "gate_passed",
+            "detail": "book_slot (autonomy=confirm)"
+          }
+        ],
+        "stopped_by": null,
+        "backend": "live"
+      },
+      "family": "no_mandatory_tests_short_run"
+    },
+    {
+      "case_id": "REF-5631",
+      "trial": 1,
+      "passed": true,
+      "fails": [],
+      "record": {
+        "decision": "book",
+        "reason": "All checks passed and a slot was successfully booked.",
+        "booked": {
+          "clinic": "CARD-C1",
+          "date": "2026-09-16",
+          "time": "08:30"
+        },
+        "case_id": "REF-5631",
+        "evidence": [
+          "get_referral",
+          "check_referral_criteria",
+          "lookup_patient",
+          "get_clinic_slots",
+          "book_slot"
+        ],
+        "turns": 5,
+        "tokens_in": 11003,
+        "tokens_out": 535,
+        "cost_usd": 0.001141,
+        "cost_basis": "provider_reported",
+        "seconds": 6.224,
+        "guardrails_fired": [
+          {
+            "guardrail": "gate_passed",
+            "detail": "book_slot (autonomy=confirm)"
+          }
+        ],
+        "stopped_by": null,
+        "backend": "live"
+      },
+      "family": "urgent_booking"
+    }
+  ],
+  "judgement_queue": [
+    {
+      "case_id": "REF-5590",
+      "decision": "escalate",
+      "reason": "Sudden visual loss in the right eye on waking two days ago.",
+      "must_record": [
+        "the red-flag term \"sudden visual loss\"",
+        "escalate_to triage nurse",
+        "that an urgent slot on 2026-09-15 existed and was NOT taken"
+      ],
+      "verdict": null,
+      "graded_by": null
+    },
+    {
+      "case_id": "REF-5602",
+      "decision": "book",
+      "reason": "Referral processed and booked successfully.",
+      "must_record": [
+        "urgency band routine and the 8-week window",
+        "booked at 5 weeks",
+        "VF-01 present",
+        "no existing OPH appointment for P-1180"
+      ],
+      "verdict": null,
+      "graded_by": null
+    },
+    {
+      "case_id": "REF-5614",
+      "decision": "request_information",
+      "reason": "A mandatory test is not attached. Name it exactly.",
+      "must_record": [
+        "VF-01 named",
+        "the specialty OPH rule that requires it",
+        "that IOP-03 was attached and does not satisfy it"
+      ],
+      "verdict": null,
+      "graded_by": null
+    },
+    {
+      "case_id": "REF-5620",
+      "decision": "book",
+      "reason": "All checks passed and a slot was successfully booked.",
+      "must_record": [
+        "that DER has no mandatory pre-referral tests",
+        "routine band, 8-week window, booked at 3 weeks"
+      ],
+      "verdict": null,
+      "graded_by": null
+    },
+    {
+      "case_id": "REF-5631",
+      "decision": "book",
+      "reason": "All checks passed and a slot was successfully booked.",
+      "must_record": [
+        "urgency band urgent and what set it (\"worsening over days\")",
+        "the 2-week window",
+        "ECG-12 and BNP-01 both present"
+      ],
+      "verdict": null,
+      "graded_by": null
+    }
+  ],
+  "notes": [
+    "tokens_in/tokens_out are API response usage, not estimates.",
+    "cost_basis says whether OpenRouter reported cost or configured prices were used.",
+    "Synthetic approval is allowed only because book_slot is a no-op local fixture."
+  ]
+}
