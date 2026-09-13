@@ -51,8 +51,8 @@ def run_case(case_id, problem=None, approve=None, verbose=False):
     #     python3 run_eval.py --prompt      to see the exact text
     backend = make_backend(
         case_id,
-        tool_descriptors=[tools.DESCRIPTORS[n] for n in tools.REGISTRY[problem]
-                          if n in tools.DESCRIPTORS],
+        tool_descriptors=[tools.descriptors()[n] for n in tools.REGISTRY[problem]
+                          if n in tools.descriptors()],
         system_prompt=prompt.build_system_prompt(problem))
 
     # The live model needs an explicit task, not only its operating manual.

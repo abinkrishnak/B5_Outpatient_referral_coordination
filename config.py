@@ -39,6 +39,10 @@ API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
 # ─────────────────────────────────────────────────────────────────────
 PROBLEM = "B"
 
+# D2(b): hold the model constant and change only this tool contract when
+# comparing V1 (loose strings) with V2 (closed, validated values).
+TOOL_CONTRACT_VERSION = "v2"  # "v1" | "v2"
+
 # ─────────────────────────────────────────────────────────────────────
 # GUARDRAIL LIMITS (D3a). These are the code layer. Set them from
 # EVIDENCE, not from a round number - see D7. If your median run is 4

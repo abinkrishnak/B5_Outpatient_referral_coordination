@@ -55,7 +55,7 @@
         "tokens_in": 10800,
         "tokens_out": 360,
         "cost_usd": 0.001224,
-        "seconds": 0.001,
+        "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
         "backend": "scripted"

@@ -17,7 +17,7 @@ an experiment.
 
 So the chain is deliberately short and visible:
 
-    tools.DESCRIPTORS  ->  build_system_prompt()  ->  the system message
+    tools.descriptors()  ->  build_system_prompt()  ->  the system message
 
 Change a descriptor, run `--prompt`, and you can see the difference in
 the text the model receives. That difference is your v1 -> v2.
@@ -133,19 +133,20 @@ def build_system_prompt(problem=None):
     measured.
     """
     problem = problem or config.PROBLEM
+    descriptors = tools.descriptors()
 
     names = sorted(tools.REGISTRY[problem])
 
     described = [
-        tools.DESCRIPTORS[name]
+        descriptors[name]
         for name in names
-        if name in tools.DESCRIPTORS
+        if name in descriptors
     ]
 
     undescribed = [
         name
         for name in names
-        if name not in tools.DESCRIPTORS
+        if name not in descriptors
     ]
 
     parts = [RULES[problem]]
@@ -195,9 +196,10 @@ def audit(problem=None):
     to earn that on every single turn of every single run.
     """
     problem = problem or config.PROBLEM
+    descriptors = tools.descriptors()
     text = build_system_prompt(problem)
     names = sorted(tools.REGISTRY[problem])
-    missing = [n for n in names if n not in tools.DESCRIPTORS]
+    missing = [n for n in names if n not in descriptors]
 
     print("=" * 68)
     print("  SYSTEM PROMPT - Problem %s - what the model is told before turn 1"
@@ -208,6 +210,7 @@ def audit(problem=None):
     print("  characters      %d" % len(text))
     print("  ~tokens         %d   (rough: chars/4)" % (len(text) // 4))
     print("  tools callable  %d" % len(names))
+    print("  contract version %s" % config.TOOL_CONTRACT_VERSION)
     print("  tools described %d" % (len(names) - len(missing)))
     if missing:
         print("  NO DESCRIPTOR   %s" % ", ".join(missing))

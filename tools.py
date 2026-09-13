@@ -56,6 +56,12 @@ import config
 
 _CACHE = {}
 
+# These are the only values a Problem B slot search can legally receive.
+# V2 enforces this set at runtime; V1 deliberately leaves the strings loose
+# for the D2(b) comparison.
+VALID_B_SPECIALTIES = frozenset({"OPH", "CARD", "ORT", "DER", "ENT", "NEU"})
+VALID_URGENCY_BANDS = frozenset({"urgent", "soon", "routine"})
+
 
 def _load(problem, table):
     """Read one JSON file, once, and keep it in memory.
@@ -110,19 +116,18 @@ def get_referral(referral_id):
 
 
 def lookup_patient(patient_id):
-    """Who the patient is, what they already have booked, and how to
-    reach them.
+    """Which future appointments could make this referral a duplicate.
 
-    WHAT IT DOES   answers the duplicate question and the contact question
-                   in one call.
-    READS          data_B/patients.json AND data_B/contacts.json
-    RETURNS        {"patient": {...}, "contact": {...}}
+    WHAT IT DOES   returns the existing appointments needed for the
+                   duplicate check.
+    READS          data_B/patients.json
+    RETURNS        {patient_id, existing_appointments[]}
     RETURNS NONE   when the patient_id matches nobody - again a broken
                    case, not an outcome.
-    WATCH OUT      contacts and patients share the SAME KEY. Reading
-                   contacts "through" patients would be a two-hop chain
-                   and an extra turn for nothing. Both are fetched here
-                   for that reason.
+    WATCH OUT      Contact details are deliberately NOT returned. This A2
+                   system never contacts a patient or creates a real booking;
+                   exposing unused contact data adds token cost and privacy
+                   surface without helping a routing decision.
 
     THE DUPLICATE RULE, because this is where teams lose the case:
     `patient["existing_appointments"]` is a duplicate only when BOTH are
@@ -139,9 +144,8 @@ def lookup_patient(patient_id):
               if x["patient_id"] == patient_id), None)
     if p is None:
         return None
-    c = next((x for x in _load("B", "contacts")
-              if x["patient_id"] == patient_id), None)
-    return {"patient": p, "contact": c}
+    return {"patient_id": p["patient_id"],
+            "existing_appointments": p.get("existing_appointments", [])}
 
 
 def check_referral_criteria(specialty, referral_id):
@@ -246,6 +250,20 @@ def get_clinic_slots(specialty, band, **window):
     it is a Python keyword and cannot be a normal parameter. That is a
     small ugliness bought deliberately, to keep the domain word.
     """
+    if config.TOOL_CONTRACT_VERSION == "v2":
+        invalid = {}
+        if specialty not in VALID_B_SPECIALTIES:
+            invalid["specialty"] = specialty
+        if band not in VALID_URGENCY_BANDS:
+            invalid["band"] = band
+        if invalid:
+            return {
+                "error": "invalid_slot_query",
+                "invalid": invalid,
+                "allowed_specialties": sorted(VALID_B_SPECIALTIES),
+                "allowed_bands": sorted(VALID_URGENCY_BANDS),
+            }
+
     lo = window.get("from", "0000-00-00")
     hi = window.get("to", "9999-99-99")
     return [s for s in _load("B", "clinic_slots")
@@ -587,12 +605,11 @@ DESCRIPTORS = {
     },
     "lookup_patient": {
         "name": "lookup_patient",
-        "purpose": "The patient's existing appointments and how to contact them.",
+        "purpose": "Find future appointments that could make this referral a duplicate.",
         "when": "Any time after get_referral. Independent of the criteria "
                 "check, so the two can go in one turn.",
         "args": {"patient_id": "str, from the referral"},
-        "returns": "{patient: {patient_id, date_of_birth, "
-                   "existing_appointments[]}, contact: {method, value}}",
+        "returns": "{patient_id, existing_appointments[]}",
         "failure": "Returns None when the patient does not exist - a broken "
                    "case. An EMPTY existing_appointments list is normal and "
                    "means nothing is booked, which is not the same thing.",
@@ -772,6 +789,36 @@ DESCRIPTORS = {
                    "- not a refusal. Deciding otherwise fails the case.",
     },
 }
+
+# D2(b) V1 -> V2: use the same five visible tools and routing rules. Only
+# get_clinic_slots changes. V1 permits a typo to be interpreted as an empty
+# result; V2 constrains its two categorical inputs and makes invalid values
+# observable so the agent can correct rather than falsely escalating.
+DESCRIPTORS_V1 = DESCRIPTORS
+DESCRIPTORS_V2 = {
+    name: {**descriptor, "args": dict(descriptor["args"])}
+    for name, descriptor in DESCRIPTORS_V1.items()
+}
+DESCRIPTORS_V2["get_clinic_slots"] = {
+    **DESCRIPTORS_V2["get_clinic_slots"],
+    "args": {
+        "specialty": "Literal[\"OPH\", \"CARD\", \"ORT\", \"DER\", \"ENT\", \"NEU\"], copied exactly from the referral",
+        "band": "Literal[\"urgent\", \"soon\", \"routine\"], copied exactly from check_referral_criteria",
+        "from/to": "str dates, the window measured from as_of()",
+    },
+    "returns": "list of free legal slots, OR {error: invalid_slot_query, invalid, allowed_specialties, allowed_bands}",
+    "failure": "V2 rejects an unknown specialty or band instead of treating it as no availability. Correct the value from the prior tool observation; never widen the window or substitute a band.",
+}
+
+
+def descriptors(version=None):
+    """Return the model-visible descriptor contract for one D2(b) version."""
+    version = version or config.TOOL_CONTRACT_VERSION
+    if version == "v1":
+        return DESCRIPTORS_V1
+    if version == "v2":
+        return DESCRIPTORS_V2
+    raise ValueError("TOOL_CONTRACT_VERSION must be 'v1' or 'v2'")
 
 
 def call(problem, name, args):
