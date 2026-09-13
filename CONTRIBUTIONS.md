@@ -1,13 +1,26 @@
 # Contributions
 
-Complete this file with your team’s real names before submission. Do not claim
-work performed by another person without their agreement.
+This table records the team declaration's planned ownership. Update the
+"Completed contribution" column with actual work and commit hashes before
+submission. Do not claim work performed by another person without agreement.
 
-| Team member | Contribution | Evidence / relevant files |
+| Team member | Declared responsibility | Completed contribution / evidence |
 |---|---|---|
-| Your name | Project integration, evaluation, report coordination | Add the relevant commit hashes and sections |
-| Teammate 1 | Replace with their actual contribution | Add files or commit hashes |
-| Teammate 2 | Replace with their actual contribution | Add files or commit hashes |
+| Zhao Xiaonan | D1, D2(a), D2(c): loop and tools | Confirm actual work and commits with Zhao. |
+| Ge Jiayao | D1, D2(a), D2(c): loop and tools | Confirm actual work and commits with Ge. |
+| Tan Jinxuan | D2(b), D3: descriptors, V1-to-V2 rewrite, guardrails | Confirm actual work and commits with Tan. |
+| Kaivelikkal Abin Krishna | D2(b), D3: descriptors, V1-to-V2 rewrite, guardrails | Current integration/checkpoint commits; add exact authored portions after team review. |
+| Wang Hanfei | D4, D5(a): evaluation harness and scripted run | Confirm actual work and commits with Wang. |
+| Liu Siwen | D6: cost model, ledger and sensitivity | Confirm actual work and commits with Liu. |
+
+## Shared obligations
+
+- Every member owns or reviews 5–8 evaluation cases in the `REF-6001` to
+  `REF-6025` range. Record the case IDs beside each name after allocation.
+- Every member runs one live-model experiment using their own private OpenRouter
+  key and commits only the resulting evidence, never a key.
+- Everyone reviews the report and presentation. The declaration is stored at
+  repository root as `TEAM_DECLARATION.docx`.
 
 ## Shared project assets
 
