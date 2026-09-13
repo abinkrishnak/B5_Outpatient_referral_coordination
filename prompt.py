@@ -102,7 +102,8 @@ one of: "red_flag_term", "specialty_mismatch",
 "instruction_in_referral_free_text". Put the clinical phrase or factual
 detail in "reason", not in "trigger".
 
-Put the exact missing test name in "missing" when you request. A final
+Put the exact missing test name AND its code in "missing" when you request:
+for example, "visual field test VF-01", not merely "visual field test". A final
 {"decision":"book"} is valid ONLY AFTER a separate earlier tool action
 called "book_slot" returned a booking confirmation. Put
 {"clinic","date","time"} in "booked" only after that action.

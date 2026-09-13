@@ -24,6 +24,7 @@ You cannot report a failure you had no way of noticing.
 ====================================================================
 """
 import time
+import re
 
 import config
 import prompt
@@ -102,6 +103,21 @@ def run_case(case_id, problem=None, approve=None, verbose=False):
             # ---- conclude -------------------------------------------
             if "final" in move:
                 record = dict(move["final"])
+                contract_error = _final_contract_error(record, evidence)
+                if contract_error:
+                    # Do not manufacture an action in Python.  Tell the same
+                    # ReAct model precisely which output invariant it broke,
+                    # then let it take its own next action from the existing
+                    # observations.  This is a schema/sequence check, not a
+                    # case-answer lookup or a second agent.
+                    transcript.append({"role": "assistant",
+                                       "content": move.get("thought", "")})
+                    transcript.append({"role": "user",
+                                       "content": "OUTPUT CONTRACT ERROR: %s "
+                                                  "Return the next valid JSON move; "
+                                                  "do not repeat prior tool calls."
+                                                  % contract_error})
+                    continue
                 break
 
             # ---- act: one turn may carry SEVERAL calls ---------------
@@ -173,3 +189,19 @@ def run_case(case_id, problem=None, approve=None, verbose=False):
 def _short(value, n=64):
     s = repr(value)
     return s if len(s) <= n else s[:n - 1] + "…"
+
+
+def _final_contract_error(record, evidence):
+    """Return an output-contract error without looking at the answer key.
+
+    These are format and action-sequence invariants that apply to every
+    Problem B referral. They deliberately do not decide whether a specific
+    patient should be booked.
+    """
+    if record.get("decision") == "book" and "book_slot" not in evidence:
+        return "a book decision requires an earlier book_slot action"
+    if record.get("decision") == "request_information":
+        missing = str(record.get("missing", ""))
+        if not re.search(r"\b[A-Z]{2,}-\d{2}\b", missing):
+            return "missing must name the mandatory test and its code, e.g. VF-01"
+    return None
