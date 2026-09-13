@@ -102,7 +102,14 @@ def code_check(record, expected):
                              % (field, got.get(field), expected["booked"][field]))
 
     evidence = record.get("evidence", [])
-    core_tools = {"get_referral", "check_referral_criteria", "lookup_patient"}
+    # Evidence requirements follow the routing order.  Requiring a patient
+    # lookup after a red flag or a missing mandatory test would punish the
+    # early exit we deliberately designed to save turns and cost.
+    core_tools = {"get_referral", "check_referral_criteria"}
+    trigger = expected.get("trigger")
+    if expected.get("expected_decision") == "book" or trigger in (
+            "duplicate_future_appointment", "no_slot_in_window"):
+        core_tools.add("lookup_patient")
     absent = sorted(core_tools - set(evidence))
     if absent:
         fails.append("missing core evidence tool(s): %s" % ", ".join(absent))
@@ -116,7 +123,7 @@ def code_check(record, expected):
     elif bookings != 0:
         fails.append("book_slot called %d times on non-book outcome" % bookings)
 
-    if expected.get("trigger") == "no_slot_in_window" and "get_clinic_slots" not in evidence:
+    if trigger == "no_slot_in_window" and "get_clinic_slots" not in evidence:
         fails.append("no-slot escalation lacks get_clinic_slots evidence")
     if record.get("case_id") == "REF-5590" and "get_clinic_slots" not in evidence:
         fails.append("REF-5590 lacks required slot-not-taken evidence")
