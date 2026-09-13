@@ -29,7 +29,8 @@
         "tokens_in": 16800,
         "tokens_out": 480,
         "cost_usd": 0.001872,
-        "seconds": 0.004,
+        "cost_basis": "configured_token_prices",
+        "seconds": 0.001,
         "guardrails_fired": [],
         "stopped_by": null,
         "backend": "scripted"
@@ -57,6 +58,7 @@
         "tokens_in": 16800,
         "tokens_out": 480,
         "cost_usd": 0.001872,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -85,6 +87,7 @@
         "tokens_in": 16800,
         "tokens_out": 480,
         "cost_usd": 0.001872,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -118,6 +121,7 @@
         "tokens_in": 24000,
         "tokens_out": 600,
         "cost_usd": 0.00264,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -149,6 +153,7 @@
         "tokens_in": 10800,
         "tokens_out": 360,
         "cost_usd": 0.001224,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -175,6 +180,7 @@
         "tokens_in": 10800,
         "tokens_out": 360,
         "cost_usd": 0.001224,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -201,6 +207,7 @@
         "tokens_in": 10800,
         "tokens_out": 360,
         "cost_usd": 0.001224,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -233,6 +240,7 @@
         "tokens_in": 24000,
         "tokens_out": 600,
         "cost_usd": 0.00264,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -270,6 +278,7 @@
         "tokens_in": 24000,
         "tokens_out": 600,
         "cost_usd": 0.00264,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -307,6 +316,7 @@
         "tokens_in": 24000,
         "tokens_out": 600,
         "cost_usd": 0.00264,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -338,6 +348,7 @@
         "tokens_in": 10800,
         "tokens_out": 360,
         "cost_usd": 0.001224,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -364,6 +375,7 @@
         "tokens_in": 10800,
         "tokens_out": 360,
         "cost_usd": 0.001224,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -390,6 +402,7 @@
         "tokens_in": 10800,
         "tokens_out": 360,
         "cost_usd": 0.001224,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -416,6 +429,7 @@
         "tokens_in": 10800,
         "tokens_out": 360,
         "cost_usd": 0.001224,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -442,6 +456,7 @@
         "tokens_in": 10800,
         "tokens_out": 360,
         "cost_usd": 0.001224,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -468,6 +483,7 @@
         "tokens_in": 10800,
         "tokens_out": 360,
         "cost_usd": 0.001224,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -495,6 +511,7 @@
         "tokens_in": 10800,
         "tokens_out": 360,
         "cost_usd": 0.001224,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -522,6 +539,7 @@
         "tokens_in": 10800,
         "tokens_out": 360,
         "cost_usd": 0.001224,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -549,6 +567,7 @@
         "tokens_in": 10800,
         "tokens_out": 360,
         "cost_usd": 0.001224,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -576,6 +595,7 @@
         "tokens_in": 10800,
         "tokens_out": 360,
         "cost_usd": 0.001224,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -603,6 +623,7 @@
         "tokens_in": 10800,
         "tokens_out": 360,
         "cost_usd": 0.001224,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -630,6 +651,7 @@
         "tokens_in": 10800,
         "tokens_out": 360,
         "cost_usd": 0.001224,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -658,6 +680,7 @@
         "tokens_in": 16800,
         "tokens_out": 480,
         "cost_usd": 0.001872,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -686,6 +709,7 @@
         "tokens_in": 16800,
         "tokens_out": 480,
         "cost_usd": 0.001872,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -714,6 +738,7 @@
         "tokens_in": 16800,
         "tokens_out": 480,
         "cost_usd": 0.001872,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -741,6 +766,7 @@
         "tokens_in": 10800,
         "tokens_out": 360,
         "cost_usd": 0.001224,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -768,6 +794,7 @@
         "tokens_in": 10800,
         "tokens_out": 360,
         "cost_usd": 0.001224,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -795,6 +822,7 @@
         "tokens_in": 10800,
         "tokens_out": 360,
         "cost_usd": 0.001224,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -822,6 +850,7 @@
         "tokens_in": 10800,
         "tokens_out": 360,
         "cost_usd": 0.001224,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -849,6 +878,7 @@
         "tokens_in": 10800,
         "tokens_out": 360,
         "cost_usd": 0.001224,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -876,6 +906,7 @@
         "tokens_in": 10800,
         "tokens_out": 360,
         "cost_usd": 0.001224,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -903,6 +934,7 @@
         "tokens_in": 10800,
         "tokens_out": 360,
         "cost_usd": 0.001224,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -930,6 +962,7 @@
         "tokens_in": 10800,
         "tokens_out": 360,
         "cost_usd": 0.001224,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -957,6 +990,7 @@
         "tokens_in": 10800,
         "tokens_out": 360,
         "cost_usd": 0.001224,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -989,6 +1023,7 @@
         "tokens_in": 24000,
         "tokens_out": 600,
         "cost_usd": 0.00264,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -1026,6 +1061,7 @@
         "tokens_in": 24000,
         "tokens_out": 600,
         "cost_usd": 0.00264,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -1063,6 +1099,7 @@
         "tokens_in": 24000,
         "tokens_out": 600,
         "cost_usd": 0.00264,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -1100,6 +1137,7 @@
         "tokens_in": 24000,
         "tokens_out": 600,
         "cost_usd": 0.00264,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -1137,6 +1175,7 @@
         "tokens_in": 24000,
         "tokens_out": 600,
         "cost_usd": 0.00264,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -1174,6 +1213,7 @@
         "tokens_in": 24000,
         "tokens_out": 600,
         "cost_usd": 0.00264,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -1211,6 +1251,7 @@
         "tokens_in": 24000,
         "tokens_out": 600,
         "cost_usd": 0.00264,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -1248,6 +1289,7 @@
         "tokens_in": 24000,
         "tokens_out": 600,
         "cost_usd": 0.00264,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -1285,6 +1327,7 @@
         "tokens_in": 24000,
         "tokens_out": 600,
         "cost_usd": 0.00264,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -1322,6 +1365,7 @@
         "tokens_in": 24000,
         "tokens_out": 600,
         "cost_usd": 0.00264,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -1359,6 +1403,7 @@
         "tokens_in": 24000,
         "tokens_out": 600,
         "cost_usd": 0.00264,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -1396,6 +1441,7 @@
         "tokens_in": 24000,
         "tokens_out": 600,
         "cost_usd": 0.00264,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -1433,6 +1479,7 @@
         "tokens_in": 24000,
         "tokens_out": 600,
         "cost_usd": 0.00264,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -1470,6 +1517,7 @@
         "tokens_in": 24000,
         "tokens_out": 600,
         "cost_usd": 0.00264,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -1507,6 +1555,7 @@
         "tokens_in": 24000,
         "tokens_out": 600,
         "cost_usd": 0.00264,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -1544,6 +1593,7 @@
         "tokens_in": 24000,
         "tokens_out": 600,
         "cost_usd": 0.00264,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -1581,6 +1631,7 @@
         "tokens_in": 24000,
         "tokens_out": 600,
         "cost_usd": 0.00264,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -1618,6 +1669,7 @@
         "tokens_in": 24000,
         "tokens_out": 600,
         "cost_usd": 0.00264,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -1655,6 +1707,7 @@
         "tokens_in": 24000,
         "tokens_out": 600,
         "cost_usd": 0.00264,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -1692,6 +1745,7 @@
         "tokens_in": 24000,
         "tokens_out": 600,
         "cost_usd": 0.00264,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -1729,6 +1783,7 @@
         "tokens_in": 24000,
         "tokens_out": 600,
         "cost_usd": 0.00264,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -1766,6 +1821,7 @@
         "tokens_in": 24000,
         "tokens_out": 600,
         "cost_usd": 0.00264,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -1803,6 +1859,7 @@
         "tokens_in": 24000,
         "tokens_out": 600,
         "cost_usd": 0.00264,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -1840,6 +1897,7 @@
         "tokens_in": 24000,
         "tokens_out": 600,
         "cost_usd": 0.00264,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -1877,6 +1935,7 @@
         "tokens_in": 24000,
         "tokens_out": 600,
         "cost_usd": 0.00264,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -1914,6 +1973,7 @@
         "tokens_in": 24000,
         "tokens_out": 600,
         "cost_usd": 0.00264,
+        "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [
           {

@@ -76,11 +76,13 @@ def run_case(case_id, problem=None, approve=None, verbose=False):
     tokens_in = tokens_out = 0
     stopped_by = None
 
-    # On the scripted backend the gate auto-approves so the run stays
-    # deterministic. The RECORD still shows the gate was reached and
-    # passed, which is what a marker looks for.
+    # Scripted fixtures auto-approve so the free reproducibility check can
+    # exercise the booking path. A LIVE run defaults to *no approval*: the
+    # caller must explicitly supply an approval function (the D5 synthetic
+    # battery does so only against these local fixtures).
     if approve is None:
-        approve = lambda action, payload: True
+        approve = (lambda action, payload: True) if backend.name == "scripted" \
+            else (lambda action, payload: False)
 
     try:
         while True:
@@ -145,7 +147,11 @@ def run_case(case_id, problem=None, approve=None, verbose=False):
                   "reason": "halted by the %s guardrail - %s"
                             % (stop.reason, stop.detail)}
 
-    cost = (tokens_in / 1e6) * config.PRICE_IN + (tokens_out / 1e6) * config.PRICE_OUT
+    provider_cost = (backend.measured_cost() if hasattr(backend, "measured_cost")
+                     else None)
+    cost = (provider_cost if provider_cost is not None else
+            (tokens_in / 1e6) * config.PRICE_IN +
+            (tokens_out / 1e6) * config.PRICE_OUT)
 
     record.update({
         "case_id": case_id,
@@ -154,6 +160,8 @@ def run_case(case_id, problem=None, approve=None, verbose=False):
         "tokens_in": tokens_in,
         "tokens_out": tokens_out,
         "cost_usd": round(cost, 6),
+        "cost_basis": ("provider_reported" if provider_cost is not None
+                       else "configured_token_prices"),
         "seconds": round(time.time() - started, 3),
         "guardrails_fired": guards.fired,
         "stopped_by": stopped_by,

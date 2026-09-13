@@ -186,19 +186,38 @@ class LiveBackend:
         self.case_id = case_id
         self.tools = tool_descriptors
         self.system_prompt = system_prompt
+        self._last_usage = (0, 0)
+        self._reported_costs = []
 
     def next_move(self, transcript):
         messages = [{"role": "system", "content": self.system_prompt}]
         for entry in transcript:
             messages.append({"role": entry["role"], "content": entry["content"]})
-        raw = _live_call(messages)
-        return _parse_move(raw)
+        response = _live_call(messages)
+        usage = response.get("usage") or {}
+        # OpenRouter uses prompt_tokens/completion_tokens.  The aliases make
+        # this adapter tolerant of an OpenAI-compatible provider that calls
+        # them input/output tokens instead.
+        self._last_usage = (int(usage.get("prompt_tokens",
+                                          usage.get("promptTokens",
+                                          usage.get("input_tokens", 0))) or 0),
+                            int(usage.get("completion_tokens",
+                                          usage.get("completionTokens",
+                                          usage.get("output_tokens", 0))) or 0))
+        if usage.get("cost") is not None:
+            try:
+                self._reported_costs.append(float(usage["cost"]))
+            except (TypeError, ValueError):
+                pass
+        return _parse_move(response.get("content", ""))
 
-    @staticmethod
-    def token_estimate(transcript):
-        # Replace with the usage numbers the API returns. Estimating here
-        # and calling it measured is the mistake D6 punishes.
-        return 0, 0
+    def token_estimate(self, transcript):
+        """Measured usage from the immediately preceding API response."""
+        return self._last_usage
+
+    def measured_cost(self):
+        """Provider-reported cost when OpenRouter supplied it, else None."""
+        return sum(self._reported_costs) if self._reported_costs else None
 
 
 def _parse_move(text):
@@ -246,7 +265,8 @@ def _live_call(messages):
                  "Content-Type": "application/json"})
     with urllib.request.urlopen(req, timeout=60) as r:
         payload = json.load(r)
-    return payload["choices"][0]["message"]["content"]
+    return {"content": payload["choices"][0]["message"].get("content", ""),
+            "usage": payload.get("usage") or {}}
 
 
 def make_backend(case_id, tool_descriptors=None, system_prompt=""):
