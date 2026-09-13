@@ -1,0 +1,43 @@
+{
+  "case_id": "REF-5602",
+  "backend": "scripted",
+  "method": "Same six tool calls and arguments; only independent-call grouping differs.",
+  "grouped": {
+    "decision": "book",
+    "code_check_pass": true,
+    "code_check_failures": [],
+    "turns": 4,
+    "tool_calls": 6,
+    "tool_sequence": [
+      "get_referral",
+      "check_referral_criteria",
+      "lookup_patient",
+      "get_clinic_slots",
+      "get_clinic_slots",
+      "book_slot"
+    ],
+    "tokens_in_estimated": 24000,
+    "tokens_out_estimated": 600,
+    "cost_usd_estimated": 0.00264
+  },
+  "sequential": {
+    "decision": "book",
+    "code_check_pass": true,
+    "code_check_failures": [],
+    "turns": 6,
+    "tool_calls": 6,
+    "tool_sequence": [
+      "get_referral",
+      "check_referral_criteria",
+      "lookup_patient",
+      "get_clinic_slots",
+      "get_clinic_slots",
+      "book_slot"
+    ],
+    "tokens_in_estimated": 42000,
+    "tokens_out_estimated": 840,
+    "cost_usd_estimated": 0.004536
+  },
+  "turn_reduction": 2,
+  "input_token_reduction_pct_estimated": 42.9
+}

@@ -55,5 +55,6 @@ Calls may share a turn only when neither needs the other’s output.
 - `book_slot` is always alone and last.
 
 `REF-5602` demonstrates the intended grouped shape: six tool calls in four
-turns. The final D2(c) report table must compare that run with the same calls
-executed one-per-turn, then show that the decision and code check are unchanged.
+turns. `python d2_parallel_comparison.py` compares it with the same calls
+executed one-per-turn and writes the reproducible result to
+`evidence/d2_parallel_comparison.json`.
