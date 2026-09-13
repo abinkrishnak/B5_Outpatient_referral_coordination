@@ -115,7 +115,7 @@
         "tokens_in": 24000,
         "tokens_out": 600,
         "cost_usd": 0.00264,
-        "seconds": 0.0,
+        "seconds": 0.001,
         "guardrails_fired": [
           {
             "guardrail": "gate_passed",

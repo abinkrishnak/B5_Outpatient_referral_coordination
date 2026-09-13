@@ -117,6 +117,8 @@ def run_case(case_id, problem=None, approve=None, verbose=False):
 
                 # THE GATE goes in front of the irreversible step only.
                 if name == tools.GATED_ACTION.get(problem):
+                    if problem == "B":
+                        guards.check_booking_eligibility(args)
                     if not guards.gate(name, args, approve):
                         raise GuardrailStop(
                             "gate_held",

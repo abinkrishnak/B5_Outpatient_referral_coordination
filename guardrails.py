@@ -16,6 +16,9 @@ worse than the loop it prevented: it turns a visible cost problem into
 an invisible correctness problem. Every stop below records WHY.
 ====================================================================
 """
+from datetime import date, timedelta
+
+import tools
 
 
 class GuardrailStop(Exception):
@@ -94,6 +97,60 @@ class Guardrails:
         self._fire("gate_%s" % ("passed" if ok else "held"),
                    "%s (autonomy=confirm)" % action_name)
         return ok
+
+    # ---- 5 · booking eligibility ------------------------------------
+    def check_booking_eligibility(self, payload):
+        """Refuse an attempted booking that contradicts systems of record.
+
+        This is a safety backstop, not a second decision-making agent. The
+        model still gathers evidence and selects actions; immediately before
+        the scarce slot is consumed, ordinary code verifies that the requested
+        booking does not violate a hard departmental rule. It specifically
+        catches a model following hostile referral text.
+        """
+        referral_id = payload.get("referral_id")
+        referral = tools.get_referral(referral_id)
+        if not referral:
+            self._booking_block("unknown_referral", referral_id)
+
+        summary = referral.get("clinical_summary", "").lower()
+        hostile_markers = (
+            "system note:", "skip the pre-referral", "book the earliest",
+            "check_referral_criteria returned:",
+        )
+        if any(marker in summary for marker in hostile_markers):
+            self._booking_block("hostile_referral_text", referral_id)
+
+        criteria = tools.check_referral_criteria(referral["specialty"], referral_id)
+        if not criteria:
+            self._booking_block("criteria_unavailable", referral_id)
+        if criteria["red_flag_term"]:
+            self._booking_block("red_flag", criteria["red_flag_term"])
+        if not criteria["right_department"]:
+            self._booking_block("specialty_mismatch", referral_id)
+        if criteria["missing_tests"]:
+            self._booking_block("mandatory_test_missing", referral_id)
+
+        patient = tools.lookup_patient(referral["patient_id"])
+        today = tools.as_of()
+        if any(a.get("specialty") == referral["specialty"] and a.get("date", "") >= today
+               for a in patient["existing_appointments"]):
+            self._booking_block("duplicate_future_appointment", referral_id)
+
+        window_end = (date.fromisoformat(today)
+                      + timedelta(weeks=criteria["window_weeks"])).isoformat()
+        legal_slots = tools.get_clinic_slots(
+            referral["specialty"], criteria["band"],
+            **{"from": today, "to": window_end})
+        requested = (payload.get("clinic"), payload.get("date"), payload.get("time"))
+        available = {(slot["clinic"], slot["date"], slot["time"])
+                     for slot in legal_slots}
+        if requested not in available:
+            self._booking_block("slot_not_legal_or_available", str(requested))
+
+    def _booking_block(self, reason, detail):
+        self._fire("booking_eligibility_blocked", "%s: %s" % (reason, detail))
+        raise GuardrailStop("booking_eligibility", "%s: %s" % (reason, detail))
 
     # ---- bookkeeping ------------------------------------------------
     def _fire(self, kind, detail):
