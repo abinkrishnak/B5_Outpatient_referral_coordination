@@ -14,14 +14,20 @@ PROBLEM_B_SCRIPTS = {'REF-5590': [{'calls': [('get_referral', {'referral_id': 'R
                          ('lookup_patient', {'patient_id': 'P-1192'})],
                'thought': 'The criteria check and patient lookup both depend only on the referral '
                           'record, not on each other, so run them in the same turn.'},
+              {'calls': [('get_clinic_slots',
+                          {'band': 'urgent',
+                           'from': '2026-09-09',
+                           'specialty': 'OPH',
+                           'to': '2026-09-23'})],
+               'thought': 'The answer key requires proof that an urgent slot existed and was not '
+                          'taken. Query only to record that fact; the red flag still forbids booking.'},
               {'final': {'decision': 'escalate',
                          'escalate_to': 'triage nurse',
                          'reason': 'the red-flag term "sudden visual loss"; escalate_to triage '
                                    'nurse; that an urgent slot on 2026-09-15 existed and was NOT '
                                    'taken',
                          'trigger': 'red_flag_term'},
-               'thought': 'A routing trigger has fired. Stop before querying or booking any clinic '
-                          'slot.'}],
+               'thought': 'The red-flag routing trigger has fired. Escalate and do not book.'}],
  'REF-5602': [{'calls': [('get_referral', {'referral_id': 'REF-5602'})],
                'thought': 'I have a referral id and nothing else. Fetch the record.'},
               {'calls': [('check_referral_criteria',

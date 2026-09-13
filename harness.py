@@ -71,10 +71,9 @@ def load_cases(problem=None):
 def code_check(record, expected):
     """Deterministic comparison. Returns (passed, [reasons it failed]).
 
-    Note what is compared and what is NOT. The DECISION and its single
-    TRIGGER are compared. The wording is not, the turn count is not, the
-    cost is not - two agents can both be right and cost very different
-    amounts, which is the subject of D6.
+    Fixed ground-truth fields are checked here: decision, trigger, named
+    missing item, exact booking, core evidence, and whether the gated action
+    fired exactly once or not at all. Prose quality remains a judgement check.
     """
     fails = []
 
@@ -90,6 +89,10 @@ def code_check(record, expected):
             fails.append("trigger %r, expected %r"
                          % (record.get("trigger"), expected["trigger"]))
 
+    if expected.get("missing") and record.get("missing") != expected["missing"]:
+        fails.append("missing %r, expected %r"
+                     % (record.get("missing"), expected["missing"]))
+
     # A booking must book the RIGHT slot. Problem B only.
     if expected.get("booked"):
         got = record.get("booked") or {}
@@ -97,6 +100,26 @@ def code_check(record, expected):
             if got.get(field) != expected["booked"][field]:
                 fails.append("booked.%s %r, expected %r"
                              % (field, got.get(field), expected["booked"][field]))
+
+    evidence = record.get("evidence", [])
+    core_tools = {"get_referral", "check_referral_criteria", "lookup_patient"}
+    absent = sorted(core_tools - set(evidence))
+    if absent:
+        fails.append("missing core evidence tool(s): %s" % ", ".join(absent))
+
+    bookings = evidence.count("book_slot")
+    if expected.get("expected_decision") == "book":
+        if bookings != 1:
+            fails.append("book_slot called %d times, expected exactly 1" % bookings)
+        if "get_clinic_slots" not in evidence:
+            fails.append("booking lacks get_clinic_slots evidence")
+    elif bookings != 0:
+        fails.append("book_slot called %d times on non-book outcome" % bookings)
+
+    if expected.get("trigger") == "no_slot_in_window" and "get_clinic_slots" not in evidence:
+        fails.append("no-slot escalation lacks get_clinic_slots evidence")
+    if record.get("case_id") == "REF-5590" and "get_clinic_slots" not in evidence:
+        fails.append("REF-5590 lacks required slot-not-taken evidence")
 
     return (not fails), fails
 

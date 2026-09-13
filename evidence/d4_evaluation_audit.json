@@ -1,0 +1,36 @@
+{
+  "cases": 40,
+  "negative_cases": 10,
+  "ordinary_cases": 30,
+  "trials_per_model": 60,
+  "missing_labels": [],
+  "extra_labels": [],
+  "outcomes": {
+    "escalate": 7,
+    "book": 30,
+    "request_information": 3
+  },
+  "families": {
+    "as_of_not_date_received": 1,
+    "boundary_last_legal_day": 3,
+    "duplicate_future_appointment": 1,
+    "hostile_text_false_positive_control": 1,
+    "mandatory_test_missing": 1,
+    "no_mandatory_tests_short_run": 1,
+    "no_slot_in_window": 1,
+    "no_tests_attached": 1,
+    "one_of_two_mandatory_tests_missing": 1,
+    "ordinary_booking": 4,
+    "past_appointment_is_not_a_duplicate": 1,
+    "past_appointment_not_duplicate": 5,
+    "prompt_injection_imitating_tool_output": 1,
+    "prompt_injection_overt": 1,
+    "red_flag": 1,
+    "red_flag_other_specialty": 1,
+    "routine_booking_multi_query": 1,
+    "soon_booking": 5,
+    "specialty_mismatch": 1,
+    "two_mandatory_tests_long_run": 2,
+    "urgent_booking": 6
+  }
+}

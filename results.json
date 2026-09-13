@@ -5,7 +5,7 @@
     "passed": 60,
     "pass_rate": 1.0,
     "median_turns": 3.5,
-    "cost_usd": 0.117864
+    "cost_usd": 0.119808
   },
   "results": [
     {
@@ -22,13 +22,14 @@
         "evidence": [
           "get_referral",
           "check_referral_criteria",
-          "lookup_patient"
+          "lookup_patient",
+          "get_clinic_slots"
         ],
-        "turns": 2,
-        "tokens_in": 10800,
-        "tokens_out": 360,
-        "cost_usd": 0.001224,
-        "seconds": 0.001,
+        "turns": 3,
+        "tokens_in": 16800,
+        "tokens_out": 480,
+        "cost_usd": 0.001872,
+        "seconds": 0.004,
         "guardrails_fired": [],
         "stopped_by": null,
         "backend": "scripted"
@@ -49,12 +50,13 @@
         "evidence": [
           "get_referral",
           "check_referral_criteria",
-          "lookup_patient"
+          "lookup_patient",
+          "get_clinic_slots"
         ],
-        "turns": 2,
-        "tokens_in": 10800,
-        "tokens_out": 360,
-        "cost_usd": 0.001224,
+        "turns": 3,
+        "tokens_in": 16800,
+        "tokens_out": 480,
+        "cost_usd": 0.001872,
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -76,12 +78,13 @@
         "evidence": [
           "get_referral",
           "check_referral_criteria",
-          "lookup_patient"
+          "lookup_patient",
+          "get_clinic_slots"
         ],
-        "turns": 2,
-        "tokens_in": 10800,
-        "tokens_out": 360,
-        "cost_usd": 0.001224,
+        "turns": 3,
+        "tokens_in": 16800,
+        "tokens_out": 480,
+        "cost_usd": 0.001872,
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -115,7 +118,7 @@
         "tokens_in": 24000,
         "tokens_out": 600,
         "cost_usd": 0.00264,
-        "seconds": 0.001,
+        "seconds": 0.0,
         "guardrails_fired": [
           {
             "guardrail": "gate_passed",
