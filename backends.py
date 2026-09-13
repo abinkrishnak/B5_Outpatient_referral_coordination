@@ -188,12 +188,14 @@ class LiveBackend:
         self.system_prompt = system_prompt
         self._last_usage = (0, 0)
         self._reported_costs = []
+        self.last_raw_response = ""
 
     def next_move(self, transcript):
         messages = [{"role": "system", "content": self.system_prompt}]
         for entry in transcript:
             messages.append({"role": entry["role"], "content": entry["content"]})
         response = _live_call(messages)
+        self.last_raw_response = response.get("content", "")
         usage = response.get("usage") or {}
         # OpenRouter uses prompt_tokens/completion_tokens.  The aliases make
         # this adapter tolerant of an OpenAI-compatible provider that calls
@@ -209,7 +211,7 @@ class LiveBackend:
                 self._reported_costs.append(float(usage["cost"]))
             except (TypeError, ValueError):
                 pass
-        return _parse_move(response.get("content", ""))
+        return _parse_move(self.last_raw_response)
 
     def token_estimate(self, transcript):
         """Measured usage from the immediately preceding API response."""
@@ -221,14 +223,36 @@ class LiveBackend:
 
 
 def _parse_move(text):
-    """The model must answer in JSON. Anything else is a run you cannot
-    grade, so say so loudly rather than guessing."""
+    """Parse the required JSON without mistaking Markdown fences for a run.
+
+    The API requests JSON mode, but accepting a surrounding ```json fence is
+    a harmless compatibility measure.  We never infer an action from prose:
+    genuinely invalid output remains a loud, gradeable failed record.
+    """
+    candidate = (text or "").strip()
+    if candidate.startswith("```"):
+        lines = candidate.splitlines()
+        if lines:
+            lines = lines[1:]
+        if lines and lines[-1].strip().startswith("```"):
+            lines = lines[:-1]
+        candidate = "\n".join(lines).strip()
     try:
-        return json.loads(text)
+        return json.loads(candidate)
     except json.JSONDecodeError:
+        # Some providers add one short sentence before/after an otherwise
+        # valid object.  Recover only the complete outer object, never a
+        # partial fragment or a tool call hidden in prose.
+        left, right = candidate.find("{"), candidate.rfind("}")
+        if left >= 0 and right > left:
+            try:
+                return json.loads(candidate[left:right + 1])
+            except json.JSONDecodeError:
+                pass
         return {"final": {"decision": "escalate",
-                          "reason": "model did not return parseable JSON"},
-                "thought": "unparseable: %s" % text[:200]}
+                          "reason": "model did not return parseable JSON: %s"
+                                    % candidate[:200]},
+                "thought": "unparseable: %s" % candidate[:200]}
 
 
 def get_api_key():
@@ -257,6 +281,10 @@ def _live_call(messages):
         "model": config.MODEL,
         "messages": messages,
         "temperature": 0,
+        # The prompt still states the schema so the experiment is portable;
+        # this API-level constraint makes a live run gradeable rather than
+        # charging for prose we cannot execute.
+        "response_format": {"type": "json_object"},
     }).encode()
     req = urllib.request.Request(
         config.BASE_URL.rstrip("/") + "/chat/completions",
