@@ -8,8 +8,8 @@ three-layer cost model. It runs out of the box with no key and no network.
 referrals and 60 trials; the paid live battery is opt-in and separate so a
 marker or teammate never needs an API key to reproduce the core result.
 
-**Start with the notebook for your problem** (`A2_Scaffold_Tour_ProblemA.ipynb` or
-`…ProblemB.ipynb`) — it walks the whole machine on one case, with every value printed.
+**Start with `A2_Scaffold_Tour_ProblemB.ipynb`** — it walks the whole machine
+on one case, with every value printed.
 Then work in the modules.
 
 ---
@@ -47,7 +47,7 @@ rather than guessing.
 
 | File | What it is | Will you change it? |
 |---|---|---|
-| `config.py` | The vendor-neutral block: `BACKEND`, `MODEL`, `BASE_URL`, guardrail limits, which problem | **Yes** — this is the first file to open |
+| `config.py` | The vendor-neutral block: `BACKEND`, `MODEL`, `BASE_URL`, and guardrail limits | **Yes** — this is the first file to open |
 | `tools.py` | The tool layer over the reference data, with six-field descriptors | **Yes, heavily** — this is D2 |
 | `backends.py` | The scripted backend and the live one. One function knows a vendor exists | **Yes** — you add a script per case |
 | `agent.py` | The ReAct loop, instrumented | Some — but read every line first |
@@ -56,18 +56,16 @@ rather than guessing.
 | `prompt.py` | Assembles the descriptors + routing rules into the text the model is sent | **Yes** — this is D2(b) |
 | `run_eval.py` | Entry point. **This is what a marker runs** | Rarely |
 | `demo_loop_failure.py` | D7's method, worked once on the scripted backend | Copy the method |
-| `A2_Scaffold_Tour_ProblemA.ipynb` | Guided walk-through of one claim, `CLM-8842` | Read once |
 | `A2_Scaffold_Tour_ProblemB.ipynb` | Guided walk-through of one referral, `REF-5602` | Read once |
 
 ---
 
-## The two notebooks — start here
+## The Problem B notebook — start here
 
-**Open the one for the problem you chose. You do not need the other.**
+**This final repository implements Problem B only.**
 
 | | Case | What it walks through |
 |---|---|---|
-| `A2_Scaffold_Tour_ProblemA.ipynb` | `CLM-8842` — the partly-payable claim from Appendix A | three lines, one excluded, one needing a pre-authorisation |
 | `A2_Scaffold_Tour_ProblemB.ipynb` | `REF-5602` — the booking from Appendix A | four gates, an urgency window, a slot search |
 
 ### What they are for
@@ -77,20 +75,17 @@ short steps, in the order the machine runs: what the agent is handed → what it
 fetch → the run, turn by turn → the decision record → the code check → the judgement
 check → a failure that raises no exception.
 
-Every value printed is real. Wherever a cell hard-codes something — `'OPH'`, `'M-2214'`,
-`'POL-3310'` — the markdown says which earlier cell it came from, so nothing appears by
-magic.
+Every value printed is real. Wherever a cell hard-codes something, the markdown
+says which earlier cell it came from, so nothing appears by magic.
 
 **The model is simulated; the data is not.** The backend replays a fixed sequence of moves
 from `backends.py`, so the run is deterministic and free. The tools underneath do genuine
 lookups against the shipped JSON. Only the model's decisions are scripted.
 
-**Each notebook has a "trap" cell** — the mistake that costs teams the case, made visible:
+**The notebook has a "trap" cell** — the mistake that costs teams the case, made visible:
 
 - **Problem B, cell 4** lists every OPH slot and marks three that are inside the window
   and free but in the **wrong band**. Filter by date alone and you book one of them.
-- **Problem A, cell 5** runs four duplicate-matching strategies and shows that every
-  shortcut wrongly escalates a perfectly good claim — including this one.
 
 ### What they are not
 
@@ -126,14 +121,11 @@ submit.** A marker clones your repository and runs `python3 run_eval.py`. If you
 numbers do not come back, D5(a) has failed and Technical Execution is capped. Only
 D5(b) — the live model battery — costs money. D3(b), D5(a) and D7 all run scripted.
 
-**3 · Turns are decided by the data, not by you.** `requires_preauth` decides
-whether Problem A makes another call. A red flag ends a Problem B run before a slot
-is ever queried. You did not write those branches; the record did.
+**3 · Turns are decided by the data, not by you.** A red flag ends a Problem B
+run before a slot is ever queried. You did not write that branch; the record did.
 
 **4 · Only independent calls fold into one turn.** `REF-5602` is 6 calls in 4
-turns. `CLM-8842` is 8 calls in 4 turns. Both match Appendix A exactly — check
-them. A dependency chain cannot be shortened by running things at once, which is
-why Problem B saves 36% and Problem A saves 54%.
+turns. A dependency chain cannot be shortened by running things at once.
 
 **5 · Instrumentation is not optional.** Every run records turns, tokens, cost,
 every tool call and every guardrail event. D6's cost model and D7's loop failure
@@ -144,10 +136,10 @@ and you re-run the whole battery.
 
 ## Your first hour
 
-1. **Open the tour notebook for your problem** and run it top to bottom. Fifteen minutes,
+1. **Open the Problem B tour notebook** and run it top to bottom. Fifteen minutes,
    and you will have seen the whole machine on one case.
-2. **Open `config.py`** and set `PROBLEM` to the one you chose.
-3. **`python3 run_eval.py`** — the same case, graded, from the command line. This is what
+2. **Open `config.py`** and review the safe scripted default.
+3. **`python3 run_eval.py`** — the 40-case set, graded, from the command line. This is what
    a marker runs.
 4. **`python3 run_eval.py --prompt`** — read the exact text the model is sent, and
    its token cost. It is assembled from the descriptors in `tools.py`, so editing one
@@ -162,8 +154,6 @@ and you re-run the whole battery.
 
 Left undone on purpose. Doing them is the assignment.
 
-- **Only two cases are scripted.** Your set needs 30–50. See
-  `PE6201_A2_Adding_Extra_Cases.pdf`.
 - **The judgement check is a queue, not a verdict.** `must_record` items are written
   in English; a substring match would be theatre. A person — or a second model —
   rules on each. If you automate it with a model, say so: a model grading a model is

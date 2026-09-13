@@ -35,7 +35,7 @@ BASE_URL = "https://openrouter.ai/api/v1"
 API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
 
 # ─────────────────────────────────────────────────────────────────────
-# WHICH PROBLEM. "A" = claims first response, "B" = referral coordination.
+# THIS REPOSITORY SUBMITS PROBLEM B ONLY.
 # ─────────────────────────────────────────────────────────────────────
 PROBLEM = "B"
 
@@ -75,22 +75,21 @@ _CANDIDATES = [
 
 
 def data_root():
-    """Find the folder that holds data_A/ and data_B/.
+    """Find the folder that holds this project's Problem B reference data.
 
     Fails LOUDLY with instructions rather than returning something wrong.
     A silent wrong path here is exactly the failure the data guide warns
     about: your tools return nothing and the run still looks fine.
     """
     for c in _CANDIDATES:
-        if c and os.path.isdir(os.path.join(c, "data_A")) \
-             and os.path.isdir(os.path.join(c, "data_B")):
+        if c and os.path.isdir(os.path.join(c, "data_B")):
             return os.path.abspath(c)
     raise SystemExit(
         "\n  Could not find the reference data.\n"
-        "  I looked for a folder containing BOTH data_A/ and data_B/ in:\n"
+        "  I looked for a folder containing data_B/ in:\n"
         + "".join("    %s\n" % os.path.abspath(c) for c in _CANDIDATES if c)
         + "\n  Fix it either way:\n"
-        "    1. put A2_reference_data/ next to this scaffold folder, or\n"
+        "    1. put A2_reference_data/ next to this project folder, or\n"
         "    2. export A2_DATA=/path/to/A2_reference_data\n")
 
 

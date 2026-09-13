@@ -8,7 +8,7 @@ What is included
 - expected_outcomes_B.json contains 40 labels / answer keys
 - make_fixtures_B.py contains additions only in the EXTRA_* blocks
 - data_B/ has been regenerated from the generator
-- check_my_data.py result: “Your data hangs together.”
+- check_problem_b_data.py result: “Problem B data valid.”
 
 Important assignment rule
 Every team member must write evaluation cases. Therefore, treat REF-6001–REF-6025 as a READY DRAFT / template for the team to review, edit by replacing team-added rows if needed, and explicitly allocate/own cases. Do not claim one person authored everyone’s required 5–8 cases.

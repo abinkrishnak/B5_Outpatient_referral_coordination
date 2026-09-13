@@ -16,7 +16,7 @@ over 60 trials.
 | Common shortcut errors | past appointment is not a duplicate; wrong urgency band must not be booked |
 
 The 15 supplied cases remain intact; team-added cases use new `REF-6001` to
-`REF-6025` identifiers. `check_my_data.py` reports that all 40 referrals and
+`REF-6025` identifiers. `check_problem_b_data.py` reports that all 40 referrals and
 their supporting records join correctly.
 
 ## Two grading layers

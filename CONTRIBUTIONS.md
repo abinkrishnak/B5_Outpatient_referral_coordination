@@ -11,7 +11,7 @@ work performed by another person without their agreement.
 
 ## Shared project assets
 
-`ProblemB_V1_Offline_Final.zip` is an archived teammate hand-off. The runnable
-project uses the extracted and integrated source at repository root, especially
-`problem_b_scripts.py` and the historical `evidence/v1_*.csv` files. The ZIP
-is retained as provenance only; do not run code directly from inside it.
+The original teammate hand-off has been integrated into the runnable project,
+especially `problem_b_scripts.py` and the historical `evidence/v1_*.csv`
+files. The duplicate ZIP archive is deliberately not included in the final
+repository: team members should run the root-level project, not a stale copy.
