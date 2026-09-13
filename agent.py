@@ -202,6 +202,6 @@ def _final_contract_error(record, evidence):
         return "a book decision requires an earlier book_slot action"
     if record.get("decision") == "request_information":
         missing = str(record.get("missing", ""))
-        if not re.search(r"\b[A-Z]{2,}-\d{2}\b", missing):
+        if not re.search(r"\b[A-Z]{2,}(?:-[A-Z0-9]+)+\b", missing):
             return "missing must name the mandatory test and its code, e.g. VF-01"
     return None

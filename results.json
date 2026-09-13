@@ -2,10 +2,10 @@
   "config": "BACKEND=scripted  FREE, deterministic  |  PROBLEM=B  |  model=(no model)  |  cap=8 turns  |  autonomy=confirm",
   "summary": {
     "trials": 60,
-    "passed": 57,
-    "pass_rate": 0.95,
+    "passed": 60,
+    "pass_rate": 1.0,
     "median_turns": 3.5,
-    "cost_usd": 0.121752
+    "cost_usd": 0.119808
   },
   "results": [
     {
@@ -30,7 +30,7 @@
         "tokens_out": 480,
         "cost_usd": 0.001872,
         "cost_basis": "configured_token_prices",
-        "seconds": 0.002,
+        "seconds": 0.003,
         "guardrails_fired": [],
         "stopped_by": null,
         "backend": "scripted"
@@ -413,14 +413,12 @@
     {
       "case_id": "REF-5663",
       "trial": 1,
-      "passed": false,
-      "fails": [
-        "decision 'escalate', expected 'request_information'",
-        "missing None, expected 'weight-bearing knee X-ray XR-KNEE'"
-      ],
+      "passed": true,
+      "fails": [],
       "record": {
-        "decision": "escalate",
-        "reason": "script ended without a conclusion",
+        "decision": "request_information",
+        "missing": "weight-bearing knee X-ray XR-KNEE",
+        "reason": "XR-KNEE named; the ORT rule that requires it",
         "case_id": "REF-5663",
         "evidence": [
           "get_referral",
@@ -428,9 +426,9 @@
           "lookup_patient"
         ],
         "turns": 2,
-        "tokens_in": 16800,
-        "tokens_out": 480,
-        "cost_usd": 0.001872,
+        "tokens_in": 10800,
+        "tokens_out": 360,
+        "cost_usd": 0.001224,
         "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [],
@@ -442,14 +440,12 @@
     {
       "case_id": "REF-5663",
       "trial": 2,
-      "passed": false,
-      "fails": [
-        "decision 'escalate', expected 'request_information'",
-        "missing None, expected 'weight-bearing knee X-ray XR-KNEE'"
-      ],
+      "passed": true,
+      "fails": [],
       "record": {
-        "decision": "escalate",
-        "reason": "script ended without a conclusion",
+        "decision": "request_information",
+        "missing": "weight-bearing knee X-ray XR-KNEE",
+        "reason": "XR-KNEE named; the ORT rule that requires it",
         "case_id": "REF-5663",
         "evidence": [
           "get_referral",
@@ -457,9 +453,9 @@
           "lookup_patient"
         ],
         "turns": 2,
-        "tokens_in": 16800,
-        "tokens_out": 480,
-        "cost_usd": 0.001872,
+        "tokens_in": 10800,
+        "tokens_out": 360,
+        "cost_usd": 0.001224,
         "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [],
@@ -471,14 +467,12 @@
     {
       "case_id": "REF-5663",
       "trial": 3,
-      "passed": false,
-      "fails": [
-        "decision 'escalate', expected 'request_information'",
-        "missing None, expected 'weight-bearing knee X-ray XR-KNEE'"
-      ],
+      "passed": true,
+      "fails": [],
       "record": {
-        "decision": "escalate",
-        "reason": "script ended without a conclusion",
+        "decision": "request_information",
+        "missing": "weight-bearing knee X-ray XR-KNEE",
+        "reason": "XR-KNEE named; the ORT rule that requires it",
         "case_id": "REF-5663",
         "evidence": [
           "get_referral",
@@ -486,9 +480,9 @@
           "lookup_patient"
         ],
         "turns": 2,
-        "tokens_in": 16800,
-        "tokens_out": 480,
-        "cost_usd": 0.001872,
+        "tokens_in": 10800,
+        "tokens_out": 360,
+        "cost_usd": 0.001224,
         "cost_basis": "configured_token_prices",
         "seconds": 0.0,
         "guardrails_fired": [],
@@ -2078,8 +2072,8 @@
     },
     {
       "case_id": "REF-5663",
-      "decision": "escalate",
-      "reason": "script ended without a conclusion",
+      "decision": "request_information",
+      "reason": "XR-KNEE named; the ORT rule that requires it",
       "must_record": [
         "XR-KNEE named",
         "the ORT rule that requires it"
