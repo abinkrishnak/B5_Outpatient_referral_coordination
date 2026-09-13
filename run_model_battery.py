@@ -30,8 +30,6 @@ def run_one_model(model, case_limit, full, synthetic_approval, max_cost):
     """Run a bounded battery and write one evidence file for one model."""
     config.BACKEND = "live"
     config.MODEL = model
-    if not config.API_KEY and not os.environ.get("OPENROUTER_API_KEY"):
-        raise SystemExit("No OPENROUTER_API_KEY found. Set it only in this terminal session.")
     if not synthetic_approval:
         raise SystemExit("The battery requires --synthetic-approval: these are local fixtures, not real bookings.")
 
