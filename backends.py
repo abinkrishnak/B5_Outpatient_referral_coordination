@@ -27,6 +27,7 @@ moves is how you test the parts you wrote.
 """
 import json
 import urllib.request
+from getpass import getpass
 
 import config
 
@@ -211,6 +212,20 @@ def _parse_move(text):
                 "thought": "unparseable: %s" % text[:200]}
 
 
+def get_api_key():
+    """Return an OpenRouter key without ever writing it to disk.
+
+    A key in the environment is preferred for automation. If it is absent,
+    an interactive terminal run asks once with hidden input. The key remains
+    only in this Python process and is never printed or committed.
+    """
+    if not config.API_KEY:
+        config.API_KEY = getpass("OpenRouter API key (input hidden): ").strip()
+    if not config.API_KEY:
+        raise SystemExit("No API key entered. Set BACKEND = 'scripted' to run free.")
+    return config.API_KEY
+
+
 def _live_call(messages):
     """>>> THE ONLY FUNCTION IN THIS REPOSITORY THAT KNOWS A VENDOR <<<
 
@@ -218,11 +233,7 @@ def _live_call(messages):
     vendor means rewriting this one function, and changing MODEL and
     BASE_URL in config.py. Nothing else.
     """
-    if not config.API_KEY:
-        raise SystemExit(
-            "\n  BACKEND is 'live' but OPENROUTER_API_KEY is not set.\n"
-            "    export OPENROUTER_API_KEY='sk-or-...'\n"
-            "  Or set BACKEND = 'scripted' in config.py, which is free.\n")
+    api_key = get_api_key()
     body = json.dumps({
         "model": config.MODEL,
         "messages": messages,
@@ -231,7 +242,7 @@ def _live_call(messages):
     req = urllib.request.Request(
         config.BASE_URL.rstrip("/") + "/chat/completions",
         data=body,
-        headers={"Authorization": "Bearer " + config.API_KEY,
+        headers={"Authorization": "Bearer " + api_key,
                  "Content-Type": "application/json"})
     with urllib.request.urlopen(req, timeout=60) as r:
         payload = json.load(r)
