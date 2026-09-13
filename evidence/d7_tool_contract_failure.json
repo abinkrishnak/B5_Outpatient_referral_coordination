@@ -1,0 +1,37 @@
+{
+  "failure": "specialty_typo_silent_empty_result",
+  "deleted_component": "V2 closed-set specialty validation",
+  "attempted_args": {
+    "specialty": "OPHT",
+    "band": "routine",
+    "from": "2026-09-09",
+    "to": "2026-11-04"
+  },
+  "working_v2_result": {
+    "error": "invalid_slot_query",
+    "invalid": {
+      "specialty": "OPHT"
+    },
+    "allowed_specialties": [
+      "CARD",
+      "DER",
+      "ENT",
+      "NEU",
+      "OPH",
+      "ORT"
+    ],
+    "allowed_bands": [
+      "routine",
+      "soon",
+      "urgent"
+    ]
+  },
+  "broken_v1_result": [],
+  "why_accuracy_alone_is_insufficient": "Both results are valid Python values. Only V2 distinguishes an invalid query from a real empty slot window.",
+  "correct_fix_layer": "tool interface (poka-yoke constraint)",
+  "wrong_fix_layers": [
+    "prompt: a model can still misspell a string",
+    "guardrail after slot search: it sees an empty result too late"
+  ],
+  "restoration_verified": true
+}
