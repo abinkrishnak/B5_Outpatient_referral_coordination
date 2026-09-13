@@ -36,13 +36,23 @@ Prompt-size audit after minimising `lookup_patient`:
 
 This is only a prompt-size estimate. It is not measured model usage.
 
-### Required live experiment - not yet claimed as complete
+### Completed live experiment
 
-Use one inexpensive fixed model for both versions. Keep the same 40 cases,
-60 trials, temperature, autonomy setting, and evaluation date. Change only
-`TOOL_CONTRACT_VERSION`; record pass rate, negative-case pass rate, invalid
-slot-query attempts, input/output token usage, and cost. The scripted backend
-cannot demonstrate that a live model obeys either descriptor.
+The same fixed Gemini 2.5 Flash-Lite model, 40 cases, 60-trial schedule,
+temperature zero, autonomy setting and evaluation date were used for both
+contracts. Only `TOOL_CONTRACT_VERSION` changed.
+
+| Contract | Code-check pass rate | Input tokens | Output tokens | Measured cost | Guardrail stops |
+|---|---:|---:|---:|---:|---:|
+| V1 | 49/60 (81.7%) | 468,537 | 22,075 | US$0.051530 | 4 |
+| V2 | 48/60 (80.0%) | 434,084 | 23,105 | US$0.048662 | 4 |
+
+V2 used 7.4% fewer input tokens and 5.6% less measured cost, while the small
+1.7-point pass-rate difference is reported rather than treated as proof of a
+quality advantage. V2 remains the selected deployment contract because it
+turns invalid specialties/bands into explicit errors instead of silently
+turning them into a false no-slot escalation. Raw live evidence is committed
+under `evidence/d5_live_google_gemini-2.5-flash-lite*.json`.
 
 ## D2(c): dependency rule
 

@@ -1,10 +1,12 @@
 # PE6201 · A2 — starter scaffold
 
-A working single-agent ReAct loop, a tool layer, a guardrail layer, an evaluation
-harness and both graders. It runs, out of the box, with no key and no network.
+A production-oriented single-agent ReAct loop for PE6201 Problem B, with a
+tool layer, guardrails, a 40-case evaluation harness, live-model evidence and
+three-layer cost model. It runs out of the box with no key and no network.
 
-**It is a starting point, not a solution.** It handles two cases — one per problem —
-and stops. Everything it does is something you will replace with your own design.
+**This submission implements Problem B.** The free scripted run covers 40
+referrals and 60 trials; the paid live battery is opt-in and separate so a
+marker or teammate never needs an API key to reproduce the core result.
 
 **Start with the notebook for your problem** (`A2_Scaffold_Tour_ProblemA.ipynb` or
 `…ProblemB.ipynb`) — it walks the whole machine on one case, with every value printed.
@@ -15,13 +17,14 @@ Then work in the modules.
 ## Run it
 
 ```bash
-cd A2_scaffold
-python3 run_eval.py REF-5602          # one case, every turn shown
-python3 run_eval.py                   # the scripted cases, graded
-python3 demo_loop_failure.py          # the D7 method, worked once
-python3 run_eval.py --prompt          # exactly what the model is told
-
-python3 run_eval.py CLM-8842          # Problem A, once PROBLEM = "A" in config.py
+python run_eval.py REF-5602           # one case, every turn shown
+python run_eval.py                    # 40 cases / 60 scripted trials
+python audit_evaluation_set.py        # validates case mix and labels
+python run_guardrail_checklist.py     # 11 code-layer safety checks
+python d2_parallel_comparison.py      # grouped versus sequential turns
+python cost_to_serve.py               # rebuilds D6 from measured D5 evidence
+python demo_loop_failure.py           # D7 loop-control failure
+python demo_tool_contract_failure.py  # D7 tool-interface failure
 ```
 
 No arguments needed, no packages to install, no network, no API key. Standard
