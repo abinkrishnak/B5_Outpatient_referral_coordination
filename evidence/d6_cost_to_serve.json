@@ -1,0 +1,50 @@
+{
+  "method": "Layer 1 measured D5 API spend + Layer 2 observed code-check failure rate times $9.17 + Layer 3 4,000 referrals/month",
+  "caution": "The raw code-check failure rate is intentionally conservative: it includes the documented REF-5590 early-exit versus answer-key conflict.",
+  "models": [
+    {
+      "model": "google/gemini-2.5-flash-lite",
+      "source": "evidence/d5_live_google_gemini-2.5-flash-lite.json",
+      "trials": 60,
+      "code_check_failures": 12,
+      "code_check_failure_rate": 0.2,
+      "layer_1": {
+        "measured_variable_total_usd": 0.048662,
+        "measured_variable_per_referral_usd": 0.000811
+      },
+      "layer_2": {
+        "fallback_cost_per_failure_usd": 9.17,
+        "expected_fallback_per_referral_usd": 1.834
+      },
+      "layer_3": {
+        "monthly_referrals": 4000,
+        "monthly_variable_usd": 3.24,
+        "monthly_expected_fallback_usd": 7336.0,
+        "monthly_total_usd": 7339.24
+      },
+      "expected_total_per_referral_usd": 1.834811
+    },
+    {
+      "model": "openai/gpt-4.1-mini",
+      "source": "evidence/d5_live_openai_gpt-4.1-mini.json",
+      "trials": 60,
+      "code_check_failures": 9,
+      "code_check_failure_rate": 0.15,
+      "layer_1": {
+        "measured_variable_total_usd": 0.122501,
+        "measured_variable_per_referral_usd": 0.002042
+      },
+      "layer_2": {
+        "fallback_cost_per_failure_usd": 9.17,
+        "expected_fallback_per_referral_usd": 1.3755
+      },
+      "layer_3": {
+        "monthly_referrals": 4000,
+        "monthly_variable_usd": 8.17,
+        "monthly_expected_fallback_usd": 5502.0,
+        "monthly_total_usd": 5510.17
+      },
+      "expected_total_per_referral_usd": 1.377542
+    }
+  ]
+}
