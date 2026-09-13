@@ -26,10 +26,12 @@ def safe_filename(model):
     return re.sub(r"[^A-Za-z0-9._-]+", "_", model).strip("_")
 
 
-def run_one_model(model, case_limit, full, synthetic_approval, max_cost):
+def run_one_model(model, case_limit, full, synthetic_approval, max_cost,
+                  tool_contract):
     """Run a bounded battery and write one evidence file for one model."""
     config.BACKEND = "live"
     config.MODEL = model
+    config.TOOL_CONTRACT_VERSION = tool_contract
     if not synthetic_approval:
         raise SystemExit("The battery requires --synthetic-approval: these are local fixtures, not real bookings.")
 
@@ -84,7 +86,8 @@ def run_one_model(model, case_limit, full, synthetic_approval, max_cost):
         ],
     }
     os.makedirs("evidence", exist_ok=True)
-    path = os.path.join("evidence", "d5_live_%s.json" % safe_filename(model))
+    path = os.path.join("evidence", "d5_live_%s_%s.json"
+                        % (safe_filename(model), tool_contract))
     with open(path, "w", encoding="utf-8") as fh:
         json.dump(payload, fh, indent=2, default=str)
     print("Wrote %s" % path)
@@ -105,6 +108,8 @@ def main():
                         help="allow no-op fixture bookings after the confirm gate")
     parser.add_argument("--max-cost", type=float, required=True,
                         help="hard stop after this much measured/fallback cost per model")
+    parser.add_argument("--tool-contract", choices=("v1", "v2"), default="v2",
+                        help="descriptor contract to measure (default: v2)")
     args = parser.parse_args()
     if args.pilot < 1 or args.max_cost <= 0:
         raise SystemExit("--pilot and --max-cost must be positive.")
@@ -112,7 +117,8 @@ def main():
     for model in args.model:
         print("\nD5 live battery: %s" % model)
         run_one_model(model, args.pilot, args.full,
-                      args.synthetic_approval, args.max_cost)
+                      args.synthetic_approval, args.max_cost,
+                      args.tool_contract)
 
 
 if __name__ == "__main__":

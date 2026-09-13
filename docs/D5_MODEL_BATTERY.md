@@ -29,7 +29,7 @@ python run_model_battery.py --model provider/model --full --synthetic-approval -
 
 Repeat `--model` to compare models. A completed full run contains 60 trials:
 30 ordinary cases once and 10 negative cases three times. Each model produces
-its own `evidence/d5_live_<model>.json`, including raw records, code-check
+its own `evidence/d5_live_<model>_<contract>.json`, including raw records, code-check
 results, judgement queue, token counts, turn counts, cost basis and whether the
 user-set budget stopped the run.
 
@@ -48,4 +48,5 @@ cost, and negative-case pass rate. Read the judgement queue separately; do not
 mistake the automated code check for a prose-quality review.
 
 The D2 V1-vs-V2 descriptor experiment is a separate paired experiment: use
-one model, all other settings fixed, and change only `TOOL_CONTRACT_VERSION`.
+one model, all other settings fixed, and change only `--tool-contract`. Then
+run `compare_tool_contracts.py` over the two evidence files.
