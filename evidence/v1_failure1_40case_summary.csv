@@ -1,0 +1,4 @@
+﻿version,backend,cases,decision_passes,decision_pass_rate,median_turns,mean_turns,maximum_turns,minimum_turns,step_cap,step_cap_hits,median_tool_calls,mean_tool_calls,maximum_tool_calls,total_slot_queries,median_total_tokens,mean_total_tokens,maximum_total_tokens,total_tokens,mean_cost_usd,total_estimated_cost_usd
+working_v1,scripted,40,40,1.0,4.0,3.525,4,2,8,0,5.0,4.55,6,32,21600.0,18678.0,21600,747120,0.002031,0.081228
+broken_without_action_deduplication,scripted,40,40,1.0,4.0,3.575,6,2,8,0,5.0,4.65,10,36,21600.0,19104.0,38640,764160,0.002075,0.083004
+restored_v1,scripted,40,40,1.0,4.0,3.525,4,2,8,0,5.0,4.55,6,32,21600.0,18678.0,21600,747120,0.002031,0.081228

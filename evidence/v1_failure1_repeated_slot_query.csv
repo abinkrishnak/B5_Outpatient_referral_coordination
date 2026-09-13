@@ -1,0 +1,4 @@
+﻿case_id,condition,action_deduplication,repeated_slot_behaviour,decision,turns,tool_calls,slot_queries,tokens_in,tokens_out,total_tokens,cost_usd,stopped_by
+REF-5602,working_v1,True,False,book,4,6,2,21000,600,21600,0.00234,
+REF-5602,working_v1_minus_action_deduplication,False,True,book,6,10,6,37800,840,38640,0.004116,
+REF-5602,restored_v1,True,False,book,4,6,2,21000,600,21600,0.00234,

@@ -1,0 +1,2 @@
+﻿failure_id,failure_name,removed_component,correct_layer,case_id,working_decision,broken_decision,working_turns,broken_turns,working_tool_calls,broken_tool_calls,working_slot_queries,broken_slot_queries,working_total_tokens,broken_total_tokens,working_cost_usd,broken_cost_usd,cost_ratio,step_cap_fired,budget_ceiling_exceeded,failure_detected_by_accuracy,failure_detected_by_instrumentation,restoration_verified
+F1,repeated_slot_query_ghost_loop,action_de_duplication,code,REF-5602,book,book,4,6,6,10,2,6,21600,38640,0.00234,0.004116,1.76,False,False,False,True,True

@@ -1,0 +1,162 @@
+[
+  {
+    "patient_id": "P-1180",
+    "method": "sms",
+    "value": "+65 8••• ••21"
+  },
+  {
+    "patient_id": "P-1192",
+    "method": "phone",
+    "value": "+65 6••• ••04"
+  },
+  {
+    "patient_id": "P-1204",
+    "method": "email",
+    "value": "p1204@example.test"
+  },
+  {
+    "patient_id": "P-1215",
+    "method": "sms",
+    "value": "+65 9••• ••77"
+  },
+  {
+    "patient_id": "P-1227",
+    "method": "email",
+    "value": "p1227@example.test"
+  },
+  {
+    "patient_id": "P-1233",
+    "method": "phone",
+    "value": "+65 6••• ••39"
+  },
+  {
+    "patient_id": "P-1241",
+    "method": "sms",
+    "value": "+65 8••• ••55"
+  },
+  {
+    "patient_id": "P-2001",
+    "method": "phone",
+    "value": "+65 8xxx xx01"
+  },
+  {
+    "patient_id": "P-2002",
+    "method": "email",
+    "value": "contact-p2002@example.test"
+  },
+  {
+    "patient_id": "P-2003",
+    "method": "sms",
+    "value": "+65 8xxx xx03"
+  },
+  {
+    "patient_id": "P-2004",
+    "method": "phone",
+    "value": "+65 8xxx xx04"
+  },
+  {
+    "patient_id": "P-2005",
+    "method": "email",
+    "value": "contact-p2005@example.test"
+  },
+  {
+    "patient_id": "P-2006",
+    "method": "sms",
+    "value": "+65 8xxx xx06"
+  },
+  {
+    "patient_id": "P-2007",
+    "method": "phone",
+    "value": "+65 8xxx xx07"
+  },
+  {
+    "patient_id": "P-2008",
+    "method": "email",
+    "value": "contact-p2008@example.test"
+  },
+  {
+    "patient_id": "P-2009",
+    "method": "sms",
+    "value": "+65 8xxx xx09"
+  },
+  {
+    "patient_id": "P-2010",
+    "method": "phone",
+    "value": "+65 8xxx xx10"
+  },
+  {
+    "patient_id": "P-2011",
+    "method": "email",
+    "value": "contact-p2011@example.test"
+  },
+  {
+    "patient_id": "P-2012",
+    "method": "sms",
+    "value": "+65 8xxx xx12"
+  },
+  {
+    "patient_id": "P-2013",
+    "method": "phone",
+    "value": "+65 8xxx xx13"
+  },
+  {
+    "patient_id": "P-2014",
+    "method": "email",
+    "value": "contact-p2014@example.test"
+  },
+  {
+    "patient_id": "P-2015",
+    "method": "sms",
+    "value": "+65 8xxx xx15"
+  },
+  {
+    "patient_id": "P-2016",
+    "method": "phone",
+    "value": "+65 8xxx xx16"
+  },
+  {
+    "patient_id": "P-2017",
+    "method": "email",
+    "value": "contact-p2017@example.test"
+  },
+  {
+    "patient_id": "P-2018",
+    "method": "sms",
+    "value": "+65 8xxx xx18"
+  },
+  {
+    "patient_id": "P-2019",
+    "method": "phone",
+    "value": "+65 8xxx xx19"
+  },
+  {
+    "patient_id": "P-2020",
+    "method": "email",
+    "value": "contact-p2020@example.test"
+  },
+  {
+    "patient_id": "P-2021",
+    "method": "sms",
+    "value": "+65 8xxx xx21"
+  },
+  {
+    "patient_id": "P-2022",
+    "method": "phone",
+    "value": "+65 8xxx xx22"
+  },
+  {
+    "patient_id": "P-2023",
+    "method": "email",
+    "value": "contact-p2023@example.test"
+  },
+  {
+    "patient_id": "P-2024",
+    "method": "sms",
+    "value": "+65 8xxx xx24"
+  },
+  {
+    "patient_id": "P-2025",
+    "method": "phone",
+    "value": "+65 8xxx xx25"
+  }
+]
