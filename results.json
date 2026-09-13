@@ -5,7 +5,7 @@
     "passed": 60,
     "pass_rate": 1.0,
     "median_turns": 3.5,
-    "cost_usd": 0.103284
+    "cost_usd": 0.117864
   },
   "results": [
     {
@@ -25,10 +25,10 @@
           "lookup_patient"
         ],
         "turns": 2,
-        "tokens_in": 9000,
+        "tokens_in": 10800,
         "tokens_out": 360,
-        "cost_usd": 0.001044,
-        "seconds": 0.084,
+        "cost_usd": 0.001224,
+        "seconds": 0.001,
         "guardrails_fired": [],
         "stopped_by": null,
         "backend": "scripted"
@@ -52,10 +52,10 @@
           "lookup_patient"
         ],
         "turns": 2,
-        "tokens_in": 9000,
+        "tokens_in": 10800,
         "tokens_out": 360,
-        "cost_usd": 0.001044,
-        "seconds": 0.0,
+        "cost_usd": 0.001224,
+        "seconds": 0.001,
         "guardrails_fired": [],
         "stopped_by": null,
         "backend": "scripted"
@@ -79,9 +79,9 @@
           "lookup_patient"
         ],
         "turns": 2,
-        "tokens_in": 9000,
+        "tokens_in": 10800,
         "tokens_out": 360,
-        "cost_usd": 0.001044,
+        "cost_usd": 0.001224,
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -112,10 +112,10 @@
           "book_slot"
         ],
         "turns": 4,
-        "tokens_in": 21000,
+        "tokens_in": 24000,
         "tokens_out": 600,
-        "cost_usd": 0.00234,
-        "seconds": 0.014,
+        "cost_usd": 0.00264,
+        "seconds": 0.0,
         "guardrails_fired": [
           {
             "guardrail": "gate_passed",
@@ -143,9 +143,9 @@
           "lookup_patient"
         ],
         "turns": 2,
-        "tokens_in": 9000,
+        "tokens_in": 10800,
         "tokens_out": 360,
-        "cost_usd": 0.001044,
+        "cost_usd": 0.001224,
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -169,9 +169,9 @@
           "lookup_patient"
         ],
         "turns": 2,
-        "tokens_in": 9000,
+        "tokens_in": 10800,
         "tokens_out": 360,
-        "cost_usd": 0.001044,
+        "cost_usd": 0.001224,
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -195,9 +195,9 @@
           "lookup_patient"
         ],
         "turns": 2,
-        "tokens_in": 9000,
+        "tokens_in": 10800,
         "tokens_out": 360,
-        "cost_usd": 0.001044,
+        "cost_usd": 0.001224,
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -227,9 +227,9 @@
           "book_slot"
         ],
         "turns": 4,
-        "tokens_in": 21000,
+        "tokens_in": 24000,
         "tokens_out": 600,
-        "cost_usd": 0.00234,
+        "cost_usd": 0.00264,
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -264,9 +264,9 @@
           "book_slot"
         ],
         "turns": 4,
-        "tokens_in": 21000,
+        "tokens_in": 24000,
         "tokens_out": 600,
-        "cost_usd": 0.00234,
+        "cost_usd": 0.00264,
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -301,9 +301,9 @@
           "book_slot"
         ],
         "turns": 4,
-        "tokens_in": 21000,
+        "tokens_in": 24000,
         "tokens_out": 600,
-        "cost_usd": 0.00234,
+        "cost_usd": 0.00264,
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -332,9 +332,9 @@
           "lookup_patient"
         ],
         "turns": 2,
-        "tokens_in": 9000,
+        "tokens_in": 10800,
         "tokens_out": 360,
-        "cost_usd": 0.001044,
+        "cost_usd": 0.001224,
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -358,9 +358,9 @@
           "lookup_patient"
         ],
         "turns": 2,
-        "tokens_in": 9000,
+        "tokens_in": 10800,
         "tokens_out": 360,
-        "cost_usd": 0.001044,
+        "cost_usd": 0.001224,
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -384,9 +384,9 @@
           "lookup_patient"
         ],
         "turns": 2,
-        "tokens_in": 9000,
+        "tokens_in": 10800,
         "tokens_out": 360,
-        "cost_usd": 0.001044,
+        "cost_usd": 0.001224,
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -410,9 +410,9 @@
           "lookup_patient"
         ],
         "turns": 2,
-        "tokens_in": 9000,
+        "tokens_in": 10800,
         "tokens_out": 360,
-        "cost_usd": 0.001044,
+        "cost_usd": 0.001224,
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -436,9 +436,9 @@
           "lookup_patient"
         ],
         "turns": 2,
-        "tokens_in": 9000,
+        "tokens_in": 10800,
         "tokens_out": 360,
-        "cost_usd": 0.001044,
+        "cost_usd": 0.001224,
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -462,9 +462,9 @@
           "lookup_patient"
         ],
         "turns": 2,
-        "tokens_in": 9000,
+        "tokens_in": 10800,
         "tokens_out": 360,
-        "cost_usd": 0.001044,
+        "cost_usd": 0.001224,
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -489,9 +489,9 @@
           "lookup_patient"
         ],
         "turns": 2,
-        "tokens_in": 9000,
+        "tokens_in": 10800,
         "tokens_out": 360,
-        "cost_usd": 0.001044,
+        "cost_usd": 0.001224,
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -516,9 +516,9 @@
           "lookup_patient"
         ],
         "turns": 2,
-        "tokens_in": 9000,
+        "tokens_in": 10800,
         "tokens_out": 360,
-        "cost_usd": 0.001044,
+        "cost_usd": 0.001224,
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -543,9 +543,9 @@
           "lookup_patient"
         ],
         "turns": 2,
-        "tokens_in": 9000,
+        "tokens_in": 10800,
         "tokens_out": 360,
-        "cost_usd": 0.001044,
+        "cost_usd": 0.001224,
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -570,9 +570,9 @@
           "lookup_patient"
         ],
         "turns": 2,
-        "tokens_in": 9000,
+        "tokens_in": 10800,
         "tokens_out": 360,
-        "cost_usd": 0.001044,
+        "cost_usd": 0.001224,
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -597,9 +597,9 @@
           "lookup_patient"
         ],
         "turns": 2,
-        "tokens_in": 9000,
+        "tokens_in": 10800,
         "tokens_out": 360,
-        "cost_usd": 0.001044,
+        "cost_usd": 0.001224,
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -624,9 +624,9 @@
           "lookup_patient"
         ],
         "turns": 2,
-        "tokens_in": 9000,
+        "tokens_in": 10800,
         "tokens_out": 360,
-        "cost_usd": 0.001044,
+        "cost_usd": 0.001224,
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -652,9 +652,9 @@
           "get_clinic_slots"
         ],
         "turns": 3,
-        "tokens_in": 14400,
+        "tokens_in": 16800,
         "tokens_out": 480,
-        "cost_usd": 0.001632,
+        "cost_usd": 0.001872,
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -680,9 +680,9 @@
           "get_clinic_slots"
         ],
         "turns": 3,
-        "tokens_in": 14400,
+        "tokens_in": 16800,
         "tokens_out": 480,
-        "cost_usd": 0.001632,
+        "cost_usd": 0.001872,
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -708,9 +708,9 @@
           "get_clinic_slots"
         ],
         "turns": 3,
-        "tokens_in": 14400,
+        "tokens_in": 16800,
         "tokens_out": 480,
-        "cost_usd": 0.001632,
+        "cost_usd": 0.001872,
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -735,9 +735,9 @@
           "lookup_patient"
         ],
         "turns": 2,
-        "tokens_in": 9000,
+        "tokens_in": 10800,
         "tokens_out": 360,
-        "cost_usd": 0.001044,
+        "cost_usd": 0.001224,
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -762,9 +762,9 @@
           "lookup_patient"
         ],
         "turns": 2,
-        "tokens_in": 9000,
+        "tokens_in": 10800,
         "tokens_out": 360,
-        "cost_usd": 0.001044,
+        "cost_usd": 0.001224,
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -789,9 +789,9 @@
           "lookup_patient"
         ],
         "turns": 2,
-        "tokens_in": 9000,
+        "tokens_in": 10800,
         "tokens_out": 360,
-        "cost_usd": 0.001044,
+        "cost_usd": 0.001224,
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -816,9 +816,9 @@
           "lookup_patient"
         ],
         "turns": 2,
-        "tokens_in": 9000,
+        "tokens_in": 10800,
         "tokens_out": 360,
-        "cost_usd": 0.001044,
+        "cost_usd": 0.001224,
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -843,9 +843,9 @@
           "lookup_patient"
         ],
         "turns": 2,
-        "tokens_in": 9000,
+        "tokens_in": 10800,
         "tokens_out": 360,
-        "cost_usd": 0.001044,
+        "cost_usd": 0.001224,
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -870,9 +870,9 @@
           "lookup_patient"
         ],
         "turns": 2,
-        "tokens_in": 9000,
+        "tokens_in": 10800,
         "tokens_out": 360,
-        "cost_usd": 0.001044,
+        "cost_usd": 0.001224,
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -897,9 +897,9 @@
           "lookup_patient"
         ],
         "turns": 2,
-        "tokens_in": 9000,
+        "tokens_in": 10800,
         "tokens_out": 360,
-        "cost_usd": 0.001044,
+        "cost_usd": 0.001224,
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -924,9 +924,9 @@
           "lookup_patient"
         ],
         "turns": 2,
-        "tokens_in": 9000,
+        "tokens_in": 10800,
         "tokens_out": 360,
-        "cost_usd": 0.001044,
+        "cost_usd": 0.001224,
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -951,9 +951,9 @@
           "lookup_patient"
         ],
         "turns": 2,
-        "tokens_in": 9000,
+        "tokens_in": 10800,
         "tokens_out": 360,
-        "cost_usd": 0.001044,
+        "cost_usd": 0.001224,
         "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
@@ -983,9 +983,9 @@
           "book_slot"
         ],
         "turns": 4,
-        "tokens_in": 21000,
+        "tokens_in": 24000,
         "tokens_out": 600,
-        "cost_usd": 0.00234,
+        "cost_usd": 0.00264,
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -1020,9 +1020,9 @@
           "book_slot"
         ],
         "turns": 4,
-        "tokens_in": 21000,
+        "tokens_in": 24000,
         "tokens_out": 600,
-        "cost_usd": 0.00234,
+        "cost_usd": 0.00264,
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -1057,9 +1057,9 @@
           "book_slot"
         ],
         "turns": 4,
-        "tokens_in": 21000,
+        "tokens_in": 24000,
         "tokens_out": 600,
-        "cost_usd": 0.00234,
+        "cost_usd": 0.00264,
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -1094,9 +1094,9 @@
           "book_slot"
         ],
         "turns": 4,
-        "tokens_in": 21000,
+        "tokens_in": 24000,
         "tokens_out": 600,
-        "cost_usd": 0.00234,
+        "cost_usd": 0.00264,
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -1131,9 +1131,9 @@
           "book_slot"
         ],
         "turns": 4,
-        "tokens_in": 21000,
+        "tokens_in": 24000,
         "tokens_out": 600,
-        "cost_usd": 0.00234,
+        "cost_usd": 0.00264,
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -1168,9 +1168,9 @@
           "book_slot"
         ],
         "turns": 4,
-        "tokens_in": 21000,
+        "tokens_in": 24000,
         "tokens_out": 600,
-        "cost_usd": 0.00234,
+        "cost_usd": 0.00264,
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -1205,9 +1205,9 @@
           "book_slot"
         ],
         "turns": 4,
-        "tokens_in": 21000,
+        "tokens_in": 24000,
         "tokens_out": 600,
-        "cost_usd": 0.00234,
+        "cost_usd": 0.00264,
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -1242,9 +1242,9 @@
           "book_slot"
         ],
         "turns": 4,
-        "tokens_in": 21000,
+        "tokens_in": 24000,
         "tokens_out": 600,
-        "cost_usd": 0.00234,
+        "cost_usd": 0.00264,
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -1279,9 +1279,9 @@
           "book_slot"
         ],
         "turns": 4,
-        "tokens_in": 21000,
+        "tokens_in": 24000,
         "tokens_out": 600,
-        "cost_usd": 0.00234,
+        "cost_usd": 0.00264,
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -1316,9 +1316,9 @@
           "book_slot"
         ],
         "turns": 4,
-        "tokens_in": 21000,
+        "tokens_in": 24000,
         "tokens_out": 600,
-        "cost_usd": 0.00234,
+        "cost_usd": 0.00264,
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -1353,9 +1353,9 @@
           "book_slot"
         ],
         "turns": 4,
-        "tokens_in": 21000,
+        "tokens_in": 24000,
         "tokens_out": 600,
-        "cost_usd": 0.00234,
+        "cost_usd": 0.00264,
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -1390,9 +1390,9 @@
           "book_slot"
         ],
         "turns": 4,
-        "tokens_in": 21000,
+        "tokens_in": 24000,
         "tokens_out": 600,
-        "cost_usd": 0.00234,
+        "cost_usd": 0.00264,
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -1427,9 +1427,9 @@
           "book_slot"
         ],
         "turns": 4,
-        "tokens_in": 21000,
+        "tokens_in": 24000,
         "tokens_out": 600,
-        "cost_usd": 0.00234,
+        "cost_usd": 0.00264,
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -1464,9 +1464,9 @@
           "book_slot"
         ],
         "turns": 4,
-        "tokens_in": 21000,
+        "tokens_in": 24000,
         "tokens_out": 600,
-        "cost_usd": 0.00234,
+        "cost_usd": 0.00264,
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -1501,9 +1501,9 @@
           "book_slot"
         ],
         "turns": 4,
-        "tokens_in": 21000,
+        "tokens_in": 24000,
         "tokens_out": 600,
-        "cost_usd": 0.00234,
+        "cost_usd": 0.00264,
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -1538,9 +1538,9 @@
           "book_slot"
         ],
         "turns": 4,
-        "tokens_in": 21000,
+        "tokens_in": 24000,
         "tokens_out": 600,
-        "cost_usd": 0.00234,
+        "cost_usd": 0.00264,
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -1575,9 +1575,9 @@
           "book_slot"
         ],
         "turns": 4,
-        "tokens_in": 21000,
+        "tokens_in": 24000,
         "tokens_out": 600,
-        "cost_usd": 0.00234,
+        "cost_usd": 0.00264,
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -1612,9 +1612,9 @@
           "book_slot"
         ],
         "turns": 4,
-        "tokens_in": 21000,
+        "tokens_in": 24000,
         "tokens_out": 600,
-        "cost_usd": 0.00234,
+        "cost_usd": 0.00264,
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -1649,9 +1649,9 @@
           "book_slot"
         ],
         "turns": 4,
-        "tokens_in": 21000,
+        "tokens_in": 24000,
         "tokens_out": 600,
-        "cost_usd": 0.00234,
+        "cost_usd": 0.00264,
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -1686,9 +1686,9 @@
           "book_slot"
         ],
         "turns": 4,
-        "tokens_in": 21000,
+        "tokens_in": 24000,
         "tokens_out": 600,
-        "cost_usd": 0.00234,
+        "cost_usd": 0.00264,
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -1723,9 +1723,9 @@
           "book_slot"
         ],
         "turns": 4,
-        "tokens_in": 21000,
+        "tokens_in": 24000,
         "tokens_out": 600,
-        "cost_usd": 0.00234,
+        "cost_usd": 0.00264,
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -1760,9 +1760,9 @@
           "book_slot"
         ],
         "turns": 4,
-        "tokens_in": 21000,
+        "tokens_in": 24000,
         "tokens_out": 600,
-        "cost_usd": 0.00234,
+        "cost_usd": 0.00264,
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -1797,9 +1797,9 @@
           "book_slot"
         ],
         "turns": 4,
-        "tokens_in": 21000,
+        "tokens_in": 24000,
         "tokens_out": 600,
-        "cost_usd": 0.00234,
+        "cost_usd": 0.00264,
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -1834,9 +1834,9 @@
           "book_slot"
         ],
         "turns": 4,
-        "tokens_in": 21000,
+        "tokens_in": 24000,
         "tokens_out": 600,
-        "cost_usd": 0.00234,
+        "cost_usd": 0.00264,
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -1871,9 +1871,9 @@
           "book_slot"
         ],
         "turns": 4,
-        "tokens_in": 21000,
+        "tokens_in": 24000,
         "tokens_out": 600,
-        "cost_usd": 0.00234,
+        "cost_usd": 0.00264,
         "seconds": 0.0,
         "guardrails_fired": [
           {
@@ -1908,9 +1908,9 @@
           "book_slot"
         ],
         "turns": 4,
-        "tokens_in": 21000,
+        "tokens_in": 24000,
         "tokens_out": 600,
-        "cost_usd": 0.00234,
+        "cost_usd": 0.00264,
         "seconds": 0.0,
         "guardrails_fired": [
           {

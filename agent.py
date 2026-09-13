@@ -55,7 +55,14 @@ def run_case(case_id, problem=None, approve=None, verbose=False):
                           if n in tools.DESCRIPTORS],
         system_prompt=prompt.build_system_prompt(problem))
 
-    transcript = []      # what the model would see
+    # The live model needs an explicit task, not only its operating manual.
+    # ScriptedBackend already knows case_id because it replays a fixture, which
+    # could otherwise hide this gap until an expensive live evaluation.
+    item_name = "referral" if problem == "B" else "claim"
+    transcript = [{"role": "user",
+                   "content": "Process %s %s. Use tools to gather "
+                              "ground truth before concluding."
+                              % (item_name, case_id)}]
     evidence = []        # every tool actually called, in order
 
     # TURNS ARE TOOL-CALLING TURNS. The concluding move - where the agent
