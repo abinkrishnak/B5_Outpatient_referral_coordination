@@ -22,6 +22,7 @@ python run_eval.py                    # 40 cases / 60 scripted trials
 python audit_evaluation_set.py        # validates case mix and labels
 python run_guardrail_checklist.py     # 11 code-layer safety checks
 python d2_parallel_comparison.py      # grouped versus sequential turns
+python summarize_live_results.py      # compact table of completed D5 models
 python cost_to_serve.py               # rebuilds D6 from measured D5 evidence
 python demo_loop_failure.py           # D7 loop-control failure
 python demo_tool_contract_failure.py  # D7 tool-interface failure
@@ -30,6 +31,10 @@ python demo_tool_contract_failure.py  # D7 tool-interface failure
 No arguments needed, no packages to install, no network, no API key. Standard
 library only. If any of that is not true on your machine, tell me — the whole
 point of the scripted backend is that it works everywhere.
+
+For a newcomer-friendly walkthrough, open `ProblemB_Team_Runbook.ipynb`.
+It runs the free verification first and leaves the paid live-pilot cell
+commented out by default.
 
 **If you change `PROBLEM` and nothing happens**, Python is reusing stale bytecode —
 `"B"` → `"A"` is the same file size, so its cache check can miss the edit. The scaffold
