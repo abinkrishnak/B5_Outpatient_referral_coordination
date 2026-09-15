@@ -127,7 +127,27 @@ def run_case(case_id, problem=None, approve=None, verbose=False):
             # Only calls INDEPENDENT of each other belong in one turn.
             # A dependency chain cannot be shortened by running things at
             # once - that is why Problem B saves less than Problem A.
-            calls = move.get("calls") or [(move["tool"], move["args"])]
+            # Different providers occasionally return ``{"calls": []}`` or
+            # omit both action keys despite JSON mode.  Do not let a model
+            # formatting lapse crash the Python process (or silently count as
+            # a clinical decision).  Give the same ReAct model one explicit
+            # protocol-repair turn instead.  A non-empty legacy single-tool
+            # shape remains supported for compatibility with the scaffold.
+            calls = move.get("calls")
+            if calls is None and "tool" in move and "args" in move:
+                calls = [(move["tool"], move["args"])]
+            move_error = _calls_contract_error(calls)
+            if move_error:
+                transcript.append({"role": "assistant",
+                                   "content": move.get("thought", "")})
+                transcript.append({"role": "user",
+                                   "content": "ACTION CONTRACT ERROR: %s "
+                                              "Return one valid JSON move. "
+                                              "Use final only to conclude, "
+                                              "or calls with at least one "
+                                              "[tool_name, args] pair."
+                                              % move_error})
+                continue
             observations = []
 
             for name, args in calls:
@@ -204,4 +224,20 @@ def _final_contract_error(record, evidence):
         missing = str(record.get("missing", ""))
         if not re.search(r"\b[A-Z]{2,}(?:-[A-Z0-9]+)+\b", missing):
             return "missing must name the mandatory test and its code, e.g. VF-01"
+    return None
+
+
+def _calls_contract_error(calls):
+    """Return a structural error for a non-final model move, else ``None``.
+
+    This validates the wire format only.  It does not decide the referral
+    outcome or invent a tool call, so the ReAct model remains responsible for
+    choosing the next action.
+    """
+    if not isinstance(calls, list) or not calls:
+        return "calls must be a non-empty JSON list"
+    for call in calls:
+        if (not isinstance(call, (list, tuple)) or len(call) != 2 or
+                not isinstance(call[0], str) or not isinstance(call[1], dict)):
+            return "each call must be [tool_name, args_object]"
     return None

@@ -12,6 +12,7 @@ FAILURE_FALLBACK_USD = 9.17
 MONTHLY_REFERRALS = 4000
 INPUTS = (
     "evidence/d5_live_google_gemini-2.5-flash-lite.json",
+    "evidence/d5_live_google_gemini-2.5-flash_v2.json",
     "evidence/d5_live_openai_gpt-4.1-mini.json",
 )
 

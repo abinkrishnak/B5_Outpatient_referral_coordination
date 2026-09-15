@@ -25,6 +25,28 @@
       "expected_total_per_referral_usd": 1.834811
     },
     {
+      "model": "google/gemini-2.5-flash",
+      "source": "evidence/d5_live_google_gemini-2.5-flash_v2.json",
+      "trials": 60,
+      "code_check_failures": 10,
+      "code_check_failure_rate": 0.166667,
+      "layer_1": {
+        "measured_variable_total_usd": 0.194309,
+        "measured_variable_per_referral_usd": 0.003238
+      },
+      "layer_2": {
+        "fallback_cost_per_failure_usd": 9.17,
+        "expected_fallback_per_referral_usd": 1.528333
+      },
+      "layer_3": {
+        "monthly_referrals": 4000,
+        "monthly_variable_usd": 12.95,
+        "monthly_expected_fallback_usd": 6113.33,
+        "monthly_total_usd": 6126.29
+      },
+      "expected_total_per_referral_usd": 1.531572
+    },
+    {
       "model": "openai/gpt-4.1-mini",
       "source": "evidence/d5_live_openai_gpt-4.1-mini.json",
       "trials": 60,
