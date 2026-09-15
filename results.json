@@ -30,7 +30,7 @@
         "tokens_out": 480,
         "cost_usd": 0.001872,
         "cost_basis": "configured_token_prices",
-        "seconds": 0.023,
+        "seconds": 0.082,
         "guardrails_fired": [],
         "stopped_by": null,
         "backend": "scripted"
@@ -59,7 +59,7 @@
         "tokens_out": 480,
         "cost_usd": 0.001872,
         "cost_basis": "configured_token_prices",
-        "seconds": 0.001,
+        "seconds": 0.0,
         "guardrails_fired": [],
         "stopped_by": null,
         "backend": "scripted"
@@ -122,7 +122,7 @@
         "tokens_out": 600,
         "cost_usd": 0.00264,
         "cost_basis": "configured_token_prices",
-        "seconds": 0.0,
+        "seconds": 0.001,
         "guardrails_fired": [
           {
             "guardrail": "gate_passed",
