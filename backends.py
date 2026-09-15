@@ -312,7 +312,7 @@ def get_api_key():
 
 
 LIVE_TIMEOUT_SECONDS = 90
-LIVE_MAX_ATTEMPTS = 2
+LIVE_MAX_ATTEMPTS = 3
 
 
 def _is_transport_timeout(error):
@@ -345,15 +345,31 @@ def _live_call(messages):
         data=body,
         headers={"Authorization": "Bearer " + api_key,
                  "Content-Type": "application/json"})
-    # A transient read timeout is not an agent decision. Retry it once, but
-    # never retry a server/validation error: those remain visible to D5.
+    # A transient transport or provider-capacity failure is not an agent
+    # decision. Retry it twice, but never turn it into a clinical outcome.
     # A lost response can theoretically duplicate a request, so provider-
     # reported cost remains the authority for the final evidence.
     for attempt in range(1, LIVE_MAX_ATTEMPTS + 1):
         try:
             with urllib.request.urlopen(req, timeout=LIVE_TIMEOUT_SECONDS) as r:
                 payload = json.load(r)
-            break
+            if (isinstance(payload, dict) and isinstance(payload.get("choices"), list)
+                    and payload["choices"]):
+                return {"content": payload["choices"][0]["message"].get("content", ""),
+                        "usage": payload.get("usage") or {}}
+
+            # OpenRouter can return a JSON error object (sometimes with a 2xx
+            # status) when an upstream provider is temporarily unavailable.
+            # The old code indexed ``choices`` and hid the useful reason behind
+            # KeyError. Capture it and give a transient provider response a
+            # bounded retry before failing explicitly.
+            error_info = payload.get("error", payload) if isinstance(payload, dict) else payload
+            if attempt == LIVE_MAX_ATTEMPTS:
+                raise RuntimeError(
+                    "OpenRouter returned no completion after %s attempts: %s"
+                    % (LIVE_MAX_ATTEMPTS, str(error_info)[:500]))
+            time.sleep(attempt)
+            continue
         except (TimeoutError, socket.timeout, urllib.error.URLError) as error:
             timed_out = _is_transport_timeout(error)
             if not timed_out or attempt == LIVE_MAX_ATTEMPTS:
@@ -364,8 +380,6 @@ def _live_call(messages):
                         % (LIVE_MAX_ATTEMPTS, LIVE_TIMEOUT_SECONDS)) from error
                 raise
             time.sleep(1)
-    return {"content": payload["choices"][0]["message"].get("content", ""),
-            "usage": payload.get("usage") or {}}
 
 
 def make_backend(case_id, tool_descriptors=None, system_prompt=""):
