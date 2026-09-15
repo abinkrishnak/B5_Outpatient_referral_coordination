@@ -370,6 +370,18 @@ def _live_call(messages):
                     % (LIVE_MAX_ATTEMPTS, str(error_info)[:500]))
             time.sleep(attempt)
             continue
+        except urllib.error.HTTPError as error:
+            # HTTPError exposes the provider's JSON/text response on the
+            # exception itself.  Surface it instead of leaving the runner
+            # with only "HTTP 400", which cannot distinguish an invalid
+            # parameter from a provider-side availability refusal.
+            try:
+                detail = error.read().decode("utf-8", errors="replace")
+            except Exception:
+                detail = "(could not read response body)"
+            raise RuntimeError(
+                "OpenRouter HTTP %s for model %s: %s"
+                % (error.code, config.MODEL, detail[:800])) from error
         except (TimeoutError, socket.timeout, urllib.error.URLError) as error:
             timed_out = _is_transport_timeout(error)
             if not timed_out or attempt == LIVE_MAX_ATTEMPTS:
