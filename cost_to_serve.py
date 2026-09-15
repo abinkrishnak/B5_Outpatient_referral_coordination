@@ -14,6 +14,8 @@ INPUTS = (
     "evidence/d5_live_google_gemini-2.5-flash-lite.json",
     "evidence/d5_live_google_gemini-2.5-flash_v2.json",
     "evidence/d5_live_openai_gpt-4.1-mini.json",
+    "evidence/d5_live_openai_gpt-4o-mini-2024-07-18_v2.json",
+    "evidence/d5_live_meta-llama_llama-3.3-70b-instruct_v2.json",
 )
 
 

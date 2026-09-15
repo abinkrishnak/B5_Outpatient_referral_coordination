@@ -67,6 +67,50 @@
         "monthly_total_usd": 5510.17
       },
       "expected_total_per_referral_usd": 1.377542
+    },
+    {
+      "model": "openai/gpt-4o-mini-2024-07-18",
+      "source": "evidence/d5_live_openai_gpt-4o-mini-2024-07-18_v2.json",
+      "trials": 60,
+      "code_check_failures": 34,
+      "code_check_failure_rate": 0.566667,
+      "layer_1": {
+        "measured_variable_total_usd": 0.047391,
+        "measured_variable_per_referral_usd": 0.00079
+      },
+      "layer_2": {
+        "fallback_cost_per_failure_usd": 9.17,
+        "expected_fallback_per_referral_usd": 5.196333
+      },
+      "layer_3": {
+        "monthly_referrals": 4000,
+        "monthly_variable_usd": 3.16,
+        "monthly_expected_fallback_usd": 20785.33,
+        "monthly_total_usd": 20788.49
+      },
+      "expected_total_per_referral_usd": 5.197123
+    },
+    {
+      "model": "meta-llama/llama-3.3-70b-instruct",
+      "source": "evidence/d5_live_meta-llama_llama-3.3-70b-instruct_v2.json",
+      "trials": 60,
+      "code_check_failures": 17,
+      "code_check_failure_rate": 0.283333,
+      "layer_1": {
+        "measured_variable_total_usd": 0.062616,
+        "measured_variable_per_referral_usd": 0.001044
+      },
+      "layer_2": {
+        "fallback_cost_per_failure_usd": 9.17,
+        "expected_fallback_per_referral_usd": 2.598167
+      },
+      "layer_3": {
+        "monthly_referrals": 4000,
+        "monthly_variable_usd": 4.17,
+        "monthly_expected_fallback_usd": 10392.67,
+        "monthly_total_usd": 10396.84
+      },
+      "expected_total_per_referral_usd": 2.59921
     }
   ]
 }

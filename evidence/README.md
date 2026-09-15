@@ -17,3 +17,7 @@ files and the D2-D7 documentation before opening large per-trial live results.
 The report should cite final D2-D7 files. Do not treat a pilot file as a final
 model result. Rebuild derived files with the root-level scripts when input
 evidence changes.
+
+Five completed 60-trial V2 files are the final D5 comparison. Other
+`d5_live_*.json` files may be incomplete provider/protocol diagnostics; check
+their `complete` field before using them in D5 or D6.
