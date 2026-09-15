@@ -261,25 +261,38 @@ def _parse_move(text):
 def _normalise_move(move):
     """Accept an OpenAI-compatible final-answer spelling used by some models.
 
-    The agent protocol specifies ``{\"final\": {...}}``.  Qwen occasionally
-    emits the semantically identical single tool call
-    ``{\"tool\": \"final\", \"args\": {...}}`` (or the one-item ``calls``
-    variant).  Normalising only those *single*, structured forms at the vendor
-    adapter boundary keeps the core ReAct loop vendor-neutral.  It deliberately
-    does not turn an arbitrary unknown tool into a final answer.
+    The agent protocol specifies ``{\"final\": {...}}``.  Some providers
+    instead emit a single pseudo-tool call for either ``final`` or a known
+    decision such as ``request_information``.  Normalising only those *single*,
+    structured forms at the vendor adapter boundary keeps the core ReAct loop
+    vendor-neutral.  It deliberately does not turn an arbitrary unknown tool
+    into a final answer.
     """
     if not isinstance(move, dict):
         return move
 
     thought = move.get("thought", "")
-    if move.get("tool") == "final" and isinstance(move.get("args"), dict):
-        return {"thought": thought, "final": move["args"]}
+    decision_names = {
+        "approve_in_principle", "book", "escalate", "request_document",
+        "request_information",
+    }
+
+    def as_final(name, payload):
+        record = dict(payload)
+        if name != "final":
+            record.setdefault("decision", name)
+        return {"thought": thought, "final": record}
+
+    if (move.get("tool") == "final" or move.get("tool") in decision_names) \
+            and isinstance(move.get("args"), dict):
+        return as_final(move["tool"], move["args"])
 
     calls = move.get("calls")
     if (isinstance(calls, list) and len(calls) == 1 and
             isinstance(calls[0], (list, tuple)) and len(calls[0]) == 2 and
-            calls[0][0] == "final" and isinstance(calls[0][1], dict)):
-        return {"thought": thought, "final": calls[0][1]}
+            calls[0][0] in decision_names | {"final"} and
+            isinstance(calls[0][1], dict)):
+        return as_final(calls[0][0], calls[0][1])
 
     return move
 
