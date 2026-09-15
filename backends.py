@@ -379,6 +379,16 @@ def _live_call(messages):
                 detail = error.read().decode("utf-8", errors="replace")
             except Exception:
                 detail = "(could not read response body)"
+            if error.code == 429 and attempt < LIVE_MAX_ATTEMPTS:
+                # Respect a short provider hint when present.  We cap the
+                # wait to keep an interactive student run responsive; after
+                # the bounded retries, the caller receives the real error.
+                try:
+                    delay = float(error.headers.get("Retry-After", attempt))
+                except (TypeError, ValueError):
+                    delay = float(attempt)
+                time.sleep(min(max(delay, 1.0), 10.0))
+                continue
             raise RuntimeError(
                 "OpenRouter HTTP %s for model %s: %s"
                 % (error.code, config.MODEL, detail[:800])) from error
