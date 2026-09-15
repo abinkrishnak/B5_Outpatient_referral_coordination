@@ -26,6 +26,9 @@ moves is how you test the parts you wrote.
 ====================================================================
 """
 import json
+import socket
+import time
+import urllib.error
 import urllib.request
 from getpass import getpass
 
@@ -269,6 +272,18 @@ def get_api_key():
     return config.API_KEY
 
 
+LIVE_TIMEOUT_SECONDS = 90
+LIVE_MAX_ATTEMPTS = 2
+
+
+def _is_transport_timeout(error):
+    """True only for a connection/read timeout, never an HTTP/model error."""
+    if isinstance(error, (TimeoutError, socket.timeout)):
+        return True
+    return (isinstance(error, urllib.error.URLError)
+            and isinstance(error.reason, (TimeoutError, socket.timeout)))
+
+
 def _live_call(messages):
     """>>> THE ONLY FUNCTION IN THIS REPOSITORY THAT KNOWS A VENDOR <<<
 
@@ -291,8 +306,25 @@ def _live_call(messages):
         data=body,
         headers={"Authorization": "Bearer " + api_key,
                  "Content-Type": "application/json"})
-    with urllib.request.urlopen(req, timeout=60) as r:
-        payload = json.load(r)
+    # A transient read timeout is not an agent decision. Retry it once, but
+    # never retry a server/validation error: those remain visible to D5.
+    # A lost response can theoretically duplicate a request, so provider-
+    # reported cost remains the authority for the final evidence.
+    for attempt in range(1, LIVE_MAX_ATTEMPTS + 1):
+        try:
+            with urllib.request.urlopen(req, timeout=LIVE_TIMEOUT_SECONDS) as r:
+                payload = json.load(r)
+            break
+        except (TimeoutError, socket.timeout, urllib.error.URLError) as error:
+            timed_out = _is_transport_timeout(error)
+            if not timed_out or attempt == LIVE_MAX_ATTEMPTS:
+                if timed_out:
+                    raise TimeoutError(
+                        "OpenRouter read timed out after %s attempts of %ss. "
+                        "No result was recorded; rerun this battery."
+                        % (LIVE_MAX_ATTEMPTS, LIVE_TIMEOUT_SECONDS)) from error
+                raise
+            time.sleep(1)
     return {"content": payload["choices"][0]["message"].get("content", ""),
             "usage": payload.get("usage") or {}}
 

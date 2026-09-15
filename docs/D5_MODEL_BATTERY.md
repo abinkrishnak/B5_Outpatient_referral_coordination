@@ -33,6 +33,13 @@ its own `evidence/d5_live_<model>_<contract>.json`, including raw records, code-
 results, judgement queue, token counts, turn counts, cost basis and whether the
 user-set budget stopped the run.
 
+The OpenRouter adapter allows a 90-second read and retries one *transport
+timeout* once. It does not retry HTTP, validation, or model errors. An
+exhausted timeout produces no valid battery result: retain any earlier pilot
+under a `d5_pilot_...` filename and rerun the full battery from the beginning.
+Because a response could be lost after the provider processed it, provider-
+reported cost (and the key's credit check) remains the final cost authority.
+
 `--synthetic-approval` is required for a full benchmark because `AUTONOMY` is
 `confirm`. It is acceptable only here: the supplied `book_slot` is a no-op
 fixture. In a real service, an operator must approve the exact booking payload;
