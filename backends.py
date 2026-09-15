@@ -241,7 +241,7 @@ def _parse_move(text):
             lines = lines[:-1]
         candidate = "\n".join(lines).strip()
     try:
-        return json.loads(candidate)
+        return _normalise_move(json.loads(candidate))
     except json.JSONDecodeError:
         # Some providers add one short sentence before/after an otherwise
         # valid object.  Recover only the complete outer object, never a
@@ -249,13 +249,39 @@ def _parse_move(text):
         left, right = candidate.find("{"), candidate.rfind("}")
         if left >= 0 and right > left:
             try:
-                return json.loads(candidate[left:right + 1])
+                return _normalise_move(json.loads(candidate[left:right + 1]))
             except json.JSONDecodeError:
                 pass
         return {"final": {"decision": "escalate",
                           "reason": "model did not return parseable JSON: %s"
                                     % candidate[:200]},
                 "thought": "unparseable: %s" % candidate[:200]}
+
+
+def _normalise_move(move):
+    """Accept an OpenAI-compatible final-answer spelling used by some models.
+
+    The agent protocol specifies ``{\"final\": {...}}``.  Qwen occasionally
+    emits the semantically identical single tool call
+    ``{\"tool\": \"final\", \"args\": {...}}`` (or the one-item ``calls``
+    variant).  Normalising only those *single*, structured forms at the vendor
+    adapter boundary keeps the core ReAct loop vendor-neutral.  It deliberately
+    does not turn an arbitrary unknown tool into a final answer.
+    """
+    if not isinstance(move, dict):
+        return move
+
+    thought = move.get("thought", "")
+    if move.get("tool") == "final" and isinstance(move.get("args"), dict):
+        return {"thought": thought, "final": move["args"]}
+
+    calls = move.get("calls")
+    if (isinstance(calls, list) and len(calls) == 1 and
+            isinstance(calls[0], (list, tuple)) and len(calls[0]) == 2 and
+            calls[0][0] == "final" and isinstance(calls[0][1], dict)):
+        return {"thought": thought, "final": calls[0][1]}
+
+    return move
 
 
 def get_api_key():
