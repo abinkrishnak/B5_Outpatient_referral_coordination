@@ -311,8 +311,8 @@ def get_api_key():
     return config.API_KEY
 
 
-LIVE_TIMEOUT_SECONDS = 90
-LIVE_MAX_ATTEMPTS = 3
+LIVE_TIMEOUT_SECONDS = 45
+LIVE_MAX_ATTEMPTS = 1
 
 
 def _is_transport_timeout(error):
@@ -418,3 +418,4 @@ def make_backend(case_id, tool_descriptors=None, system_prompt=""):
 # They do not represent live-model accuracy.
 from problem_b_scripts import PROBLEM_B_SCRIPTS
 SCRIPTS.update(PROBLEM_B_SCRIPTS)
+
