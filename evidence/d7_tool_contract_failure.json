@@ -1,37 +1,142 @@
 {
+  "failure_id": "F2",
   "failure": "specialty_typo_silent_empty_result",
-  "deleted_component": "V2 closed-set specialty validation",
-  "attempted_args": {
-    "specialty": "OPHT",
-    "band": "routine",
-    "from": "2026-09-09",
-    "to": "2026-11-04"
-  },
-  "working_v2_result": {
-    "error": "invalid_slot_query",
-    "invalid": {
-      "specialty": "OPHT"
+  "layer": "tool interface",
+  "controlled_change": "Remove only V2 closed-set validation; keep the action and routing logic unchanged, then restore the validation.",
+  "expected_safe_behaviour": "Expose invalid_slot_query instead of reporting an empty legal window.",
+  "runs": [
+    {
+      "phase": "working_baseline",
+      "tool_contract_version": "v2",
+      "deleted_component": "none",
+      "attempted_action": {
+        "tool": "get_clinic_slots",
+        "args": {
+          "specialty": "OPHT",
+          "band": "routine",
+          "from": "2026-09-09",
+          "to": "2026-11-04"
+        }
+      },
+      "observation": {
+        "error": "invalid_slot_query",
+        "invalid": {
+          "specialty": "OPHT"
+        },
+        "allowed_specialties": [
+          "CARD",
+          "DER",
+          "ENT",
+          "NEU",
+          "OPH",
+          "ORT"
+        ],
+        "allowed_bands": [
+          "routine",
+          "soon",
+          "urgent"
+        ]
+      },
+      "decision": "escalate",
+      "trigger": "invalid_slot_query",
+      "reason": "The slot query is invalid because specialty OPHT is outside the closed set. Correct the value from the referral before retrying.",
+      "expected_trigger": "invalid_slot_query",
+      "pass": true,
+      "turns": 1,
+      "tool_calls": 1,
+      "tokens_in_estimated": 30,
+      "tokens_out_estimated": 45,
+      "total_tokens_estimated": 75,
+      "estimated_cost_usd": 0.000021,
+      "token_method": "serialized_characters_divided_by_4"
     },
-    "allowed_specialties": [
-      "CARD",
-      "DER",
-      "ENT",
-      "NEU",
-      "OPH",
-      "ORT"
-    ],
-    "allowed_bands": [
-      "routine",
-      "soon",
-      "urgent"
-    ]
-  },
-  "broken_v1_result": [],
-  "why_accuracy_alone_is_insufficient": "Both results are valid Python values. Only V2 distinguishes an invalid query from a real empty slot window.",
-  "correct_fix_layer": "tool interface (poka-yoke constraint)",
-  "wrong_fix_layers": [
-    "prompt: a model can still misspell a string",
-    "guardrail after slot search: it sees an empty result too late"
+    {
+      "phase": "component_removed",
+      "tool_contract_version": "v1",
+      "deleted_component": "closed-set specialty and urgency-band validation",
+      "attempted_action": {
+        "tool": "get_clinic_slots",
+        "args": {
+          "specialty": "OPHT",
+          "band": "routine",
+          "from": "2026-09-09",
+          "to": "2026-11-04"
+        }
+      },
+      "observation": [],
+      "decision": "escalate",
+      "trigger": "no_slot_in_window",
+      "reason": "No slots were returned, so the agent incorrectly treated a typo as genuine unavailability.",
+      "expected_trigger": "invalid_slot_query",
+      "pass": false,
+      "turns": 1,
+      "tool_calls": 1,
+      "tokens_in_estimated": 30,
+      "tokens_out_estimated": 1,
+      "total_tokens_estimated": 31,
+      "estimated_cost_usd": 0.0000034,
+      "token_method": "serialized_characters_divided_by_4"
+    },
+    {
+      "phase": "component_restored",
+      "tool_contract_version": "v2",
+      "deleted_component": "none",
+      "attempted_action": {
+        "tool": "get_clinic_slots",
+        "args": {
+          "specialty": "OPHT",
+          "band": "routine",
+          "from": "2026-09-09",
+          "to": "2026-11-04"
+        }
+      },
+      "observation": {
+        "error": "invalid_slot_query",
+        "invalid": {
+          "specialty": "OPHT"
+        },
+        "allowed_specialties": [
+          "CARD",
+          "DER",
+          "ENT",
+          "NEU",
+          "OPH",
+          "ORT"
+        ],
+        "allowed_bands": [
+          "routine",
+          "soon",
+          "urgent"
+        ]
+      },
+      "decision": "escalate",
+      "trigger": "invalid_slot_query",
+      "reason": "The slot query is invalid because specialty OPHT is outside the closed set. Correct the value from the referral before retrying.",
+      "expected_trigger": "invalid_slot_query",
+      "pass": true,
+      "turns": 1,
+      "tool_calls": 1,
+      "tokens_in_estimated": 30,
+      "tokens_out_estimated": 45,
+      "total_tokens_estimated": 75,
+      "estimated_cost_usd": 0.000021,
+      "token_method": "serialized_characters_divided_by_4"
+    }
   ],
-  "restoration_verified": true
+  "working_pass_rate": 1,
+  "broken_pass_rate": 0,
+  "restored_pass_rate": 1,
+  "failure_reproduced": true,
+  "restoration_verified": true,
+  "failure_visible_in": [
+    "trigger",
+    "reason",
+    "structured tool observation"
+  ],
+  "correct_fix_layer": "Tool interface: the finite vocabulary is known and can be enforced before an empty list acquires business meaning.",
+  "why_other_layers_are_wrong": {
+    "prompt": "A prompt can request exact copying but cannot make an illegal string impossible.",
+    "post_query_guardrail": "After the V1 tool returns [], the typo is already indistinguishable from genuine no availability."
+  },
+  "scope_note": "This is an offline deterministic agent-routing reproduction. Token and cost fields are transparent estimates, not provider billing."
 }
