@@ -49,7 +49,10 @@ def run_one_model(model, case_limit, full, synthetic_approval, max_cost,
     for cid in cases:
         trials = 3 if _is_negative(key[cid]) else 1
         for trial in range(1, trials + 1):
-            record = run_case(cid, approve=approve)
+            try:
+                record = run_case(cid, approve=approve)
+            except TimeoutError as error:
+                record = {'case_id': cid, 'decision': 'live_timeout', 'reason': str(error), 'evidence': [], 'turns': 0, 'tokens_in': 0, 'tokens_out': 0, 'cost_usd': 0.0, 'stopped_by': 'live_timeout', 'backend': 'live'}
             passed, fails = code_check(record, key[cid])
             results.append({"case_id": cid, "trial": trial, "passed": passed,
                             "fails": fails, "record": record,
@@ -123,3 +126,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
