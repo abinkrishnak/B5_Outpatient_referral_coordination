@@ -22,7 +22,24 @@
         "monthly_expected_fallback_usd": 7336.0,
         "monthly_total_usd": 7339.24
       },
-      "expected_total_per_referral_usd": 1.834811
+      "expected_total_per_referral_usd": 1.834811,
+      "sensitivity": [
+        {
+          "assumed_success_rate": 0.7,
+          "expected_total_per_referral_usd": 2.751811,
+          "monthly_total_usd": 11007.24
+        },
+        {
+          "assumed_success_rate": 0.8,
+          "expected_total_per_referral_usd": 1.834811,
+          "monthly_total_usd": 7339.24
+        },
+        {
+          "assumed_success_rate": 0.9,
+          "expected_total_per_referral_usd": 0.917811,
+          "monthly_total_usd": 3671.24
+        }
+      ]
     },
     {
       "model": "google/gemini-2.5-flash",
@@ -44,7 +61,24 @@
         "monthly_expected_fallback_usd": 6113.33,
         "monthly_total_usd": 6126.29
       },
-      "expected_total_per_referral_usd": 1.531572
+      "expected_total_per_referral_usd": 1.531572,
+      "sensitivity": [
+        {
+          "assumed_success_rate": 0.7333,
+          "expected_total_per_referral_usd": 2.448572,
+          "monthly_total_usd": 9794.29
+        },
+        {
+          "assumed_success_rate": 0.8333,
+          "expected_total_per_referral_usd": 1.531572,
+          "monthly_total_usd": 6126.29
+        },
+        {
+          "assumed_success_rate": 0.9333,
+          "expected_total_per_referral_usd": 0.614572,
+          "monthly_total_usd": 2458.29
+        }
+      ]
     },
     {
       "model": "openai/gpt-4.1-mini",
@@ -66,7 +100,24 @@
         "monthly_expected_fallback_usd": 5502.0,
         "monthly_total_usd": 5510.17
       },
-      "expected_total_per_referral_usd": 1.377542
+      "expected_total_per_referral_usd": 1.377542,
+      "sensitivity": [
+        {
+          "assumed_success_rate": 0.75,
+          "expected_total_per_referral_usd": 2.294542,
+          "monthly_total_usd": 9178.17
+        },
+        {
+          "assumed_success_rate": 0.85,
+          "expected_total_per_referral_usd": 1.377542,
+          "monthly_total_usd": 5510.17
+        },
+        {
+          "assumed_success_rate": 0.95,
+          "expected_total_per_referral_usd": 0.460542,
+          "monthly_total_usd": 1842.17
+        }
+      ]
     },
     {
       "model": "openai/gpt-4o-mini-2024-07-18",
@@ -88,7 +139,24 @@
         "monthly_expected_fallback_usd": 20785.33,
         "monthly_total_usd": 20788.49
       },
-      "expected_total_per_referral_usd": 5.197123
+      "expected_total_per_referral_usd": 5.197123,
+      "sensitivity": [
+        {
+          "assumed_success_rate": 0.3333,
+          "expected_total_per_referral_usd": 6.114123,
+          "monthly_total_usd": 24456.49
+        },
+        {
+          "assumed_success_rate": 0.4333,
+          "expected_total_per_referral_usd": 5.197123,
+          "monthly_total_usd": 20788.49
+        },
+        {
+          "assumed_success_rate": 0.5333,
+          "expected_total_per_referral_usd": 4.280123,
+          "monthly_total_usd": 17120.49
+        }
+      ]
     },
     {
       "model": "meta-llama/llama-3.3-70b-instruct",
@@ -110,7 +178,31 @@
         "monthly_expected_fallback_usd": 10392.67,
         "monthly_total_usd": 10396.84
       },
-      "expected_total_per_referral_usd": 2.59921
+      "expected_total_per_referral_usd": 2.59921,
+      "sensitivity": [
+        {
+          "assumed_success_rate": 0.6167,
+          "expected_total_per_referral_usd": 3.51621,
+          "monthly_total_usd": 14064.84
+        },
+        {
+          "assumed_success_rate": 0.7167,
+          "expected_total_per_referral_usd": 2.59921,
+          "monthly_total_usd": 10396.84
+        },
+        {
+          "assumed_success_rate": 0.8167,
+          "expected_total_per_referral_usd": 1.68221,
+          "monthly_total_usd": 6728.84
+        }
+      ]
     }
-  ]
+  ],
+  "break_even": {
+    "cheap_model": "google/gemini-2.5-flash-lite",
+    "dear_model": "openai/gpt-4.1-mini",
+    "required_cheap_success_rate": 0.849866,
+    "observed_cheap_success_rate": 0.8,
+    "formula": "p_cheap = p_dear - (dear_variable - cheap_variable) / failure_cost"
+  }
 }

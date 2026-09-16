@@ -54,6 +54,33 @@ def model_cost(data, source):
             "monthly_total_usd": round(MONTHLY_REFERRALS * total_per_referral, 2),
         },
         "expected_total_per_referral_usd": round(total_per_referral, 6),
+        "sensitivity": [
+            {
+                "assumed_success_rate": round(rate, 4),
+                "expected_total_per_referral_usd": round(
+                    variable_per_referral + (1 - rate) * FAILURE_FALLBACK_USD, 6),
+                "monthly_total_usd": round(MONTHLY_REFERRALS * (
+                    variable_per_referral + (1 - rate) * FAILURE_FALLBACK_USD), 2),
+            }
+            for rate in (max(0, 1 - failure_rate - .10),
+                         1 - failure_rate,
+                         min(1, 1 - failure_rate + .10))
+        ],
+    }
+
+
+def break_even(cheap, dear):
+    """Success rate the lower-variable-cost model needs to match the dear one."""
+    cheap_var = cheap["layer_1"]["measured_variable_per_referral_usd"]
+    dear_var = dear["layer_1"]["measured_variable_per_referral_usd"]
+    dear_success = 1 - dear["code_check_failure_rate"]
+    required = dear_success - (dear_var - cheap_var) / FAILURE_FALLBACK_USD
+    return {
+        "cheap_model": cheap["model"],
+        "dear_model": dear["model"],
+        "required_cheap_success_rate": round(required, 6),
+        "observed_cheap_success_rate": round(1 - cheap["code_check_failure_rate"], 6),
+        "formula": "p_cheap = p_dear - (dear_variable - cheap_variable) / failure_cost",
     }
 
 
@@ -63,6 +90,7 @@ def main():
         "method": "Layer 1 measured D5 API spend + Layer 2 observed code-check failure rate times $9.17 + Layer 3 4,000 referrals/month",
         "caution": "The raw code-check failure rate is intentionally conservative: it includes the documented REF-5590 early-exit versus answer-key conflict.",
         "models": results,
+        "break_even": break_even(results[0], results[2]),
     }
     os.makedirs("evidence", exist_ok=True)
     path = "evidence/d6_cost_to_serve.json"

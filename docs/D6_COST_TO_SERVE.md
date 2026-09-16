@@ -40,3 +40,16 @@ be economically worthwhile even when its inference cost is higher.
 GPT-4.1 mini is the lowest expected-cost option in this measured experiment.
 Its small additional inference cost is overwhelmed by the lower expected
 human-triage fallback cost.
+
+## Sensitivity and break-even
+
+The committed JSON includes each model at its observed success rate and at
+plus/minus 10 percentage points. This is the required sensitivity: a 10-point
+success-rate change shifts expected cost by $0.917 per referral, or $3,668 per
+month at 4,000 referrals. It dwarfs the measured Layer 1 differences.
+
+For the lower-variable-cost Gemini 2.5 Flash Lite to match GPT-4.1 mini, it
+would need a success rate of 84.99%, rather than its observed 80.00%. The
+break-even formula is `p_cheap = p_dear - (dear_variable - cheap_variable) /
+failure_cost`. This supports the model choice without claiming that a small
+one-run pass-rate difference is statistically conclusive.
