@@ -144,7 +144,10 @@ def prepare_judgement_check(record, expected):
     return {
         "case_id": record["case_id"],
         "decision": record.get("decision"),
-        "reason": record.get("reason", ""),
+        "reason": record.get("reason", ""),  # full record follows
+        "decision_record": dict(record),
+        "tool_evidence": list(record.get("evidence", [])),
+        "guardrails_fired": list(record.get("guardrails_fired", [])),
         "must_record": expected.get("must_record", []),
         "verdict": None,          # <- a person or a second model fills this
         "graded_by": None,        # <- "person: Priya" | "model: <name>"
