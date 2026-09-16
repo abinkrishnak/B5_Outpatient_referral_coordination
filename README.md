@@ -1,189 +1,88 @@
-# PE6201 · A2 — starter scaffold
+# PE6201 A2 Applied AI System
 
-A production-oriented single-agent ReAct loop for PE6201 Problem B, with a
-tool layer, guardrails, a 40-case evaluation harness, live-model evidence and
-three-layer cost model. It runs out of the box with no key and no network.
+## Problem B Outpatient Referral Coordination
 
-**This submission implements Problem B.** The free scripted run covers 40
-referrals and 60 trials; the paid live battery is opt-in and separate so a
-marker or teammate never needs an API key to reproduce the core result.
+This repository contains a single, hand-written ReAct agent for coordinating
+outpatient referrals. It uses local fixture data only and keeps the one
+irreversible action, `book_slot`, behind a human confirmation gate.
 
-**Start with `A2_Scaffold_Tour_ProblemB.ipynb`** — it walks the whole machine
-on one case, with every value printed.
-Then work in the modules.
+The submission uses a five-tool V2 poka-yoke contract, a 40-referral
+evaluation set (60 scheduled trials), code-layer safety checks, five completed
+live-model evaluations, and a three-layer cost-to-serve model.
 
----
+## Submission results
 
-## Run it
+| Measure | Result |
+|---|---:|
+| Offline scripted evaluation | 60/60 code-check passes |
+| Evaluation set | 40 referrals, 60 trials |
+| Code-layer safety checklist | 11/11 passes |
+| V1 versus V2 experiment | V2: 48/60, $0.048662 |
+| Completed V2 live models | 5 |
+| Recommended model | GPT-4.1 mini |
+| Expected monthly cost at 4,000 referrals | $5,510.17 |
 
-```bash
-python run_eval.py REF-5602           # one case, every turn shown
-python run_eval.py                    # 40 cases / 60 scripted trials
-python audit_evaluation_set.py        # validates case mix and labels
-python run_guardrail_checklist.py     # 11 code-layer safety checks
-python d2_parallel_comparison.py      # grouped versus sequential turns
-python summarize_live_results.py      # compact table of completed D5 models
-python cost_to_serve.py               # rebuilds D6 from measured D5 evidence
-python demo_loop_failure.py           # D7 loop-control failure
-python demo_tool_contract_failure.py  # D7 tool-interface failure
+Read [the results dashboard](docs/RESULTS_DASHBOARD.md) first. It presents
+the D0-D7 evidence, model comparison, cost model and controlled failures.
+
+## Architecture
+
+```mermaid
+flowchart LR
+    R[Referral ID] --> A[Single ReAct loop]
+    A --> T[Five read tools]
+    T --> A
+    A --> G{Confirm gate}
+    G -->|approved only| B[book_slot]
+    G -->|held| E[Escalate or suggest]
+    B --> F[Final record]
 ```
 
-No arguments needed, no packages to install, no network, no API key. Standard
-library only. If any of that is not true on your machine, tell me — the whole
-point of the scripted backend is that it works everywhere.
+The loop is deliberately not a framework or multi-agent system. The model
+chooses the next tool action; ordinary code enforces step, budget,
+de-duplication, eligibility and autonomy controls.
 
-For a newcomer-friendly walkthrough, open `ProblemB_Team_Runbook.ipynb`.
-It runs the free verification first and leaves the paid live-pilot cell
-commented out by default.
+## Reproduce the submission
 
-**If you change `PROBLEM` and nothing happens**, Python is reusing stale bytecode —
-`"B"` → `"A"` is the same file size, so its cache check can miss the edit. The scaffold
-detects this and prints a loud warning; the fix is `rm -rf __pycache__`, or restart the
-kernel in a notebook. (This bit us while building the scaffold, which is why there is a
-guard for it.)
+Run from the repository root. These commands use no network and require no
+API key.
 
-**It expects `A2_reference_data/` to sit next to this folder.** If yours is
-elsewhere: `export A2_DATA=/path/to/A2_reference_data`. It fails with instructions
-rather than guessing.
+```powershell
+python run_eval.py
+python audit_evaluation_set.py
+python run_guardrail_checklist.py
+python d2_parallel_comparison.py
+python summarize_live_results.py
+python cost_to_serve.py
+python demo_loop_failure.py
+python demo_tool_contract_failure.py
+```
 
----
+`config.py` is committed with the safe scripted backend. Live model runs are
+opt-in through `run_model_battery.py`; API keys are requested only through a
+hidden terminal prompt and must never be committed.
 
-## What is here
+## Repository map
 
-| File | What it is | Will you change it? |
-|---|---|---|
-| `config.py` | The vendor-neutral block: `BACKEND`, `MODEL`, `BASE_URL`, and guardrail limits | **Yes** — this is the first file to open |
-| `tools.py` | The tool layer over the reference data, with six-field descriptors | **Yes, heavily** — this is D2 |
-| `backends.py` | The scripted backend and the live one. One function knows a vendor exists | **Yes** — you add a script per case |
-| `agent.py` | The ReAct loop, instrumented | Some — but read every line first |
-| `guardrails.py` | Step cap · budget ceiling · de-duplication · autonomy gate | Some — the limits are yours to set |
-| `harness.py` | Load, run, code check, judgement queue, report | Some |
-| `prompt.py` | Assembles the descriptors + routing rules into the text the model is sent | **Yes** — this is D2(b) |
-| `run_eval.py` | Entry point. **This is what a marker runs** | Rarely |
-| `demo_loop_failure.py` | D7's method, worked once on the scripted backend | Copy the method |
-| `A2_Scaffold_Tour_ProblemB.ipynb` | Guided walk-through of one referral, `REF-5602` | Read once |
+| Location | Purpose |
+|---|---|
+| `agent.py`, `tools.py`, `guardrails.py` | Production agent, tool contract and safety controls |
+| `backends.py`, `prompt.py`, `config.py` | Vendor-neutral live adapter and model protocol |
+| `harness.py`, `run_eval.py` | Evaluation and reproducibility |
+| `A2_reference_data/` | Professor-provided data plus Problem B extensions |
+| `docs/` | D0-D7 design and evidence notes |
+| `evidence/` | Reproducible machine-readable experiment outputs |
+| `results.json` | Current scripted evaluation output |
+| `ProblemB_Team_Runbook.ipynb` | Optional guided walkthrough |
 
----
+## Evidence conventions
 
-## The Problem B notebook — start here
+Only `complete: true` files with 60 trials count in the final D5 model and D6
+cost comparisons. Incomplete provider/protocol runs are retained locally as
+diagnostics and are never reported as model-quality results.
 
-**This final repository implements Problem B only.**
+## Team declaration
 
-| | Case | What it walks through |
-|---|---|---|
-| `A2_Scaffold_Tour_ProblemB.ipynb` | `REF-5602` — the booking from Appendix A | four gates, an urgency window, a slot search |
-
-### What they are for
-
-**To show you the whole machine working on one case before you change any of it.** Eleven
-short steps, in the order the machine runs: what the agent is handed → what it has to
-fetch → the run, turn by turn → the decision record → the code check → the judgement
-check → a failure that raises no exception.
-
-Every value printed is real. Wherever a cell hard-codes something, the markdown
-says which earlier cell it came from, so nothing appears by magic.
-
-**The model is simulated; the data is not.** The backend replays a fixed sequence of moves
-from `backends.py`, so the run is deterministic and free. The tools underneath do genuine
-lookups against the shipped JSON. Only the model's decisions are scripted.
-
-**The notebook has a "trap" cell** — the mistake that costs teams the case, made visible:
-
-- **Problem B, cell 4** lists every OPH slot and marks three that are inside the window
-  and free but in the **wrong band**. Filter by date alone and you book one of them.
-
-### What they are not
-
-**They contain no logic of their own.** Every cell imports from the `.py` files. That is
-deliberate, and it is the habit to copy:
-
-> **Notebooks explore. Modules ship.**
-
-Six people can edit six modules at once. Six people editing one notebook produces merge
-conflicts and an unreadable diff — and section 8 of the brief leans on your commit history
-to corroborate `CONTRIBUTIONS.md`.
-
-**They are not what you submit.** D5(a) says a marker clones your repository and reproduces
-your numbers. `python3 run_eval.py` is that; a notebook is not. Read the tour once, then
-work in the modules.
-
-### Running them in Colab
-
-Upload `A2_scaffold/` and `A2_reference_data/` to the same folder in your Drive, then edit
-the two paths in the setup cell. Locally, run the cells in order — no setup needed.
-
----
-
-## The five ideas it exists to show
-
-**1 · The agent never sees the data.** It asks a tool a question and gets one fact
-back. An agent handed all the data in its first prompt is making a single call, not
-running a loop — and D0(a) asks which rung of the Class 4 ladder you are actually
-on.
-
-**2 · `BACKEND = "scripted"` is the default, and must stay that way in what you
-submit.** A marker clones your repository and runs `python3 run_eval.py`. If your
-numbers do not come back, D5(a) has failed and Technical Execution is capped. Only
-D5(b) — the live model battery — costs money. D3(b), D5(a) and D7 all run scripted.
-
-**3 · Turns are decided by the data, not by you.** A red flag ends a Problem B
-run before a slot is ever queried. You did not write that branch; the record did.
-
-**4 · Only independent calls fold into one turn.** `REF-5602` is 6 calls in 4
-turns. A dependency chain cannot be shortened by running things at once.
-
-**5 · Instrumentation is not optional.** Every run records turns, tokens, cost,
-every tool call and every guardrail event. D6's cost model and D7's loop failure
-both need numbers captured *while the run happened*. Add instrumentation afterwards
-and you re-run the whole battery.
-
----
-
-## Your first hour
-
-1. **Open the Problem B tour notebook** and run it top to bottom. Fifteen minutes,
-   and you will have seen the whole machine on one case.
-2. **Open `config.py`** and review the safe scripted default.
-3. **`python3 run_eval.py`** — the 40-case set, graded, from the command line. This is what
-   a marker runs.
-4. **`python3 run_eval.py --prompt`** — read the exact text the model is sent, and
-   its token cost. It is assembled from the descriptors in `tools.py`, so editing one
-   changes what the agent sees. Write deliberately worse ones — that is your D2(b)
-   **v1**, and the measured comparison is the deliverable.
-5. **Open `backends.py`** and script a second case yourself. If you cannot write the
-   steps down, you do not yet understand the case. Better to find that out now.
-
----
-
-## What it deliberately does not do
-
-Left undone on purpose. Doing them is the assignment.
-
-- **The judgement check is a queue, not a verdict.** `must_record` items are written
-  in English; a substring match would be theatre. A person — or a second model —
-  rules on each. If you automate it with a model, say so: a model grading a model is
-  a claim that needs defending.
-- **The live backend counts no tokens.** It returns zeros, on purpose. Wire in the
-  usage numbers the API gives you. Estimating and calling it measured is what D6
-  punishes.
-- **The tool set is minimal and the names are ours.** Rename, merge, split, add. The
-  routing rule and the gated action are the only fixed things.
-- **The guardrail checklist is not written.** D3(b) wants ten cases, at least three
-  of them hostile free text. The layer they test is in `guardrails.py`.
-- **The prompt is a starting point, not a good one.** `prompt.py` assembles the
-  descriptors and routing rules into what the model is sent — run `--prompt` to read
-  it. Rewriting it, and measuring v1 against v2 on a fixed model, is D2(b). Note that
-  comparison needs LIVE runs: the scripted backend never consults a model, so it never
-  reads the prompt.
-
----
-
-## Before you submit
-
-- `python3 run_eval.py` works **in a fresh clone**, on a machine with no key. Test
-  it that way — "works on my laptop" has caught out every cohort.
-- `BACKEND = "scripted"` is the committed default.
-- `results.json` is committed, and your report's numbers come from it.
-- Your extended `expected_outcomes_*.json` is committed. **A pass rate submitted
-  without the key it was measured against is not a measurement.**
-- Every pass rate in the report carries its trial count.
+The submitted team declaration is retained as `TEAM_DECLARATION.docx`.
+`CONTRIBUTIONS.md` records the agreed work allocation and is intentionally kept
+separate from the technical evidence.
