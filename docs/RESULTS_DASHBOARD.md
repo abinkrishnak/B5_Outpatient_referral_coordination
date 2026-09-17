@@ -18,7 +18,7 @@ flowchart TD
 | D0 | Rung-7 agent; confirmation at booking | `D0_FOUNDATION.md` |
 | D1 | Single hand-written ReAct loop | `D1_AGENT_ARCHITECTURE.md` |
 | D2 | 5 tools; REF-5602: 6 calls in 4 turns | `D2_TOOL_LAYER.md` |
-| D3 | 11/11 safety checks pass | `d3_guardrail_checklist.json` |
+| D3 | 12/12 safety checks pass, including 3 malicious free-text cases | `d3_guardrail_checklist.json` |
 | D4 | 40 cases and 60 trials; scripted 60/60 | `d4_evaluation_audit.json` |
 | D5 | Five complete V2 live batteries | `D5_MODEL_BATTERY.md` |
 | D6 | DeepSeek Chat V3: $5,508.49/month | `d6_cost_to_serve.json` |

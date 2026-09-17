@@ -16,7 +16,7 @@ live-model evaluations, and a three-layer cost-to-serve model.
 |---|---:|
 | Offline scripted evaluation | 60/60 code-check passes |
 | Evaluation set | 40 referrals, 60 trials |
-| Code-layer safety checklist | 11/11 passes |
+| Code-layer safety checklist | 12/12 passes, including 3 malicious free-text cases |
 | V1 versus V2 experiment | V2: 48/60, $0.048662 |
 | Completed V2 live models | 5 distinct families |
 | Recommended final-comparison model | DeepSeek Chat V3: 51/60 (85.0%) |
