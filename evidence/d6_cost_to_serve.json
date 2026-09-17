@@ -1,16 +1,24 @@
 {
   "method": "Layer 1 measured D5 API spend + Layer 2 observed code-check failure rate times $9.17 + Layer 3 4,000 referrals/month",
   "caution": "The raw code-check failure rate is intentionally conservative: it includes the documented REF-5590 early-exit versus answer-key conflict.",
+  "final_model_families": [
+    "Anthropic",
+    "DeepSeek",
+    "Google",
+    "Meta",
+    "Mistral"
+  ],
+  "recommended_model": "deepseek/deepseek-chat-v3-0324",
   "models": [
     {
-      "model": "google/gemini-2.5-flash-lite",
-      "source": "evidence/d5_live_google_gemini-2.5-flash-lite.json",
+      "model": "anthropic/claude-haiku-4.5",
+      "source": "evidence/d5_live_anthropic_claude-haiku-4.5_v2.json",
       "trials": 60,
       "code_check_failures": 12,
       "code_check_failure_rate": 0.2,
       "layer_1": {
-        "measured_variable_total_usd": 0.048662,
-        "measured_variable_per_referral_usd": 0.000811
+        "measured_variable_total_usd": 0.736601,
+        "measured_variable_per_referral_usd": 0.012277
       },
       "layer_2": {
         "fallback_cost_per_failure_usd": 9.17,
@@ -18,77 +26,38 @@
       },
       "layer_3": {
         "monthly_referrals": 4000,
-        "monthly_variable_usd": 3.24,
+        "monthly_variable_usd": 49.11,
         "monthly_expected_fallback_usd": 7336.0,
-        "monthly_total_usd": 7339.24
+        "monthly_total_usd": 7385.11
       },
-      "expected_total_per_referral_usd": 1.834811,
+      "expected_total_per_referral_usd": 1.846277,
       "sensitivity": [
         {
           "assumed_success_rate": 0.7,
-          "expected_total_per_referral_usd": 2.751811,
-          "monthly_total_usd": 11007.24
+          "expected_total_per_referral_usd": 2.763277,
+          "monthly_total_usd": 11053.11
         },
         {
           "assumed_success_rate": 0.8,
-          "expected_total_per_referral_usd": 1.834811,
-          "monthly_total_usd": 7339.24
+          "expected_total_per_referral_usd": 1.846277,
+          "monthly_total_usd": 7385.11
         },
         {
           "assumed_success_rate": 0.9,
-          "expected_total_per_referral_usd": 0.917811,
-          "monthly_total_usd": 3671.24
+          "expected_total_per_referral_usd": 0.929277,
+          "monthly_total_usd": 3717.11
         }
       ]
     },
     {
-      "model": "google/gemini-2.5-flash",
-      "source": "evidence/d5_live_google_gemini-2.5-flash_v2.json",
-      "trials": 60,
-      "code_check_failures": 10,
-      "code_check_failure_rate": 0.166667,
-      "layer_1": {
-        "measured_variable_total_usd": 0.194309,
-        "measured_variable_per_referral_usd": 0.003238
-      },
-      "layer_2": {
-        "fallback_cost_per_failure_usd": 9.17,
-        "expected_fallback_per_referral_usd": 1.528333
-      },
-      "layer_3": {
-        "monthly_referrals": 4000,
-        "monthly_variable_usd": 12.95,
-        "monthly_expected_fallback_usd": 6113.33,
-        "monthly_total_usd": 6126.29
-      },
-      "expected_total_per_referral_usd": 1.531572,
-      "sensitivity": [
-        {
-          "assumed_success_rate": 0.7333,
-          "expected_total_per_referral_usd": 2.448572,
-          "monthly_total_usd": 9794.29
-        },
-        {
-          "assumed_success_rate": 0.8333,
-          "expected_total_per_referral_usd": 1.531572,
-          "monthly_total_usd": 6126.29
-        },
-        {
-          "assumed_success_rate": 0.9333,
-          "expected_total_per_referral_usd": 0.614572,
-          "monthly_total_usd": 2458.29
-        }
-      ]
-    },
-    {
-      "model": "openai/gpt-4.1-mini",
-      "source": "evidence/d5_live_openai_gpt-4.1-mini.json",
+      "model": "deepseek/deepseek-chat-v3-0324",
+      "source": "evidence/d5_live_deepseek_deepseek-chat-v3-0324_v2.json",
       "trials": 60,
       "code_check_failures": 9,
       "code_check_failure_rate": 0.15,
       "layer_1": {
-        "measured_variable_total_usd": 0.122501,
-        "measured_variable_per_referral_usd": 0.002042
+        "measured_variable_total_usd": 0.097416,
+        "measured_variable_per_referral_usd": 0.001624
       },
       "layer_2": {
         "fallback_cost_per_failure_usd": 9.17,
@@ -96,65 +65,65 @@
       },
       "layer_3": {
         "monthly_referrals": 4000,
-        "monthly_variable_usd": 8.17,
+        "monthly_variable_usd": 6.49,
         "monthly_expected_fallback_usd": 5502.0,
-        "monthly_total_usd": 5510.17
+        "monthly_total_usd": 5508.49
       },
-      "expected_total_per_referral_usd": 1.377542,
+      "expected_total_per_referral_usd": 1.377124,
       "sensitivity": [
         {
           "assumed_success_rate": 0.75,
-          "expected_total_per_referral_usd": 2.294542,
-          "monthly_total_usd": 9178.17
+          "expected_total_per_referral_usd": 2.294124,
+          "monthly_total_usd": 9176.49
         },
         {
           "assumed_success_rate": 0.85,
-          "expected_total_per_referral_usd": 1.377542,
-          "monthly_total_usd": 5510.17
+          "expected_total_per_referral_usd": 1.377124,
+          "monthly_total_usd": 5508.49
         },
         {
           "assumed_success_rate": 0.95,
-          "expected_total_per_referral_usd": 0.460542,
-          "monthly_total_usd": 1842.17
+          "expected_total_per_referral_usd": 0.460124,
+          "monthly_total_usd": 1840.49
         }
       ]
     },
     {
-      "model": "openai/gpt-4o-mini-2024-07-18",
-      "source": "evidence/d5_live_openai_gpt-4o-mini-2024-07-18_v2.json",
+      "model": "google/gemini-2.5-flash",
+      "source": "evidence/d5_live_google_gemini-2.5-flash_v2.json",
       "trials": 60,
-      "code_check_failures": 34,
-      "code_check_failure_rate": 0.566667,
+      "code_check_failures": 11,
+      "code_check_failure_rate": 0.183333,
       "layer_1": {
-        "measured_variable_total_usd": 0.047391,
-        "measured_variable_per_referral_usd": 0.00079
+        "measured_variable_total_usd": 0.189767,
+        "measured_variable_per_referral_usd": 0.003163
       },
       "layer_2": {
         "fallback_cost_per_failure_usd": 9.17,
-        "expected_fallback_per_referral_usd": 5.196333
+        "expected_fallback_per_referral_usd": 1.681167
       },
       "layer_3": {
         "monthly_referrals": 4000,
-        "monthly_variable_usd": 3.16,
-        "monthly_expected_fallback_usd": 20785.33,
-        "monthly_total_usd": 20788.49
+        "monthly_variable_usd": 12.65,
+        "monthly_expected_fallback_usd": 6724.67,
+        "monthly_total_usd": 6737.32
       },
-      "expected_total_per_referral_usd": 5.197123,
+      "expected_total_per_referral_usd": 1.684329,
       "sensitivity": [
         {
-          "assumed_success_rate": 0.3333,
-          "expected_total_per_referral_usd": 6.114123,
-          "monthly_total_usd": 24456.49
+          "assumed_success_rate": 0.7167,
+          "expected_total_per_referral_usd": 2.601329,
+          "monthly_total_usd": 10405.32
         },
         {
-          "assumed_success_rate": 0.4333,
-          "expected_total_per_referral_usd": 5.197123,
-          "monthly_total_usd": 20788.49
+          "assumed_success_rate": 0.8167,
+          "expected_total_per_referral_usd": 1.684329,
+          "monthly_total_usd": 6737.32
         },
         {
-          "assumed_success_rate": 0.5333,
-          "expected_total_per_referral_usd": 4.280123,
-          "monthly_total_usd": 17120.49
+          "assumed_success_rate": 0.9167,
+          "expected_total_per_referral_usd": 0.767329,
+          "monthly_total_usd": 3069.32
         }
       ]
     },
@@ -162,47 +131,86 @@
       "model": "meta-llama/llama-3.3-70b-instruct",
       "source": "evidence/d5_live_meta-llama_llama-3.3-70b-instruct_v2.json",
       "trials": 60,
-      "code_check_failures": 17,
-      "code_check_failure_rate": 0.283333,
+      "code_check_failures": 15,
+      "code_check_failure_rate": 0.25,
       "layer_1": {
-        "measured_variable_total_usd": 0.062616,
-        "measured_variable_per_referral_usd": 0.001044
+        "measured_variable_total_usd": 0.064365,
+        "measured_variable_per_referral_usd": 0.001073
       },
       "layer_2": {
         "fallback_cost_per_failure_usd": 9.17,
-        "expected_fallback_per_referral_usd": 2.598167
+        "expected_fallback_per_referral_usd": 2.2925
       },
       "layer_3": {
         "monthly_referrals": 4000,
-        "monthly_variable_usd": 4.17,
-        "monthly_expected_fallback_usd": 10392.67,
-        "monthly_total_usd": 10396.84
+        "monthly_variable_usd": 4.29,
+        "monthly_expected_fallback_usd": 9170.0,
+        "monthly_total_usd": 9174.29
       },
-      "expected_total_per_referral_usd": 2.59921,
+      "expected_total_per_referral_usd": 2.293573,
       "sensitivity": [
         {
-          "assumed_success_rate": 0.6167,
-          "expected_total_per_referral_usd": 3.51621,
-          "monthly_total_usd": 14064.84
+          "assumed_success_rate": 0.65,
+          "expected_total_per_referral_usd": 3.210573,
+          "monthly_total_usd": 12842.29
         },
         {
-          "assumed_success_rate": 0.7167,
-          "expected_total_per_referral_usd": 2.59921,
-          "monthly_total_usd": 10396.84
+          "assumed_success_rate": 0.75,
+          "expected_total_per_referral_usd": 2.293573,
+          "monthly_total_usd": 9174.29
         },
         {
-          "assumed_success_rate": 0.8167,
-          "expected_total_per_referral_usd": 1.68221,
-          "monthly_total_usd": 6728.84
+          "assumed_success_rate": 0.85,
+          "expected_total_per_referral_usd": 1.376573,
+          "monthly_total_usd": 5506.29
+        }
+      ]
+    },
+    {
+      "model": "mistralai/mistral-small-24b-instruct-2501",
+      "source": "evidence/d5_live_mistralai_mistral-small-24b-instruct-2501_v2.json",
+      "trials": 60,
+      "code_check_failures": 38,
+      "code_check_failure_rate": 0.633333,
+      "layer_1": {
+        "measured_variable_total_usd": 0.01502,
+        "measured_variable_per_referral_usd": 0.00025
+      },
+      "layer_2": {
+        "fallback_cost_per_failure_usd": 9.17,
+        "expected_fallback_per_referral_usd": 5.807667
+      },
+      "layer_3": {
+        "monthly_referrals": 4000,
+        "monthly_variable_usd": 1.0,
+        "monthly_expected_fallback_usd": 23230.67,
+        "monthly_total_usd": 23231.67
+      },
+      "expected_total_per_referral_usd": 5.807917,
+      "sensitivity": [
+        {
+          "assumed_success_rate": 0.2667,
+          "expected_total_per_referral_usd": 6.724917,
+          "monthly_total_usd": 26899.67
+        },
+        {
+          "assumed_success_rate": 0.3667,
+          "expected_total_per_referral_usd": 5.807917,
+          "monthly_total_usd": 23231.67
+        },
+        {
+          "assumed_success_rate": 0.4667,
+          "expected_total_per_referral_usd": 4.890917,
+          "monthly_total_usd": 19563.67
         }
       ]
     }
   ],
   "break_even": {
-    "cheap_model": "google/gemini-2.5-flash-lite",
-    "dear_model": "openai/gpt-4.1-mini",
-    "required_cheap_success_rate": 0.849866,
-    "observed_cheap_success_rate": 0.8,
+    "cheap_model": "mistralai/mistral-small-24b-instruct-2501",
+    "dear_model": "deepseek/deepseek-chat-v3-0324",
+    "required_cheap_success_rate": 0.84985,
+    "observed_cheap_success_rate": 0.366667,
     "formula": "p_cheap = p_dear - (dear_variable - cheap_variable) / failure_cost"
   }
 }

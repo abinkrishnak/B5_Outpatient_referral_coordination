@@ -10,18 +10,28 @@ import os
 
 FAILURE_FALLBACK_USD = 9.17
 MONTHLY_REFERRALS = 4000
+# D5 final comparison: five distinct model families.  GPT-4.1 mini remains
+# separate recommended-model evidence and is intentionally not part of this
+# required five-family cost comparison.
 INPUTS = (
-    "evidence/d5_live_google_gemini-2.5-flash-lite.json",
+    "evidence/d5_live_anthropic_claude-haiku-4.5_v2.json",
+    "evidence/d5_live_deepseek_deepseek-chat-v3-0324_v2.json",
     "evidence/d5_live_google_gemini-2.5-flash_v2.json",
-    "evidence/d5_live_openai_gpt-4.1-mini.json",
-    "evidence/d5_live_openai_gpt-4o-mini-2024-07-18_v2.json",
     "evidence/d5_live_meta-llama_llama-3.3-70b-instruct_v2.json",
+    "evidence/d5_live_mistralai_mistral-small-24b-instruct-2501_v2.json",
 )
+EXPECTED_TRIALS = 60
 
 
 def load(path):
     with open(path, encoding="utf-8") as fh:
-        return json.load(fh)
+        data = json.load(fh)
+    if (not data.get("complete") or not data.get("full_battery_requested") or
+            len(data.get("results", [])) != EXPECTED_TRIALS):
+        raise ValueError(
+            "%s is not a completed %s-trial battery; do not use pilot or "
+            "partial evidence in D6" % (path, EXPECTED_TRIALS))
+    return data
 
 
 def model_cost(data, source):
@@ -86,11 +96,17 @@ def break_even(cheap, dear):
 
 def main():
     results = [model_cost(load(path), path) for path in INPUTS]
+    raw_cheapest = min(results,
+                       key=lambda item: item["layer_1"]["measured_variable_per_referral_usd"])
+    recommended = min(results,
+                      key=lambda item: item["expected_total_per_referral_usd"])
     payload = {
         "method": "Layer 1 measured D5 API spend + Layer 2 observed code-check failure rate times $9.17 + Layer 3 4,000 referrals/month",
         "caution": "The raw code-check failure rate is intentionally conservative: it includes the documented REF-5590 early-exit versus answer-key conflict.",
+        "final_model_families": ["Anthropic", "DeepSeek", "Google", "Meta", "Mistral"],
+        "recommended_model": recommended["model"],
         "models": results,
-        "break_even": break_even(results[0], results[2]),
+        "break_even": break_even(raw_cheapest, recommended),
     }
     os.makedirs("evidence", exist_ok=True)
     path = "evidence/d6_cost_to_serve.json"

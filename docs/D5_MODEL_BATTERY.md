@@ -62,19 +62,21 @@ run `compare_tool_contracts.py` over the two evidence files.
 
 All five completed runs used the same 40 cases / 60 trials, V2 tool contract,
 temperature zero, evaluation date, synthetic fixture approval and guardrails.
-Only completed 60-trial evidence is included below.
+They span five distinct model families, as required. Only completed 60-trial
+evidence is included below.
 
 | Model | Pass rate | Median turns | Measured cost |
 |---|---:|---:|---:|
-| Gemini 2.5 Flash Lite | 48/60 (80.0%) | 4.0 | US$0.048662 |
-| Gemini 2.5 Flash | 50/60 (83.3%) | 4.0 | US$0.194309 |
-| GPT-4.1 mini | 51/60 (85.0%) | 4.0 | US$0.122501 |
-| GPT-4o mini (2024-07-18) | 26/60 (43.3%) | 4.0 | US$0.047391 |
-| Llama 3.3 70B Instruct | 43/60 (71.7%) | 4.0 | US$0.062616 |
+| Claude Haiku 4.5 (Anthropic) | 48/60 (80.0%) | 3.5 | US$0.736601 |
+| DeepSeek Chat V3 (DeepSeek) | **51/60 (85.0%)** | 4.0 | US$0.097416 |
+| Gemini 2.5 Flash (Google) | 49/60 (81.7%) | 4.0 | US$0.189767 |
+| Llama 3.3 70B Instruct (Meta) | 45/60 (75.0%) | 4.0 | US$0.064365 |
+| Mistral Small 24B (Mistral) | 22/60 (36.7%) | 1.0 | US$0.015020 |
 
-GPT-4.1 mini is the recommended model in this experiment: it has the highest
-code-check pass rate and the lowest expected cost after the human-fallback
-layer is applied. The inexpensive GPT-4o mini run demonstrates why API price
-alone is not a safe deployment criterion. Interrupted Claude, DeepSeek,
-Mistral, Qwen and Gemini 2.0 diagnostics remain out of the final table because
-they did not complete all 60 trials.
+DeepSeek Chat V3 is the recommended model in the required five-family
+comparison: it has the highest measured code-check pass rate and the lowest
+expected cost after the human-fallback layer is applied. Mistral is the
+cheapest raw API option but the weakest on the evaluation set, demonstrating
+why token price alone is not a safe deployment criterion. GPT-4.1 mini is
+retained as a separate supplementary recommended-model evaluation, not as one
+of the five required family-distinct comparison rows.

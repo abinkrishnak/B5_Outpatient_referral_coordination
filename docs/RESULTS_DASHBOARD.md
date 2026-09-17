@@ -21,7 +21,7 @@ flowchart TD
 | D3 | 11/11 safety checks pass | `d3_guardrail_checklist.json` |
 | D4 | 40 cases and 60 trials; scripted 60/60 | `d4_evaluation_audit.json` |
 | D5 | Five complete V2 live batteries | `D5_MODEL_BATTERY.md` |
-| D6 | GPT-4.1 mini: $5,510.17/month | `d6_cost_to_serve.json` |
+| D6 | DeepSeek Chat V3: $5,508.49/month | `d6_cost_to_serve.json` |
 | D7 | Loop and tool-interface failures reproduced | `D7_FAILURES.md` |
 
 ## V2 poka-yoke decision
@@ -47,15 +47,15 @@ silently looking like a genuine absence of clinic capacity.
 
 | Model | Pass rate | Median turns | Total cost | Expected monthly cost |
 |---|---:|---:|---:|---:|
-| GPT-4.1 mini | **51/60 (85.0%)** | 4.0 | $0.122501 | **$5,510.17** |
-| Gemini 2.5 Flash | 50/60 (83.3%) | 4.0 | $0.194309 | $6,126.29 |
-| Gemini 2.5 Flash Lite | 48/60 (80.0%) | 4.0 | $0.048662 | $7,339.24 |
-| Llama 3.3 70B | 43/60 (71.7%) | 4.0 | $0.062616 | $10,396.84 |
-| GPT-4o mini | 26/60 (43.3%) | 4.0 | $0.047391 | $20,788.49 |
+| DeepSeek Chat V3 | **51/60 (85.0%)** | 4.0 | $0.097416 | **$5,508.49** |
+| Gemini 2.5 Flash | 49/60 (81.7%) | 4.0 | $0.189767 | $6,737.32 |
+| Claude Haiku 4.5 | 48/60 (80.0%) | 3.5 | $0.736601 | $7,385.11 |
+| Llama 3.3 70B | 45/60 (75.0%) | 4.0 | $0.064365 | $9,174.29 |
+| Mistral Small 24B | 22/60 (36.7%) | 1.0 | $0.015020 | $23,231.67 |
 
 The model token price does not drive the deployment decision. Layer 2 human
-fallback dominates the total, so GPT-4.1 mini wins despite not having the
-lowest raw API cost.
+fallback dominates the total, so DeepSeek wins despite not having the lowest
+raw API cost. GPT-4.1 mini is retained as separate supplementary evidence.
 
 ## Safety and failure evidence
 

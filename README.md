@@ -19,8 +19,9 @@ live-model evaluations, and a three-layer cost-to-serve model.
 | Code-layer safety checklist | 11/11 passes |
 | V1 versus V2 experiment | V2: 48/60, $0.048662 |
 | Completed V2 live models | 5 |
-| Recommended model | GPT-4.1 mini |
-| Expected monthly cost at 4,000 referrals | $5,510.17 |
+| Final D5 model families | Anthropic, DeepSeek, Google, Meta, Mistral |
+| Recommended final-comparison model | DeepSeek Chat V3 |
+| Expected monthly cost at 4,000 referrals | $5,508.49 |
 
 Read [the results dashboard](docs/RESULTS_DASHBOARD.md) first. It presents
 the D0-D7 evidence, model comparison, cost model and controlled failures.
@@ -30,7 +31,7 @@ the D0-D7 evidence, model comparison, cost model and controlled failures.
 ```mermaid
 flowchart LR
     R[Referral ID] --> A[Single ReAct loop]
-    A --> T[Five read tools]
+    A --> T[Four read tools]
     T --> A
     A --> G{Confirm gate}
     G -->|approved only| B[book_slot]

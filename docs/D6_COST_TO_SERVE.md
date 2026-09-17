@@ -31,15 +31,17 @@ be economically worthwhile even when its inference cost is higher.
 
 | Model | Layer 1 / referral | Layer 2 / referral | Expected total / referral | Monthly total at 4,000 |
 |---|---:|---:|---:|---:|
-| Gemini 2.5 Flash Lite | $0.000811 | $1.834000 | $1.834811 | $7,339.24 |
-| Gemini 2.5 Flash | $0.003238 | $1.528333 | $1.531572 | $6,126.29 |
-| GPT-4.1 mini | $0.002042 | $1.375500 | $1.377542 | $5,510.17 |
-| GPT-4o mini | $0.000790 | $5.196333 | $5.197123 | $20,788.49 |
-| Llama 3.3 70B Instruct | $0.001044 | $2.598167 | $2.599210 | $10,396.84 |
+| Claude Haiku 4.5 | $0.012277 | $1.834000 | $1.846277 | $7,385.11 |
+| DeepSeek Chat V3 | $0.001624 | $1.375500 | **$1.377124** | **$5,508.49** |
+| Gemini 2.5 Flash | $0.003163 | $1.681167 | $1.684329 | $6,737.32 |
+| Llama 3.3 70B Instruct | $0.001073 | $2.292500 | $2.293573 | $9,174.29 |
+| Mistral Small 24B | $0.000250 | $5.807667 | $5.807917 | $23,231.67 |
 
-GPT-4.1 mini is the lowest expected-cost option in this measured experiment.
-Its small additional inference cost is overwhelmed by the lower expected
-human-triage fallback cost.
+DeepSeek Chat V3 is the lowest expected-cost option in the required,
+five-family comparison. Its slightly higher raw API cost than Mistral is
+overwhelmed by the lower expected human-triage fallback cost. GPT-4.1 mini is
+retained separately as supplementary recommended-model evidence and is not
+part of this family-distinct D6 table.
 
 ## Sensitivity and break-even
 
@@ -48,8 +50,8 @@ plus/minus 10 percentage points. This is the required sensitivity: a 10-point
 success-rate change shifts expected cost by $0.917 per referral, or $3,668 per
 month at 4,000 referrals. It dwarfs the measured Layer 1 differences.
 
-For the lower-variable-cost Gemini 2.5 Flash Lite to match GPT-4.1 mini, it
-would need a success rate of 84.99%, rather than its observed 80.00%. The
+For the lower-variable-cost Mistral Small 24B to match DeepSeek Chat V3, it
+would need a success rate of 84.99%, rather than its observed 36.67%. The
 break-even formula is `p_cheap = p_dear - (dear_variable - cheap_variable) /
-failure_cost`. This supports the model choice without claiming that a small
-one-run pass-rate difference is statistically conclusive.
+failure_cost`. This supports the model choice without claiming that a one-run
+pass-rate difference is statistically conclusive.
