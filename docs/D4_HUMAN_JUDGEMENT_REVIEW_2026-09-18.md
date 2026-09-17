@@ -4,7 +4,7 @@
 
 - Reviewer: **Wang Hanfei**
 - Review date: **2026-09-18**
-- Records reviewed: the ten supplied decision records in `D4.docx`
+- Records reviewed: the ten selected scripted decision records in `results.json`
 - Expected outcomes: `A2_reference_data/expected_outcomes_B.json`
 
 This review checks whether a reader can understand and verify the outcome from the final reason and named tool evidence. It is distinct from the automated code-check result and from the retained baseline and post-remediation live-model reviews. It must not be used to replace a measured live-model score.
