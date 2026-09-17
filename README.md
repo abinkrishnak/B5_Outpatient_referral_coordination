@@ -86,7 +86,7 @@ hidden terminal prompt and must never be committed.
 | `docs/` | D0-D7 design and evidence notes |
 | `evidence/` | Reproducible machine-readable experiment outputs |
 | `results.json` | Current scripted evaluation output |
-| `ProblemB_Team_Runbook.ipynb` | Optional guided walkthrough |
+| `ProblemB_Team_Runbook.ipynb` | Guided walkthrough of one Problem B run |
 
 ## Evidence conventions
 
@@ -97,5 +97,5 @@ diagnostics and are never reported as model-quality results.
 ## Team declaration
 
 The submitted team declaration is retained as `TEAM_DECLARATION.md`.
-`CONTRIBUTIONS.md` is a separate factual contribution log and must be completed
-with agreed completed work and corroborating commits before final submission.
+`CONTRIBUTIONS.md` is a separate factual contribution log. It records completed
+work and corroborating commits.

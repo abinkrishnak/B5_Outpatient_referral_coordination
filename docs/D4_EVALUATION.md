@@ -38,17 +38,13 @@ Natural-language explanations are reviewed separately. The reviewer receives the
 
 The two percentages answer different questions and are never combined. The 85.0% code result shows how often fixed outcomes were correct. The 10.0% judgement result shows that the baseline explanations often omitted required rationale even when the structured decision was correct.
 
-## Remediation and fair comparison
+## Historical remediation
 
-The baseline evidence remains unchanged and auditable. The system prompt has been strengthened with a decision-specific evidence contract requiring a non-empty, complete `reason` for `book`, `request_information`, and `escalate`. The judgement queue now includes the full record rather than only the reason string.
+The retained baseline remains auditable. The system prompt was strengthened with a decision-specific evidence contract requiring a non-empty, complete `reason` for `book`, `request_information` and `escalate`, and the judgement queue was expanded to include the full record.
 
-A post-remediation evaluation must:
-
-1. use the same 40 cases and 60-trial policy;
-2. use the same GPT-4.1 mini model and v2 tool contract;
-3. save results under a new filename rather than overwriting the baseline;
-4. repeat the same ten-case human review with TAN JINGXUAN;
-5. report code-check and judgement-check pass rates separately; and
-6. state the run date and exact prompt revision.
-
-Until that rerun is completed, the project must describe the revised judgement result as **pending**, not as an achieved improvement.
+The post-remediation GPT-4.1 mini run is documented in
+`D4_POST_REMEDIATION_REVIEW_2026-09-16.md`: 57/60 automated trials and 3/10
+strict explanation-review passes. Wang Hanfei separately reviewed the ten
+supplied scripted decision records on 2026-09-18; that record is in
+`D4_HUMAN_JUDGEMENT_REVIEW_2026-09-18.md`. These measurements answer different
+questions and are not combined into one rate.
