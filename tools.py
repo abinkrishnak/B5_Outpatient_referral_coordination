@@ -49,6 +49,7 @@ accidentally book an urgent patient into a routine slot, and
 against no policy at all.
 ====================================================================
 """
+import inspect
 import json
 import os
 
@@ -835,4 +836,22 @@ def call(problem, name, args):
         raise KeyError(
             "No tool named %r for Problem %s. Available: %s"
             % (name, problem, ", ".join(sorted(table))))
-    return table[name](**args)
+    function = table[name]
+    if not isinstance(args, dict):
+        return {"error": "invalid_tool_arguments",
+                "tool": name,
+                "detail": "arguments must be a JSON object",
+                "expected_args": list(inspect.signature(function).parameters)}
+    try:
+        # Validate the call *before* entering the tool.  A model may confuse
+        # a referral ID with a patient ID; that should become an observable,
+        # repairable tool result, never a Python crash that discards the
+        # battery run.
+        inspect.signature(function).bind(**args)
+    except TypeError as error:
+        return {"error": "invalid_tool_arguments",
+                "tool": name,
+                "detail": str(error),
+                "received_args": args,
+                "expected_args": list(inspect.signature(function).parameters)}
+    return function(**args)
