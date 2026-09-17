@@ -252,6 +252,26 @@ def _parse_move(text):
                 return _normalise_move(json.loads(candidate[left:right + 1]))
             except json.JSONDecodeError:
                 pass
+        # Some OpenRouter-compatible models honour the requested JSON schema
+        # semantically but serialize a structured tool call in XML-like tags.
+        # Accept only the first *complete* function_calls block, whose body
+        # must itself be JSON in our documented [[name, args], ...] shape.
+        # Taking the first block prevents a model from jumping ahead to calls
+        # that depend on observations it has not received yet.
+        start = candidate.find("<function_calls>")
+        end = candidate.find("</function_calls>", start + 16)
+        if start >= 0 and end > start:
+            tagged = candidate[start + len("<function_calls>"):end].strip()
+            try:
+                calls = json.loads(tagged)
+                if (isinstance(calls, list) and calls and
+                        all(isinstance(call, list) and len(call) == 2 and
+                            isinstance(call[0], str) and isinstance(call[1], dict)
+                            for call in calls)):
+                    return _normalise_move({"thought": "structured tagged tool call",
+                                            "calls": calls})
+            except json.JSONDecodeError:
+                pass
         return {"final": {"decision": "escalate",
                           "reason": "model did not return parseable JSON: %s"
                                     % candidate[:200]},
@@ -313,6 +333,11 @@ def get_api_key():
 
 LIVE_TIMEOUT_SECONDS = 90
 LIVE_MAX_ATTEMPTS = 3
+# A ReAct move is a small JSON object.  Without an explicit ceiling, some
+# providers reserve their whole context window for the completion; DeepSeek
+# then rejects an otherwise tiny request because prompt + requested completion
+# exceeds its context length.
+LIVE_MAX_OUTPUT_TOKENS = 1024
 
 
 def _is_transport_timeout(error):
@@ -335,6 +360,7 @@ def _live_call(messages):
         "model": config.MODEL,
         "messages": messages,
         "temperature": 0,
+        "max_tokens": LIVE_MAX_OUTPUT_TOKENS,
         # The prompt still states the schema so the experiment is portable;
         # this API-level constraint makes a live run gradeable rather than
         # charging for prose we cannot execute.
