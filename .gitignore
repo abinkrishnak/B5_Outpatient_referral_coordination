@@ -1,3 +1,8 @@
 __pycache__/
 *.pyc
 .env
+
+# Superseded local copies retained outside the submission repository.
+/PE6201_A2_Adding_Extra_Cases.pdf
+/ProblemB_qwen_60trial_evidence.zip
+/TEAM_DECLARATION.docx

@@ -20,7 +20,7 @@ submission. Do not claim work performed by another person without agreement.
 - Every member runs one live-model experiment using their own private OpenRouter
   key and commits only the resulting evidence, never a key.
 - Everyone reviews the report and presentation. The declaration is stored at
-  repository root as `TEAM_DECLARATION.docx`.
+  repository root as `TEAM_DECLARATION.md`.
 
 ## Shared project assets
 

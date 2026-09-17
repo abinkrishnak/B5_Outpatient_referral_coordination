@@ -6,7 +6,7 @@ files and the D2-D7 documentation before opening large per-trial live results.
 | File or group | Purpose |
 |---|---|
 | `d2_parallel_comparison.json` | Parallel versus sequential tool-call comparison. |
-| `d3_guardrail_checklist.json` | Eleven scripted code-layer safety checks. |
+| `d3_guardrail_checklist.json` | Twelve scripted code-layer safety checks. |
 | `d4_evaluation_audit.json` | Confirms the 40-case, 60-trial evaluation design. |
 | `d5_live_*.json` | Measured live-model trials: decision, tools, tokens, cost, guardrails. |
 | `d5_pilot_*.json` | Diagnostic pilots retained for transparency; not final model scores. |
@@ -22,8 +22,5 @@ Five completed 60-trial V2 files are the final D5 comparison. Other
 `d5_live_*.json` files may be incomplete provider/protocol diagnostics; check
 their `complete` field before using them in D5 or D6.
 
-Qwen supplementary evidence is currently retained as
-`ProblemB_qwen_60trial_evidence.zip` at the repository root. It contains the
-staged 60-trial checkpoint and batch records, including the original timeout
-and transient HTTP 429 events in `retry_of` fields. Treat it as supplementary
-unless it is explicitly added to the final five-model D5 comparison.
+Supplementary Qwen material is intentionally excluded from the submission
+repository because it is not one of the final five family-distinct D5 models.

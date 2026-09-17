@@ -27,11 +27,16 @@ the D0-D7 evidence, model comparison, cost model and controlled failures.
 
 ## Important evidence boundary
 
-Automated code checks and human judgement are reported separately. The named
-human review records 3/10 strict explanation passes after remediation; this is
-not merged into the automated score. REF-5590 remains a documented
-label-versus-protocol conflict: the safe red-flag rule requires immediate
-escalation, while the supplied label also requests proof of a later slot lookup.
+Automated code checks and human judgement are reported separately. The retained
+live-model post-remediation review records 3/10 strict explanation passes; it
+is not merged into an automated score. A separate review of the supplied
+scripted decision records is documented in
+`docs/D4_HUMAN_JUDGEMENT_REVIEW_2026-09-18.md`.
+
+REF-5590 remains a documented label-policy tension. Its record satisfies the
+label by recording an unused urgent slot, but that requires a post-red-flag
+read-only slot lookup. No unsafe booking occurred, but the lookup is an
+avoidable early-exit and turn-minimisation deviation.
 
 ## Architecture
 
@@ -91,6 +96,6 @@ diagnostics and are never reported as model-quality results.
 
 ## Team declaration
 
-The submitted team declaration is retained as `TEAM_DECLARATION.docx`.
-`CONTRIBUTIONS.md` records the agreed work allocation and is intentionally kept
-separate from the technical evidence.
+The submitted team declaration is retained as `TEAM_DECLARATION.md`.
+`CONTRIBUTIONS.md` is a separate factual contribution log and must be completed
+with agreed completed work and corroborating commits before final submission.
