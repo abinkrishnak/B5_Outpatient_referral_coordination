@@ -18,13 +18,20 @@ live-model evaluations, and a three-layer cost-to-serve model.
 | Evaluation set | 40 referrals, 60 trials |
 | Code-layer safety checklist | 11/11 passes |
 | V1 versus V2 experiment | V2: 48/60, $0.048662 |
-| Completed V2 live models | 5 |
-| Final D5 model families | Anthropic, DeepSeek, Google, Meta, Mistral |
-| Recommended final-comparison model | DeepSeek Chat V3 |
+| Completed V2 live models | 5 distinct families |
+| Recommended final-comparison model | DeepSeek Chat V3: 51/60 (85.0%) |
 | Expected monthly cost at 4,000 referrals | $5,508.49 |
 
 Read [the results dashboard](docs/RESULTS_DASHBOARD.md) first. It presents
 the D0-D7 evidence, model comparison, cost model and controlled failures.
+
+## Important evidence boundary
+
+Automated code checks and human judgement are reported separately. The named
+human review records 3/10 strict explanation passes after remediation; this is
+not merged into the automated score. REF-5590 remains a documented
+label-versus-protocol conflict: the safe red-flag rule requires immediate
+escalation, while the supplied label also requests proof of a later slot lookup.
 
 ## Architecture
 

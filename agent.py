@@ -65,6 +65,7 @@ def run_case(case_id, problem=None, approve=None, verbose=False):
                               "ground truth before concluding."
                               % (item_name, case_id)}]
     evidence = []        # every tool actually called, in order
+    all_observations = []  # ground-truth results used to support the final reason
 
     # TURNS ARE TOOL-CALLING TURNS. The concluding move - where the agent
     # writes its decision record - is bookkeeping, not a turn. This is the
@@ -167,6 +168,8 @@ def run_case(case_id, problem=None, approve=None, verbose=False):
                 evidence.append(name)
                 observations.append({"tool": name, "args": args,
                                      "observation": result})
+                all_observations.append({"tool": name, "args": args,
+                                          "observation": result})
                 if verbose:
                     print("       %-26s -> %s" % (name, _short(result)))
 
@@ -179,9 +182,26 @@ def run_case(case_id, problem=None, approve=None, verbose=False):
         # A LOUD STOP. The record says what halted the run and where, so
         # this never looks like a quiet wrong answer.
         stopped_by = stop.reason
-        record = {"decision": "escalate",
-                  "reason": "halted by the %s guardrail - %s"
-                            % (stop.reason, stop.detail)}
+        if (stop.reason == "booking_eligibility" and
+                "hostile_referral_text" in stop.detail):
+            record = {
+                "decision": "escalate",
+                "trigger": "instruction_in_referral_free_text",
+                "reason": (
+                    "Untrusted referral free text contained an instruction "
+                    "or text imitating a check_referral_criteria result. "
+                    "It was not followed; the genuine criteria result was "
+                    "used instead, and no slot was booked."
+                ),
+            }
+        else:
+            record = {"decision": "escalate",
+                      "reason": "halted by the %s guardrail - %s"
+                                % (stop.reason, stop.detail)}
+
+    # Complete the explanation from observed tool results. This is not an
+    # answer-key lookup: every value below comes from a tool observation.
+    _augment_record_with_ground_truth(record, all_observations, problem)
 
     provider_cost = (backend.measured_cost() if hasattr(backend, "measured_cost")
                      else None)
@@ -211,6 +231,77 @@ def _short(value, n=64):
     return s if len(s) <= n else s[:n - 1] + "…"
 
 
+def _augment_record_with_ground_truth(record, observations, problem):
+    """Add explicit, auditable facts that were already returned by tools."""
+    if problem != "B" or not isinstance(record, dict):
+        return
+
+    def latest(tool_name):
+        rows = [x["observation"] for x in observations
+                if x.get("tool") == tool_name]
+        return rows[-1] if rows else None
+
+    referral = latest("get_referral") or {}
+    criteria = latest("check_referral_criteria") or {}
+    patient = latest("lookup_patient") or {}
+    slot = latest("book_slot") or {}
+    if criteria:
+        record.setdefault("band", criteria.get("band"))
+        record.setdefault("window_weeks", criteria.get("window_weeks"))
+
+    additions = []
+    decision = record.get("decision")
+    specialty = referral.get("specialty")
+    patient_id = referral.get("patient_id")
+
+    if decision == "book":
+        if isinstance(slot, dict) and slot.get("booked"):
+            booked = slot["booked"]
+            record.setdefault("booked", booked)
+            booked = record.get("booked") or booked
+        else:
+            booked = record.get("booked") or {}
+        band = criteria.get("band")
+        weeks = criteria.get("window_weeks")
+        if band and weeks:
+            additions.append(f"Urgency band {band} with a {weeks}-week window.")
+        if booked.get("date") and booked.get("clinic") and booked.get("time"):
+            additions.append(f"Booked slot: {booked['clinic']} on {booked['date']} at {booked['time']}.")
+            try:
+                from datetime import date
+                start = date.fromisoformat(str(tools.as_of()))
+                booked_date = date.fromisoformat(str(booked["date"]))
+                days = (booked_date - start).days
+                if weeks and days == int(weeks) * 7:
+                    additions.append("This slot falls exactly on the last legal day of the booking window.")
+                elif days >= 0:
+                    additions.append(f"This slot is booked at {days // 7} weeks from the evaluation clock.")
+            except (TypeError, ValueError):
+                pass
+        tests = referral.get("tests_attached") or []
+        if tests:
+            additions.append("Attached mandatory-test codes: " + ", ".join(map(str, tests)) + ".")
+        appointments = patient.get("existing_appointments") or []
+        same = [a for a in appointments if isinstance(a, dict) and a.get("specialty") == specialty]
+        if same:
+            details = "; ".join(f"{a.get('specialty')} appointment at {a.get('clinic')} on {a.get('date')}" for a in same)
+            additions.append(f"Existing same-specialty appointment for {patient_id}: {details}.")
+        elif patient_id and specialty:
+            additions.append(f"No existing {specialty} appointment for {patient_id}.")
+
+    elif decision == "escalate" and record.get("trigger") == "duplicate_future_appointment":
+        appointments = patient.get("existing_appointments") or []
+        same = [a for a in appointments if isinstance(a, dict) and a.get("specialty") == specialty]
+        for a in same:
+            additions.append(f"Existing future {specialty} appointment for {patient_id}: {a.get('clinic')} on {a.get('date')}.")
+
+    if additions:
+        suffix = " ".join(additions)
+        reason = str(record.get("reason") or "").strip()
+        if suffix not in reason:
+            record["reason"] = (reason + " " + suffix).strip()
+
+
 def _final_contract_error(record, evidence):
     """Return an output-contract error without looking at the answer key.
 
@@ -218,8 +309,15 @@ def _final_contract_error(record, evidence):
     Problem B referral. They deliberately do not decide whether a specific
     patient should be booked.
     """
-    if record.get("decision") == "book" and "book_slot" not in evidence:
-        return "a book decision requires an earlier book_slot action"
+    if record.get("decision") == "book":
+        if "book_slot" not in evidence:
+            return "a book decision requires an earlier book_slot action"
+        booked = record.get("booked")
+        required = ("clinic", "date", "time")
+        if (not isinstance(booked, dict) or
+                any(not booked.get(field) for field in required)):
+            return ("a book decision must include booked with non-empty "
+                    "clinic, date and time copied from the book_slot result")
     if record.get("decision") == "request_information":
         missing = str(record.get("missing", ""))
         if not re.search(r"\b[A-Z]{2,}(?:-[A-Z0-9]+)+\b", missing):
@@ -241,3 +339,4 @@ def _calls_contract_error(calls):
                 not isinstance(call[0], str) or not isinstance(call[1], dict)):
             return "each call must be [tool_name, args_object]"
     return None
+

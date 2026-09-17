@@ -1,10 +1,15 @@
 #!/usr/bin/env python3
-"""D7 second failure: remove V2's slot-query constraint and observe the lie.
+"""D7 failure 2: controlled removal and restoration of a tool constraint.
 
-The working V2 tool rejects the typo ``OPHT``.  V1 removes only that
-poka-yoke constraint; it returns an empty list, which a ReAct agent could
-mistake for the real business outcome ``no_slot_in_window``.  No model or
-network is involved, so the tool-layer failure is reproducible exactly.
+This deterministic experiment isolates one component: V2's closed-set
+validation for slot-query specialty and band. The same invalid action is sent
+through a tiny routing loop three times:
+
+    working V2 -> delete constraint (V1) -> restore V2
+
+No network or model is needed, so the failure is exactly reproducible. The
+experiment records the agent-level decision record and instrumentation, not
+only the raw Python return value.
 """
 import json
 import os
@@ -12,48 +17,141 @@ import os
 import config
 import tools
 
-ARGS = {"specialty": "OPHT", "band": "routine",
-        "from": "2026-09-09", "to": "2026-11-04"}
+ARGS = {
+    "specialty": "OPHT",
+    "band": "routine",
+    "from": "2026-09-09",
+    "to": "2026-11-04",
+}
+EXPECTED_TRIGGER = "invalid_slot_query"
 
 
-def call_as(version):
+def estimated_tokens(value):
+    """Transparent deterministic estimate used only by this offline demo."""
+    return max(1, round(len(json.dumps(value, sort_keys=True)) / 4))
+
+
+def run_trial(version, phase):
+    """Run one isolated routing trial under one tool-contract version."""
     original = config.TOOL_CONTRACT_VERSION
-    config.TOOL_CONTRACT_VERSION = version
     try:
-        return tools.get_clinic_slots(**ARGS)
+        config.TOOL_CONTRACT_VERSION = version
+        observation = tools.get_clinic_slots(**ARGS)
     finally:
         config.TOOL_CONTRACT_VERSION = original
 
+    action = {"tool": "get_clinic_slots", "args": ARGS}
+    tokens_in = estimated_tokens(action)
+    tokens_out = estimated_tokens(observation)
+
+    if isinstance(observation, dict) and observation.get("error") == EXPECTED_TRIGGER:
+        decision = "escalate"
+        trigger = EXPECTED_TRIGGER
+        reason = (
+            "The slot query is invalid because specialty OPHT is outside the "
+            "closed set. Correct the value from the referral before retrying."
+        )
+    else:
+        decision = "escalate"
+        trigger = "no_slot_in_window"
+        reason = (
+            "No slots were returned, so the agent incorrectly treated a typo "
+            "as genuine unavailability."
+        )
+
+    total_tokens = tokens_in + tokens_out
+    estimated_cost = (
+        (tokens_in / 1_000_000) * config.PRICE_IN
+        + (tokens_out / 1_000_000) * config.PRICE_OUT
+    )
+    return {
+        "phase": phase,
+        "tool_contract_version": version,
+        "deleted_component": (
+            "none" if version == "v2"
+            else "closed-set specialty and urgency-band validation"
+        ),
+        "attempted_action": action,
+        "observation": observation,
+        "decision": decision,
+        "trigger": trigger,
+        "reason": reason,
+        "expected_trigger": EXPECTED_TRIGGER,
+        "pass": trigger == EXPECTED_TRIGGER,
+        "turns": 1,
+        "tool_calls": 1,
+        "tokens_in_estimated": tokens_in,
+        "tokens_out_estimated": tokens_out,
+        "total_tokens_estimated": total_tokens,
+        "estimated_cost_usd": round(estimated_cost, 8),
+        "token_method": "serialized_characters_divided_by_4",
+    }
+
 
 def main():
-    v2 = call_as("v2")
-    v1 = call_as("v1")
+    working = run_trial("v2", "working_baseline")
+    broken = run_trial("v1", "component_removed")
+    restored = run_trial("v2", "component_restored")
+
     evidence = {
+        "failure_id": "F2",
         "failure": "specialty_typo_silent_empty_result",
-        "deleted_component": "V2 closed-set specialty validation",
-        "attempted_args": ARGS,
-        "working_v2_result": v2,
-        "broken_v1_result": v1,
-        "why_accuracy_alone_is_insufficient": (
-            "Both results are valid Python values. Only V2 distinguishes an "
-            "invalid query from a real empty slot window."),
-        "correct_fix_layer": "tool interface (poka-yoke constraint)",
-        "wrong_fix_layers": [
-            "prompt: a model can still misspell a string",
-            "guardrail after slot search: it sees an empty result too late",
+        "layer": "tool interface",
+        "controlled_change": (
+            "Remove only V2 closed-set validation; keep the action and routing "
+            "logic unchanged, then restore the validation."
+        ),
+        "expected_safe_behaviour": (
+            "Expose invalid_slot_query instead of reporting an empty legal window."
+        ),
+        "runs": [working, broken, restored],
+        "working_pass_rate": int(working["pass"]),
+        "broken_pass_rate": int(broken["pass"]),
+        "restored_pass_rate": int(restored["pass"]),
+        "failure_reproduced": working["pass"] and not broken["pass"],
+        "restoration_verified": restored["pass"],
+        "failure_visible_in": [
+            "trigger",
+            "reason",
+            "structured tool observation",
         ],
-        "restoration_verified": isinstance(v2, dict) and
-                                v2.get("error") == "invalid_slot_query",
+        "correct_fix_layer": (
+            "Tool interface: the finite vocabulary is known and can be enforced "
+            "before an empty list acquires business meaning."
+        ),
+        "why_other_layers_are_wrong": {
+            "prompt": (
+                "A prompt can request exact copying but cannot make an illegal "
+                "string impossible."
+            ),
+            "post_query_guardrail": (
+                "After the V1 tool returns [], the typo is already indistinguishable "
+                "from genuine no availability."
+            ),
+        },
+        "scope_note": (
+            "This is an offline deterministic agent-routing reproduction. Token "
+            "and cost fields are transparent estimates, not provider billing."
+        ),
     }
+
     os.makedirs("evidence", exist_ok=True)
     path = "evidence/d7_tool_contract_failure.json"
     with open(path, "w", encoding="utf-8") as fh:
         json.dump(evidence, fh, indent=2)
-    print("V1 (broken): %r" % v1)
-    print("V2 (restored): %r" % v2)
+
+    for run in evidence["runs"]:
+        print(
+            "{phase:<20} contract={tool_contract_version} pass={pass} "
+            "trigger={trigger} turns={turns} calls={tool_calls} "
+            "tokens={total_tokens_estimated}".format(**run)
+        )
     print("Wrote %s" % path)
+
+    if not evidence["failure_reproduced"]:
+        raise SystemExit("Failure 2 was not reproduced.")
     if not evidence["restoration_verified"]:
-        raise SystemExit("V2 restoration did not reject the invalid specialty.")
+        raise SystemExit("Failure 2 restoration was not verified.")
 
 
 if __name__ == "__main__":
