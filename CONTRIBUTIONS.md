@@ -8,8 +8,7 @@ submission. Do not claim work performed by another person without agreement.
 |---|---|---|
 | Zhao Xiaonan | D1, D2(a), D2(c): loop and tools | Confirm actual work and commits with Zhao. |
 | Ge Jiayao | D1, D2(a), D2(c): loop and tools | Confirm actual work and commits with Ge. |
-| Tan Jinxuan | V1 baseline system：D1;V1 scripted evaluation：D4;V1 and part of V2 live model testing：D5;Guardrail checks：D3;
-D7 controlled failure experiments：D7 | Build the V1 baseline and conducted the V1/V2 model evaluations across the referral cases, also implemented and documented the guardrail checks and co-developed the D7 controlled failure experiments, comparing the working, broken, and restored agents. |
+| Tan Jinxuan | V1 baseline system：D1;V1 scripted evaluation：D4;V1 and part of V2 live model testing：D5;Guardrail checks：D3;D7 controlled failure experiments：D7 | Build the V1 baseline and conducted the V1/V2 model evaluations across the referral cases, also implemented and documented the guardrail checks and co-developed the D7 controlled failure experiments, comparing the working, broken, and restored agents. |
 | Kaivelikkal Abin Krishna | D2(b), D3: descriptors, V1-to-V2 rewrite, guardrails | Current integration/checkpoint commits; add exact authored portions after team review. |
 | Wang Hanfei | D4, D5(a): evaluation harness and scripted run | Confirm actual work and commits with Wang. |
 | Liu Siwen | D6: cost model, ledger and sensitivity | Reviewed and updated the D6 cost-to-serve artifacts: cost_to_serve.py, evidence/d6_cost_to_serve.json, and docs/D6_COST_TO_SERVE.md; commits 8b194e7e, 63029b5a, and 35d2a086. |
