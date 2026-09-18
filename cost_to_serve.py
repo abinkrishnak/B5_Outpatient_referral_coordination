@@ -2,7 +2,7 @@
 """D6: three-layer, evidence-backed cost-to-serve model for Problem B.
 
 Layer 1 is measured API spend.  Layer 2 prices observed evaluation failures
-at the supplied US$9.17 triage-nurse fallback cost.  Layer 3 projects the
+at the  supplied US$9.17 triage-nurse fallback cost.  Layer 3 projects the
 per-referral expected cost over the fixed 4,000-referral monthly volume.
 """
 import json
