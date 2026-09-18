@@ -27,7 +27,7 @@ The key business finding is expected to be that model-token cost is tiny next
 to human fallback cost. Therefore a small accuracy or safety improvement can
 be economically worthwhile even when its inference cost is higher.
 
-## Completed-model result
+## Completed-model result 
 
 | Model | Layer 1 / referral | Layer 2 / referral | Expected total / referral | Monthly total at 4,000 |
 |---|---:|---:|---:|---:|
