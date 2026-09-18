@@ -213,4 +213,4 @@
     "observed_cheap_success_rate": 0.366667,
     "formula": "p_cheap = p_dear - (dear_variable - cheap_variable) / failure_cost"
   }
-}
+} 
