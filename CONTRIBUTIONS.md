@@ -6,8 +6,8 @@ submission. Do not claim work performed by another person without agreement.
 
 | Team member | Declared responsibility | Completed contribution / evidence |
 |---|---|---|
-| Zhao Xiaonan | D1, D2(a), D2(c): loop and tools | Confirm actual work and commits with Zhao. |
-| Ge Jiayao | D1, D2(a), D2(c): loop and tools | Confirm actual work and commits with Ge. |
+| Zhao Xiaonan | D2: loop and tools | Select the appropriate tools from the six available options and complete the writing of part D2(a); Write the video scripts for myself, Jiayao and Hanfei and create the corresponding PPT slides
+| Ge Jiayao | D2: loop and tools | Confirm actual work and commits with Ge. |
 | Tan Jinxuan | V1 baseline system：D1;V1 scripted evaluation：D4;V1 and part of V2 live model testing：D5;Guardrail checks：D3;D7 controlled failure experiments：D7 | Build the V1 baseline and conducted the V1/V2 model evaluations across the referral cases, also implemented and documented the guardrail checks and co-developed the D7 controlled failure experiments, comparing the working, broken, and restored agents. |
 | Kaivelikkal Abin Krishna | D2(b), D3: descriptors, V1-to-V2 rewrite, guardrails | Current integration/checkpoint commits; add exact authored portions after team review. |
 | Wang Hanfei | D4, D5(a): evaluation harness and scripted run | Confirm actual work and commits with Wang. |
