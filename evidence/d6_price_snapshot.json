@@ -1,0 +1,37 @@
+{
+  "source": "https://openrouter.ai/api/v1/models",
+  "checked_utc": "2026-09-17T13:51:46.180823+00:00",
+  "raw_catalog_sha256": "7a8302143ebc66f4f87e27721107712e34c70efa7d0f5171b384707e2825dcd4",
+  "unit": "USD per token",
+  "basis": "Dated catalog list prices, no assumed caching or reasoning discount; not a reconstruction of historical invoices.",
+  "models": {
+    "anthropic/claude-haiku-4.5": {
+      "prompt": "0.000001",
+      "completion": "0.000005"
+    },
+    "google/gemini-2.5-flash-lite": {
+      "prompt": "0.0000001",
+      "completion": "0.0000004"
+    },
+    "google/gemini-2.5-flash": {
+      "prompt": "0.0000003",
+      "completion": "0.0000025"
+    },
+    "openai/gpt-4.1-mini": {
+      "prompt": "0.0000004",
+      "completion": "0.0000016"
+    },
+    "deepseek/deepseek-chat-v3-0324": {
+      "prompt": "0.00000025",
+      "completion": "0.000001"
+    },
+    "mistralai/mistral-small-24b-instruct-2501": {
+      "prompt": "0.00000005",
+      "completion": "0.00000008"
+    },
+    "meta-llama/llama-3.3-70b-instruct": {
+      "prompt": "0.0000001",
+      "completion": "0.00000032"
+    }
+  }
+}

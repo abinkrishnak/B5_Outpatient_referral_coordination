@@ -1,216 +1,3733 @@
 {
-  "method": "Layer 1 measured D5 API spend + Layer 2 observed code-check failure rate times $9.17 + Layer 3 4,000 referrals/month",
-  "caution": "The raw code-check failure rate is intentionally conservative: it includes the documented REF-5590 early-exit versus answer-key conflict.",
-  "final_model_families": [
-    "Anthropic",
-    "DeepSeek",
-    "Google",
-    "Meta",
-    "Mistral"
-  ],
-  "recommended_model": "deepseek/deepseek-chat-v3-0324",
+  "schema_version": 3,
+  "status": "COMPLETE_FIVE_MODEL_COST_CALCULATION_WITH_STATED_LIMITATIONS",
+  "reviewed_upstream_commit": "96c36139e483409acea577dc7f5e364540d722ca",
+  "method": "Class 5 baseline: measured tokens times dated list prices; (1-p)*55*10/60; monthly fixed K",
+  "source_sha256": {
+    "evidence/d5_live_anthropic_claude-haiku-4.5_v2.json": "22d99cf011f22ac302ac11cc33e56f16e2b86ac9ba2430e1eef8a21838275aed",
+    "evidence/d5_live_deepseek_deepseek-chat-v3-0324_v2.json": "60550f21227ac53dafd9afcda70adc7c48cf56eb0d1acd22a4164c1a25c76373",
+    "evidence/d5_live_google_gemini-2.5-flash_v2.json": "f1e8f29209339d6275c7209ed73b3427942f755800c03a79b69c56a9d2b2da6c",
+    "evidence/d5_live_meta-llama_llama-3.3-70b-instruct_v2.json": "ae97b39c5a0ce1efe78dc026fa1a20b5ddc7c67d861b433f5cd51b30e34a55bf",
+    "evidence/d5_live_mistralai_mistral-small-24b-instruct-2501_v2.json": "bbf89c043e08ff3bef16a2f162afb0fc8814585113d1c3e4f0d1fdf8b628045b",
+    "evidence/d5_live_openai_gpt-4.1-mini_v2_post_timeout_fix_full_2026-09-16.json": "5f51449266086deb47822a651ee10fffc4db212804968204179882259f5e5379"
+  },
+  "prices": {
+    "source": "https://openrouter.ai/api/v1/models",
+    "checked_utc": "2026-09-17T13:51:46.180823+00:00",
+    "raw_catalog_sha256": "7a8302143ebc66f4f87e27721107712e34c70efa7d0f5171b384707e2825dcd4",
+    "unit": "USD per token",
+    "basis": "Dated catalog list prices, no assumed caching or reasoning discount; not a reconstruction of historical invoices.",
+    "models": {
+      "anthropic/claude-haiku-4.5": {
+        "prompt": "0.000001",
+        "completion": "0.000005"
+      },
+      "google/gemini-2.5-flash-lite": {
+        "prompt": "0.0000001",
+        "completion": "0.0000004"
+      },
+      "google/gemini-2.5-flash": {
+        "prompt": "0.0000003",
+        "completion": "0.0000025"
+      },
+      "openai/gpt-4.1-mini": {
+        "prompt": "0.0000004",
+        "completion": "0.0000016"
+      },
+      "deepseek/deepseek-chat-v3-0324": {
+        "prompt": "0.00000025",
+        "completion": "0.000001"
+      },
+      "mistralai/mistral-small-24b-instruct-2501": {
+        "prompt": "0.00000005",
+        "completion": "0.00000008"
+      },
+      "meta-llama/llama-3.3-70b-instruct": {
+        "prompt": "0.0000001",
+        "completion": "0.00000032"
+      }
+    }
+  },
+  "paid_model_calls_this_calculation": 0,
+  "assumptions": {
+    "currency": "USD",
+    "monthly_referrals": 4000,
+    "fallback_hourly_usd": 55,
+    "fallback_minutes": 10,
+    "fixed_monthly_usd": 0,
+    "fixed_scope": "Abin's Sep 14 prototype-only paid-service confirmation; production maintenance, monitoring, recurring eval and equipment budgets not established",
+    "p_scope": "Raw automated code-check proxy, not clinical accuracy or human-judgement pass rate",
+    "mix": "30 ordinary cases once; 10 negative cases three times; not production prevalence",
+    "cache_reasoning": "No assumed cache discount; recorded output tokens used without adding estimated hidden reasoning tokens",
+    "model_selection": "DeepSeek is minimum observed proxy cost in final five, not an approval to deploy"
+  },
   "models": [
     {
       "model": "anthropic/claude-haiku-4.5",
       "source": "evidence/d5_live_anthropic_claude-haiku-4.5_v2.json",
+      "created_utc": "2026-09-17T09:38:26.683541+00:00",
       "trials": 60,
+      "cases": 40,
+      "code_check_passed": 48,
+      "code_check_success_rate": 0.8,
       "code_check_failures": 12,
-      "code_check_failure_rate": 0.2,
+      "tokens_in": 449676,
+      "tokens_out": 57385,
+      "per_trial": [
+        {
+          "case_id": "REF-5590",
+          "trial": 1,
+          "passed": false,
+          "tokens_in": 5208,
+          "tokens_out": 812,
+          "list_price_tokens_usd": 0.009268,
+          "provider_reported_usd": 0.009268
+        },
+        {
+          "case_id": "REF-5590",
+          "trial": 2,
+          "passed": false,
+          "tokens_in": 5208,
+          "tokens_out": 807,
+          "list_price_tokens_usd": 0.009243,
+          "provider_reported_usd": 0.009243
+        },
+        {
+          "case_id": "REF-5590",
+          "trial": 3,
+          "passed": false,
+          "tokens_in": 5208,
+          "tokens_out": 807,
+          "list_price_tokens_usd": 0.009243,
+          "provider_reported_usd": 0.009243
+        },
+        {
+          "case_id": "REF-5602",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 9753,
+          "tokens_out": 1053,
+          "list_price_tokens_usd": 0.015018,
+          "provider_reported_usd": 0.015018
+        },
+        {
+          "case_id": "REF-5614",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 5219,
+          "tokens_out": 615,
+          "list_price_tokens_usd": 0.008294,
+          "provider_reported_usd": 0.008294
+        },
+        {
+          "case_id": "REF-5614",
+          "trial": 2,
+          "passed": true,
+          "tokens_in": 5219,
+          "tokens_out": 770,
+          "list_price_tokens_usd": 0.009069,
+          "provider_reported_usd": 0.009069
+        },
+        {
+          "case_id": "REF-5614",
+          "trial": 3,
+          "passed": true,
+          "tokens_in": 5219,
+          "tokens_out": 615,
+          "list_price_tokens_usd": 0.008294,
+          "provider_reported_usd": 0.008294
+        },
+        {
+          "case_id": "REF-5620",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 9463,
+          "tokens_out": 989,
+          "list_price_tokens_usd": 0.014408,
+          "provider_reported_usd": 0.014408
+        },
+        {
+          "case_id": "REF-5631",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 9859,
+          "tokens_out": 1304,
+          "list_price_tokens_usd": 0.016379,
+          "provider_reported_usd": 0.016379
+        },
+        {
+          "case_id": "REF-5645",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 9670,
+          "tokens_out": 1743,
+          "list_price_tokens_usd": 0.018385,
+          "provider_reported_usd": 0.018385
+        },
+        {
+          "case_id": "REF-5658",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 5194,
+          "tokens_out": 601,
+          "list_price_tokens_usd": 0.008199,
+          "provider_reported_usd": 0.008199
+        },
+        {
+          "case_id": "REF-5658",
+          "trial": 2,
+          "passed": true,
+          "tokens_in": 5194,
+          "tokens_out": 591,
+          "list_price_tokens_usd": 0.008149,
+          "provider_reported_usd": 0.008149
+        },
+        {
+          "case_id": "REF-5658",
+          "trial": 3,
+          "passed": true,
+          "tokens_in": 5194,
+          "tokens_out": 601,
+          "list_price_tokens_usd": 0.008199,
+          "provider_reported_usd": 0.008199
+        },
+        {
+          "case_id": "REF-5663",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 5089,
+          "tokens_out": 449,
+          "list_price_tokens_usd": 0.007334,
+          "provider_reported_usd": 0.007334
+        },
+        {
+          "case_id": "REF-5663",
+          "trial": 2,
+          "passed": true,
+          "tokens_in": 5089,
+          "tokens_out": 449,
+          "list_price_tokens_usd": 0.007334,
+          "provider_reported_usd": 0.007334
+        },
+        {
+          "case_id": "REF-5663",
+          "trial": 3,
+          "passed": true,
+          "tokens_in": 5089,
+          "tokens_out": 449,
+          "list_price_tokens_usd": 0.007334,
+          "provider_reported_usd": 0.007334
+        },
+        {
+          "case_id": "REF-5671",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 6859,
+          "tokens_out": 668,
+          "list_price_tokens_usd": 0.010199,
+          "provider_reported_usd": 0.010199
+        },
+        {
+          "case_id": "REF-5671",
+          "trial": 2,
+          "passed": true,
+          "tokens_in": 6859,
+          "tokens_out": 668,
+          "list_price_tokens_usd": 0.010199,
+          "provider_reported_usd": 0.010199
+        },
+        {
+          "case_id": "REF-5671",
+          "trial": 3,
+          "passed": true,
+          "tokens_in": 6859,
+          "tokens_out": 668,
+          "list_price_tokens_usd": 0.010199,
+          "provider_reported_usd": 0.010199
+        },
+        {
+          "case_id": "REF-5684",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 5174,
+          "tokens_out": 969,
+          "list_price_tokens_usd": 0.010019,
+          "provider_reported_usd": 0.010019
+        },
+        {
+          "case_id": "REF-5684",
+          "trial": 2,
+          "passed": true,
+          "tokens_in": 5174,
+          "tokens_out": 969,
+          "list_price_tokens_usd": 0.010019,
+          "provider_reported_usd": 0.010019
+        },
+        {
+          "case_id": "REF-5684",
+          "trial": 3,
+          "passed": true,
+          "tokens_in": 5174,
+          "tokens_out": 969,
+          "list_price_tokens_usd": 0.010019,
+          "provider_reported_usd": 0.010019
+        },
+        {
+          "case_id": "REF-5697",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 7288,
+          "tokens_out": 1500,
+          "list_price_tokens_usd": 0.014788,
+          "provider_reported_usd": 0.014788
+        },
+        {
+          "case_id": "REF-5697",
+          "trial": 2,
+          "passed": true,
+          "tokens_in": 7288,
+          "tokens_out": 1491,
+          "list_price_tokens_usd": 0.014743,
+          "provider_reported_usd": 0.014743
+        },
+        {
+          "case_id": "REF-5697",
+          "trial": 3,
+          "passed": true,
+          "tokens_in": 7288,
+          "tokens_out": 1500,
+          "list_price_tokens_usd": 0.014788,
+          "provider_reported_usd": 0.014788
+        },
+        {
+          "case_id": "REF-5703",
+          "trial": 1,
+          "passed": false,
+          "tokens_in": 4911,
+          "tokens_out": 399,
+          "list_price_tokens_usd": 0.006906,
+          "provider_reported_usd": 0.006906
+        },
+        {
+          "case_id": "REF-5703",
+          "trial": 2,
+          "passed": false,
+          "tokens_in": 4911,
+          "tokens_out": 399,
+          "list_price_tokens_usd": 0.006906,
+          "provider_reported_usd": 0.006906
+        },
+        {
+          "case_id": "REF-5703",
+          "trial": 3,
+          "passed": false,
+          "tokens_in": 4911,
+          "tokens_out": 399,
+          "list_price_tokens_usd": 0.006906,
+          "provider_reported_usd": 0.006906
+        },
+        {
+          "case_id": "REF-5711",
+          "trial": 1,
+          "passed": false,
+          "tokens_in": 7332,
+          "tokens_out": 920,
+          "list_price_tokens_usd": 0.011932,
+          "provider_reported_usd": 0.011932
+        },
+        {
+          "case_id": "REF-5711",
+          "trial": 2,
+          "passed": false,
+          "tokens_in": 7332,
+          "tokens_out": 920,
+          "list_price_tokens_usd": 0.011932,
+          "provider_reported_usd": 0.011932
+        },
+        {
+          "case_id": "REF-5711",
+          "trial": 3,
+          "passed": false,
+          "tokens_in": 7332,
+          "tokens_out": 920,
+          "list_price_tokens_usd": 0.011932,
+          "provider_reported_usd": 0.011932
+        },
+        {
+          "case_id": "REF-5725",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 5189,
+          "tokens_out": 756,
+          "list_price_tokens_usd": 0.008969,
+          "provider_reported_usd": 0.008969
+        },
+        {
+          "case_id": "REF-5725",
+          "trial": 2,
+          "passed": true,
+          "tokens_in": 5189,
+          "tokens_out": 752,
+          "list_price_tokens_usd": 0.008949,
+          "provider_reported_usd": 0.008949
+        },
+        {
+          "case_id": "REF-5725",
+          "trial": 3,
+          "passed": true,
+          "tokens_in": 5189,
+          "tokens_out": 756,
+          "list_price_tokens_usd": 0.008969,
+          "provider_reported_usd": 0.008969
+        },
+        {
+          "case_id": "REF-5738",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 9615,
+          "tokens_out": 1678,
+          "list_price_tokens_usd": 0.018005,
+          "provider_reported_usd": 0.018005
+        },
+        {
+          "case_id": "REF-6001",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 9882,
+          "tokens_out": 1169,
+          "list_price_tokens_usd": 0.015727,
+          "provider_reported_usd": 0.015727
+        },
+        {
+          "case_id": "REF-6002",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 9538,
+          "tokens_out": 1432,
+          "list_price_tokens_usd": 0.016698,
+          "provider_reported_usd": 0.016698
+        },
+        {
+          "case_id": "REF-6003",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 9664,
+          "tokens_out": 1312,
+          "list_price_tokens_usd": 0.016224,
+          "provider_reported_usd": 0.016224
+        },
+        {
+          "case_id": "REF-6004",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 9462,
+          "tokens_out": 991,
+          "list_price_tokens_usd": 0.014417,
+          "provider_reported_usd": 0.014417
+        },
+        {
+          "case_id": "REF-6005",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 9407,
+          "tokens_out": 1410,
+          "list_price_tokens_usd": 0.016457,
+          "provider_reported_usd": 0.016457
+        },
+        {
+          "case_id": "REF-6006",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 9565,
+          "tokens_out": 1094,
+          "list_price_tokens_usd": 0.015035,
+          "provider_reported_usd": 0.015035
+        },
+        {
+          "case_id": "REF-6007",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 9482,
+          "tokens_out": 1216,
+          "list_price_tokens_usd": 0.015562,
+          "provider_reported_usd": 0.015562
+        },
+        {
+          "case_id": "REF-6008",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 9568,
+          "tokens_out": 1000,
+          "list_price_tokens_usd": 0.014568,
+          "provider_reported_usd": 0.014568
+        },
+        {
+          "case_id": "REF-6009",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 9370,
+          "tokens_out": 918,
+          "list_price_tokens_usd": 0.01396,
+          "provider_reported_usd": 0.01396
+        },
+        {
+          "case_id": "REF-6010",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 9672,
+          "tokens_out": 1110,
+          "list_price_tokens_usd": 0.015222,
+          "provider_reported_usd": 0.015222
+        },
+        {
+          "case_id": "REF-6011",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 9566,
+          "tokens_out": 1053,
+          "list_price_tokens_usd": 0.014831,
+          "provider_reported_usd": 0.014831
+        },
+        {
+          "case_id": "REF-6012",
+          "trial": 1,
+          "passed": false,
+          "tokens_in": 5222,
+          "tokens_out": 649,
+          "list_price_tokens_usd": 0.008467,
+          "provider_reported_usd": 0.008467
+        },
+        {
+          "case_id": "REF-6013",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 9439,
+          "tokens_out": 1020,
+          "list_price_tokens_usd": 0.014539,
+          "provider_reported_usd": 0.014539
+        },
+        {
+          "case_id": "REF-6014",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 9371,
+          "tokens_out": 992,
+          "list_price_tokens_usd": 0.014331,
+          "provider_reported_usd": 0.014331
+        },
+        {
+          "case_id": "REF-6015",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 9830,
+          "tokens_out": 1327,
+          "list_price_tokens_usd": 0.016465,
+          "provider_reported_usd": 0.016465
+        },
+        {
+          "case_id": "REF-6016",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 9523,
+          "tokens_out": 1056,
+          "list_price_tokens_usd": 0.014803,
+          "provider_reported_usd": 0.014803
+        },
+        {
+          "case_id": "REF-6017",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 9599,
+          "tokens_out": 1142,
+          "list_price_tokens_usd": 0.015309,
+          "provider_reported_usd": 0.015309
+        },
+        {
+          "case_id": "REF-6018",
+          "trial": 1,
+          "passed": false,
+          "tokens_in": 7099,
+          "tokens_out": 768,
+          "list_price_tokens_usd": 0.010939,
+          "provider_reported_usd": 0.010939
+        },
+        {
+          "case_id": "REF-6019",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 9984,
+          "tokens_out": 1190,
+          "list_price_tokens_usd": 0.015934,
+          "provider_reported_usd": 0.015934
+        },
+        {
+          "case_id": "REF-6020",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 9854,
+          "tokens_out": 1184,
+          "list_price_tokens_usd": 0.015774,
+          "provider_reported_usd": 0.015774
+        },
+        {
+          "case_id": "REF-6021",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 9724,
+          "tokens_out": 1203,
+          "list_price_tokens_usd": 0.015739,
+          "provider_reported_usd": 0.015739
+        },
+        {
+          "case_id": "REF-6022",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 9574,
+          "tokens_out": 1015,
+          "list_price_tokens_usd": 0.014649,
+          "provider_reported_usd": 0.014649
+        },
+        {
+          "case_id": "REF-6023",
+          "trial": 1,
+          "passed": false,
+          "tokens_in": 5144,
+          "tokens_out": 566,
+          "list_price_tokens_usd": 0.007974,
+          "provider_reported_usd": 0.007974
+        },
+        {
+          "case_id": "REF-6024",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 9810,
+          "tokens_out": 1275,
+          "list_price_tokens_usd": 0.016185,
+          "provider_reported_usd": 0.016185
+        },
+        {
+          "case_id": "REF-6025",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 9578,
+          "tokens_out": 1337,
+          "list_price_tokens_usd": 0.016263,
+          "provider_reported_usd": 0.016263
+        }
+      ],
       "layer_1": {
-        "measured_variable_total_usd": 0.736601,
-        "measured_variable_per_referral_usd": 0.012277
+        "basis": "recorded tokens at dated list prices; no assumed caching discount",
+        "list_token_total_usd": 0.736601,
+        "variable_per_referral_usd": 0.012276683333,
+        "extra_tool_retrieval_per_referral_usd": 0
       },
       "layer_2": {
-        "fallback_cost_per_failure_usd": 9.17,
-        "expected_fallback_per_referral_usd": 1.834
+        "fallback_cost_per_failure_usd": 9.166666666667,
+        "expected_fallback_per_referral_usd": 1.833333333333
       },
       "layer_3": {
-        "monthly_referrals": 4000,
-        "monthly_variable_usd": 49.11,
-        "monthly_expected_fallback_usd": 7336.0,
-        "monthly_total_usd": 7385.11
+        "fixed_monthly_usd": 0.0,
+        "scope": "Additional paid prototype services only; full production fixed costs unknown"
       },
-      "expected_total_per_referral_usd": 1.846277,
+      "expected_total_per_referral_usd": 1.845610016667,
+      "monthly": {
+        "referrals": 4000,
+        "variable_usd": 49.106733333333,
+        "fallback_usd": 7333.333333333333,
+        "fixed_usd": 0.0,
+        "total_usd": 7382.440066666667
+      },
+      "provider_comparison": {
+        "recorded_battery_usd": 0.736601,
+        "per_recorded_trial_usd": 0.012276683333,
+        "old_provider_and_rounded_fallback_monthly_usd": 7385.106733333333,
+        "new_baseline_minus_old_monthly_usd": -2.666666666667,
+        "list_repricing_monthly_effect_usd": 0.0,
+        "exact_labour_monthly_effect_usd": -2.666666666667,
+        "note": "Recorded response charges, not a full account invoice. No measured cache-saving claim."
+      },
       "sensitivity": [
         {
           "assumed_success_rate": 0.7,
-          "expected_total_per_referral_usd": 2.763277,
-          "monthly_total_usd": 11053.11
+          "requested_delta_percentage_points": -10.0,
+          "clipped": false,
+          "expected_total_per_referral_usd": 2.762276683333,
+          "monthly_total_usd": 11049.106733333332
         },
         {
           "assumed_success_rate": 0.8,
-          "expected_total_per_referral_usd": 1.846277,
-          "monthly_total_usd": 7385.11
+          "requested_delta_percentage_points": 0.0,
+          "clipped": false,
+          "expected_total_per_referral_usd": 1.845610016667,
+          "monthly_total_usd": 7382.440066666667
         },
         {
           "assumed_success_rate": 0.9,
-          "expected_total_per_referral_usd": 0.929277,
-          "monthly_total_usd": 3717.11
+          "requested_delta_percentage_points": 10.0,
+          "clipped": false,
+          "expected_total_per_referral_usd": 0.92894335,
+          "monthly_total_usd": 3715.7734
         }
       ]
     },
     {
       "model": "deepseek/deepseek-chat-v3-0324",
       "source": "evidence/d5_live_deepseek_deepseek-chat-v3-0324_v2.json",
+      "created_utc": "2026-09-17T09:59:46.086783+00:00",
       "trials": 60,
+      "cases": 40,
+      "code_check_passed": 51,
+      "code_check_success_rate": 0.85,
       "code_check_failures": 9,
-      "code_check_failure_rate": 0.15,
+      "tokens_in": 417556,
+      "tokens_out": 21236,
+      "per_trial": [
+        {
+          "case_id": "REF-5590",
+          "trial": 1,
+          "passed": false,
+          "tokens_in": 4718,
+          "tokens_out": 236,
+          "list_price_tokens_usd": 0.0014155,
+          "provider_reported_usd": 0.001119
+        },
+        {
+          "case_id": "REF-5590",
+          "trial": 2,
+          "passed": false,
+          "tokens_in": 4721,
+          "tokens_out": 238,
+          "list_price_tokens_usd": 0.00141825,
+          "provider_reported_usd": 0.000834
+        },
+        {
+          "case_id": "REF-5590",
+          "trial": 3,
+          "passed": false,
+          "tokens_in": 4721,
+          "tokens_out": 249,
+          "list_price_tokens_usd": 0.00142925,
+          "provider_reported_usd": 0.000824
+        },
+        {
+          "case_id": "REF-5602",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 10558,
+          "tokens_out": 451,
+          "list_price_tokens_usd": 0.0030905,
+          "provider_reported_usd": 0.002367
+        },
+        {
+          "case_id": "REF-5614",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 4698,
+          "tokens_out": 253,
+          "list_price_tokens_usd": 0.0014275,
+          "provider_reported_usd": 0.000891
+        },
+        {
+          "case_id": "REF-5614",
+          "trial": 2,
+          "passed": true,
+          "tokens_in": 4698,
+          "tokens_out": 249,
+          "list_price_tokens_usd": 0.0014235,
+          "provider_reported_usd": 0.000817
+        },
+        {
+          "case_id": "REF-5614",
+          "trial": 3,
+          "passed": true,
+          "tokens_in": 4642,
+          "tokens_out": 198,
+          "list_price_tokens_usd": 0.0013585,
+          "provider_reported_usd": 0.000777
+        },
+        {
+          "case_id": "REF-5620",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 10331,
+          "tokens_out": 436,
+          "list_price_tokens_usd": 0.00301875,
+          "provider_reported_usd": 0.001947
+        },
+        {
+          "case_id": "REF-5631",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8830,
+          "tokens_out": 493,
+          "list_price_tokens_usd": 0.0027005,
+          "provider_reported_usd": 0.002762
+        },
+        {
+          "case_id": "REF-5645",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8833,
+          "tokens_out": 479,
+          "list_price_tokens_usd": 0.00268725,
+          "provider_reported_usd": 0.002278
+        },
+        {
+          "case_id": "REF-5658",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 4637,
+          "tokens_out": 189,
+          "list_price_tokens_usd": 0.00134825,
+          "provider_reported_usd": 0.000979
+        },
+        {
+          "case_id": "REF-5658",
+          "trial": 2,
+          "passed": true,
+          "tokens_in": 4699,
+          "tokens_out": 257,
+          "list_price_tokens_usd": 0.00143175,
+          "provider_reported_usd": 0.000861
+        },
+        {
+          "case_id": "REF-5658",
+          "trial": 3,
+          "passed": true,
+          "tokens_in": 4638,
+          "tokens_out": 200,
+          "list_price_tokens_usd": 0.0013595,
+          "provider_reported_usd": 0.000755
+        },
+        {
+          "case_id": "REF-5663",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 4669,
+          "tokens_out": 241,
+          "list_price_tokens_usd": 0.00140825,
+          "provider_reported_usd": 0.001247
+        },
+        {
+          "case_id": "REF-5663",
+          "trial": 2,
+          "passed": true,
+          "tokens_in": 4637,
+          "tokens_out": 204,
+          "list_price_tokens_usd": 0.00136325,
+          "provider_reported_usd": 0.000828
+        },
+        {
+          "case_id": "REF-5663",
+          "trial": 3,
+          "passed": true,
+          "tokens_in": 4594,
+          "tokens_out": 186,
+          "list_price_tokens_usd": 0.0013345,
+          "provider_reported_usd": 0.000761
+        },
+        {
+          "case_id": "REF-5671",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 4605,
+          "tokens_out": 211,
+          "list_price_tokens_usd": 0.00136225,
+          "provider_reported_usd": 0.001362
+        },
+        {
+          "case_id": "REF-5671",
+          "trial": 2,
+          "passed": true,
+          "tokens_in": 4625,
+          "tokens_out": 255,
+          "list_price_tokens_usd": 0.00141125,
+          "provider_reported_usd": 0.001475
+        },
+        {
+          "case_id": "REF-5671",
+          "trial": 3,
+          "passed": true,
+          "tokens_in": 4658,
+          "tokens_out": 261,
+          "list_price_tokens_usd": 0.0014255,
+          "provider_reported_usd": 0.001426
+        },
+        {
+          "case_id": "REF-5684",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 4710,
+          "tokens_out": 274,
+          "list_price_tokens_usd": 0.0014515,
+          "provider_reported_usd": 0.001452
+        },
+        {
+          "case_id": "REF-5684",
+          "trial": 2,
+          "passed": true,
+          "tokens_in": 4710,
+          "tokens_out": 264,
+          "list_price_tokens_usd": 0.0014415,
+          "provider_reported_usd": 0.001442
+        },
+        {
+          "case_id": "REF-5684",
+          "trial": 3,
+          "passed": true,
+          "tokens_in": 4722,
+          "tokens_out": 277,
+          "list_price_tokens_usd": 0.0014575,
+          "provider_reported_usd": 0.000925
+        },
+        {
+          "case_id": "REF-5697",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 6536,
+          "tokens_out": 364,
+          "list_price_tokens_usd": 0.001998,
+          "provider_reported_usd": 0.001842
+        },
+        {
+          "case_id": "REF-5697",
+          "trial": 2,
+          "passed": true,
+          "tokens_in": 6525,
+          "tokens_out": 347,
+          "list_price_tokens_usd": 0.00197825,
+          "provider_reported_usd": 0.001147
+        },
+        {
+          "case_id": "REF-5697",
+          "trial": 3,
+          "passed": true,
+          "tokens_in": 6558,
+          "tokens_out": 396,
+          "list_price_tokens_usd": 0.0020355,
+          "provider_reported_usd": 0.001236
+        },
+        {
+          "case_id": "REF-5703",
+          "trial": 1,
+          "passed": false,
+          "tokens_in": 2974,
+          "tokens_out": 144,
+          "list_price_tokens_usd": 0.0008875,
+          "provider_reported_usd": 0.000722
+        },
+        {
+          "case_id": "REF-5703",
+          "trial": 2,
+          "passed": false,
+          "tokens_in": 2970,
+          "tokens_out": 136,
+          "list_price_tokens_usd": 0.0008785,
+          "provider_reported_usd": 0.000521
+        },
+        {
+          "case_id": "REF-5703",
+          "trial": 3,
+          "passed": false,
+          "tokens_in": 2970,
+          "tokens_out": 159,
+          "list_price_tokens_usd": 0.0009015,
+          "provider_reported_usd": 0.000524
+        },
+        {
+          "case_id": "REF-5711",
+          "trial": 1,
+          "passed": false,
+          "tokens_in": 6755,
+          "tokens_out": 437,
+          "list_price_tokens_usd": 0.00212575,
+          "provider_reported_usd": 0.001697
+        },
+        {
+          "case_id": "REF-5711",
+          "trial": 2,
+          "passed": false,
+          "tokens_in": 6710,
+          "tokens_out": 366,
+          "list_price_tokens_usd": 0.0020435,
+          "provider_reported_usd": 0.001292
+        },
+        {
+          "case_id": "REF-5711",
+          "trial": 3,
+          "passed": false,
+          "tokens_in": 6714,
+          "tokens_out": 365,
+          "list_price_tokens_usd": 0.0020435,
+          "provider_reported_usd": 0.001246
+        },
+        {
+          "case_id": "REF-5725",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 4689,
+          "tokens_out": 219,
+          "list_price_tokens_usd": 0.00139125,
+          "provider_reported_usd": 0.001227
+        },
+        {
+          "case_id": "REF-5725",
+          "trial": 2,
+          "passed": true,
+          "tokens_in": 4683,
+          "tokens_out": 252,
+          "list_price_tokens_usd": 0.00142275,
+          "provider_reported_usd": 0.000874
+        },
+        {
+          "case_id": "REF-5725",
+          "trial": 3,
+          "passed": true,
+          "tokens_in": 4680,
+          "tokens_out": 235,
+          "list_price_tokens_usd": 0.001405,
+          "provider_reported_usd": 0.001029
+        },
+        {
+          "case_id": "REF-5738",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8655,
+          "tokens_out": 448,
+          "list_price_tokens_usd": 0.00261175,
+          "provider_reported_usd": 0.002612
+        },
+        {
+          "case_id": "REF-6001",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8761,
+          "tokens_out": 438,
+          "list_price_tokens_usd": 0.00262825,
+          "provider_reported_usd": 0.001802
+        },
+        {
+          "case_id": "REF-6002",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8587,
+          "tokens_out": 414,
+          "list_price_tokens_usd": 0.00256075,
+          "provider_reported_usd": 0.002561
+        },
+        {
+          "case_id": "REF-6003",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 10363,
+          "tokens_out": 452,
+          "list_price_tokens_usd": 0.00304275,
+          "provider_reported_usd": 0.001816
+        },
+        {
+          "case_id": "REF-6004",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8534,
+          "tokens_out": 405,
+          "list_price_tokens_usd": 0.0025385,
+          "provider_reported_usd": 0.002538
+        },
+        {
+          "case_id": "REF-6005",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8540,
+          "tokens_out": 407,
+          "list_price_tokens_usd": 0.002542,
+          "provider_reported_usd": 0.002165
+        },
+        {
+          "case_id": "REF-6006",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8646,
+          "tokens_out": 468,
+          "list_price_tokens_usd": 0.0026295,
+          "provider_reported_usd": 0.00228
+        },
+        {
+          "case_id": "REF-6007",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8628,
+          "tokens_out": 439,
+          "list_price_tokens_usd": 0.002596,
+          "provider_reported_usd": 0.001777
+        },
+        {
+          "case_id": "REF-6008",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8569,
+          "tokens_out": 441,
+          "list_price_tokens_usd": 0.00258325,
+          "provider_reported_usd": 0.002096
+        },
+        {
+          "case_id": "REF-6009",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 10209,
+          "tokens_out": 421,
+          "list_price_tokens_usd": 0.00297325,
+          "provider_reported_usd": 0.002264
+        },
+        {
+          "case_id": "REF-6010",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8585,
+          "tokens_out": 401,
+          "list_price_tokens_usd": 0.00254725,
+          "provider_reported_usd": 0.001706
+        },
+        {
+          "case_id": "REF-6011",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8722,
+          "tokens_out": 432,
+          "list_price_tokens_usd": 0.0026125,
+          "provider_reported_usd": 0.00195
+        },
+        {
+          "case_id": "REF-6012",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8802,
+          "tokens_out": 501,
+          "list_price_tokens_usd": 0.0027015,
+          "provider_reported_usd": 0.001707
+        },
+        {
+          "case_id": "REF-6013",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 10308,
+          "tokens_out": 419,
+          "list_price_tokens_usd": 0.002996,
+          "provider_reported_usd": 0.002004
+        },
+        {
+          "case_id": "REF-6014",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8468,
+          "tokens_out": 395,
+          "list_price_tokens_usd": 0.002512,
+          "provider_reported_usd": 0.001547
+        },
+        {
+          "case_id": "REF-6015",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8737,
+          "tokens_out": 465,
+          "list_price_tokens_usd": 0.00264925,
+          "provider_reported_usd": 0.001762
+        },
+        {
+          "case_id": "REF-6016",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8653,
+          "tokens_out": 455,
+          "list_price_tokens_usd": 0.00261825,
+          "provider_reported_usd": 0.001837
+        },
+        {
+          "case_id": "REF-6017",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8625,
+          "tokens_out": 449,
+          "list_price_tokens_usd": 0.00260525,
+          "provider_reported_usd": 0.001619
+        },
+        {
+          "case_id": "REF-6018",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8607,
+          "tokens_out": 457,
+          "list_price_tokens_usd": 0.00260875,
+          "provider_reported_usd": 0.002182
+        },
+        {
+          "case_id": "REF-6019",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 9044,
+          "tokens_out": 537,
+          "list_price_tokens_usd": 0.002798,
+          "provider_reported_usd": 0.002798
+        },
+        {
+          "case_id": "REF-6020",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8768,
+          "tokens_out": 483,
+          "list_price_tokens_usd": 0.002675,
+          "provider_reported_usd": 0.002645
+        },
+        {
+          "case_id": "REF-6021",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8768,
+          "tokens_out": 469,
+          "list_price_tokens_usd": 0.002661,
+          "provider_reported_usd": 0.002008
+        },
+        {
+          "case_id": "REF-6022",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 10397,
+          "tokens_out": 470,
+          "list_price_tokens_usd": 0.00306925,
+          "provider_reported_usd": 0.002292
+        },
+        {
+          "case_id": "REF-6023",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8839,
+          "tokens_out": 517,
+          "list_price_tokens_usd": 0.00272675,
+          "provider_reported_usd": 0.002727
+        },
+        {
+          "case_id": "REF-6024",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8734,
+          "tokens_out": 492,
+          "list_price_tokens_usd": 0.0026755,
+          "provider_reported_usd": 0.002675
+        },
+        {
+          "case_id": "REF-6025",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8589,
+          "tokens_out": 440,
+          "list_price_tokens_usd": 0.00258725,
+          "provider_reported_usd": 0.00256
+        }
+      ],
       "layer_1": {
-        "measured_variable_total_usd": 0.097416,
-        "measured_variable_per_referral_usd": 0.001624
+        "basis": "recorded tokens at dated list prices; no assumed caching discount",
+        "list_token_total_usd": 0.125625,
+        "variable_per_referral_usd": 0.00209375,
+        "extra_tool_retrieval_per_referral_usd": 0
       },
       "layer_2": {
-        "fallback_cost_per_failure_usd": 9.17,
-        "expected_fallback_per_referral_usd": 1.3755
+        "fallback_cost_per_failure_usd": 9.166666666667,
+        "expected_fallback_per_referral_usd": 1.375
       },
       "layer_3": {
-        "monthly_referrals": 4000,
-        "monthly_variable_usd": 6.49,
-        "monthly_expected_fallback_usd": 5502.0,
-        "monthly_total_usd": 5508.49
+        "fixed_monthly_usd": 0.0,
+        "scope": "Additional paid prototype services only; full production fixed costs unknown"
       },
-      "expected_total_per_referral_usd": 1.377124,
+      "expected_total_per_referral_usd": 1.37709375,
+      "monthly": {
+        "referrals": 4000,
+        "variable_usd": 8.375,
+        "fallback_usd": 5500.0,
+        "fixed_usd": 0.0,
+        "total_usd": 5508.375
+      },
+      "provider_comparison": {
+        "recorded_battery_usd": 0.097416,
+        "per_recorded_trial_usd": 0.0016236,
+        "old_provider_and_rounded_fallback_monthly_usd": 5508.4944,
+        "new_baseline_minus_old_monthly_usd": -0.1194,
+        "list_repricing_monthly_effect_usd": 1.8806,
+        "exact_labour_monthly_effect_usd": -2.0,
+        "note": "Recorded response charges, not a full account invoice. No measured cache-saving claim."
+      },
       "sensitivity": [
         {
           "assumed_success_rate": 0.75,
-          "expected_total_per_referral_usd": 2.294124,
-          "monthly_total_usd": 9176.49
+          "requested_delta_percentage_points": -10.0,
+          "clipped": false,
+          "expected_total_per_referral_usd": 2.293760416667,
+          "monthly_total_usd": 9175.041666666668
         },
         {
           "assumed_success_rate": 0.85,
-          "expected_total_per_referral_usd": 1.377124,
-          "monthly_total_usd": 5508.49
+          "requested_delta_percentage_points": 0.0,
+          "clipped": false,
+          "expected_total_per_referral_usd": 1.37709375,
+          "monthly_total_usd": 5508.375
         },
         {
           "assumed_success_rate": 0.95,
-          "expected_total_per_referral_usd": 0.460124,
-          "monthly_total_usd": 1840.49
+          "requested_delta_percentage_points": 10.0,
+          "clipped": false,
+          "expected_total_per_referral_usd": 0.460427083333,
+          "monthly_total_usd": 1841.708333333333
         }
       ]
     },
     {
       "model": "google/gemini-2.5-flash",
       "source": "evidence/d5_live_google_gemini-2.5-flash_v2.json",
+      "created_utc": "2026-09-17T10:06:28.446359+00:00",
       "trials": 60,
+      "cases": 40,
+      "code_check_passed": 49,
+      "code_check_success_rate": 0.816666666667,
       "code_check_failures": 11,
-      "code_check_failure_rate": 0.183333,
+      "tokens_in": 415475,
+      "tokens_out": 28444,
+      "per_trial": [
+        {
+          "case_id": "REF-5590",
+          "trial": 1,
+          "passed": false,
+          "tokens_in": 4929,
+          "tokens_out": 309,
+          "list_price_tokens_usd": 0.0022512,
+          "provider_reported_usd": 0.002251
+        },
+        {
+          "case_id": "REF-5590",
+          "trial": 2,
+          "passed": false,
+          "tokens_in": 4892,
+          "tokens_out": 295,
+          "list_price_tokens_usd": 0.0022051,
+          "provider_reported_usd": 0.002205
+        },
+        {
+          "case_id": "REF-5590",
+          "trial": 3,
+          "passed": false,
+          "tokens_in": 4929,
+          "tokens_out": 309,
+          "list_price_tokens_usd": 0.0022512,
+          "provider_reported_usd": 0.002251
+        },
+        {
+          "case_id": "REF-5602",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 9263,
+          "tokens_out": 665,
+          "list_price_tokens_usd": 0.0044414,
+          "provider_reported_usd": 0.00392
+        },
+        {
+          "case_id": "REF-5614",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 4889,
+          "tokens_out": 329,
+          "list_price_tokens_usd": 0.0022892,
+          "provider_reported_usd": 0.002289
+        },
+        {
+          "case_id": "REF-5614",
+          "trial": 2,
+          "passed": true,
+          "tokens_in": 4889,
+          "tokens_out": 329,
+          "list_price_tokens_usd": 0.0022892,
+          "provider_reported_usd": 0.002289
+        },
+        {
+          "case_id": "REF-5614",
+          "trial": 3,
+          "passed": true,
+          "tokens_in": 4889,
+          "tokens_out": 329,
+          "list_price_tokens_usd": 0.0022892,
+          "provider_reported_usd": 0.002289
+        },
+        {
+          "case_id": "REF-5620",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8927,
+          "tokens_out": 560,
+          "list_price_tokens_usd": 0.0040781,
+          "provider_reported_usd": 0.004078
+        },
+        {
+          "case_id": "REF-5631",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 9056,
+          "tokens_out": 616,
+          "list_price_tokens_usd": 0.0042568,
+          "provider_reported_usd": 0.004257
+        },
+        {
+          "case_id": "REF-5645",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 9395,
+          "tokens_out": 677,
+          "list_price_tokens_usd": 0.004511,
+          "provider_reported_usd": 0.004511
+        },
+        {
+          "case_id": "REF-5658",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 4861,
+          "tokens_out": 307,
+          "list_price_tokens_usd": 0.0022258,
+          "provider_reported_usd": 0.002226
+        },
+        {
+          "case_id": "REF-5658",
+          "trial": 2,
+          "passed": true,
+          "tokens_in": 4861,
+          "tokens_out": 307,
+          "list_price_tokens_usd": 0.0022258,
+          "provider_reported_usd": 0.002226
+        },
+        {
+          "case_id": "REF-5658",
+          "trial": 3,
+          "passed": true,
+          "tokens_in": 4861,
+          "tokens_out": 307,
+          "list_price_tokens_usd": 0.0022258,
+          "provider_reported_usd": 0.002226
+        },
+        {
+          "case_id": "REF-5663",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 4821,
+          "tokens_out": 316,
+          "list_price_tokens_usd": 0.0022363,
+          "provider_reported_usd": 0.002236
+        },
+        {
+          "case_id": "REF-5663",
+          "trial": 2,
+          "passed": true,
+          "tokens_in": 4821,
+          "tokens_out": 316,
+          "list_price_tokens_usd": 0.0022363,
+          "provider_reported_usd": 0.002236
+        },
+        {
+          "case_id": "REF-5663",
+          "trial": 3,
+          "passed": true,
+          "tokens_in": 4821,
+          "tokens_out": 316,
+          "list_price_tokens_usd": 0.0022363,
+          "provider_reported_usd": 0.002236
+        },
+        {
+          "case_id": "REF-5671",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 4875,
+          "tokens_out": 422,
+          "list_price_tokens_usd": 0.0025175,
+          "provider_reported_usd": 0.002517
+        },
+        {
+          "case_id": "REF-5671",
+          "trial": 2,
+          "passed": true,
+          "tokens_in": 4875,
+          "tokens_out": 422,
+          "list_price_tokens_usd": 0.0025175,
+          "provider_reported_usd": 0.002517
+        },
+        {
+          "case_id": "REF-5671",
+          "trial": 3,
+          "passed": true,
+          "tokens_in": 4875,
+          "tokens_out": 422,
+          "list_price_tokens_usd": 0.0025175,
+          "provider_reported_usd": 0.002517
+        },
+        {
+          "case_id": "REF-5684",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 4875,
+          "tokens_out": 360,
+          "list_price_tokens_usd": 0.0023625,
+          "provider_reported_usd": 0.002363
+        },
+        {
+          "case_id": "REF-5684",
+          "trial": 2,
+          "passed": true,
+          "tokens_in": 4875,
+          "tokens_out": 360,
+          "list_price_tokens_usd": 0.0023625,
+          "provider_reported_usd": 0.002363
+        },
+        {
+          "case_id": "REF-5684",
+          "trial": 3,
+          "passed": true,
+          "tokens_in": 4875,
+          "tokens_out": 360,
+          "list_price_tokens_usd": 0.0023625,
+          "provider_reported_usd": 0.002363
+        },
+        {
+          "case_id": "REF-5697",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 6767,
+          "tokens_out": 453,
+          "list_price_tokens_usd": 0.0031626,
+          "provider_reported_usd": 0.003163
+        },
+        {
+          "case_id": "REF-5697",
+          "trial": 2,
+          "passed": true,
+          "tokens_in": 6767,
+          "tokens_out": 453,
+          "list_price_tokens_usd": 0.0031626,
+          "provider_reported_usd": 0.003163
+        },
+        {
+          "case_id": "REF-5697",
+          "trial": 3,
+          "passed": true,
+          "tokens_in": 6767,
+          "tokens_out": 453,
+          "list_price_tokens_usd": 0.0031626,
+          "provider_reported_usd": 0.003163
+        },
+        {
+          "case_id": "REF-5703",
+          "trial": 1,
+          "passed": false,
+          "tokens_in": 3079,
+          "tokens_out": 214,
+          "list_price_tokens_usd": 0.0014587,
+          "provider_reported_usd": 0.001459
+        },
+        {
+          "case_id": "REF-5703",
+          "trial": 2,
+          "passed": false,
+          "tokens_in": 3079,
+          "tokens_out": 214,
+          "list_price_tokens_usd": 0.0014587,
+          "provider_reported_usd": 0.001459
+        },
+        {
+          "case_id": "REF-5703",
+          "trial": 3,
+          "passed": false,
+          "tokens_in": 3079,
+          "tokens_out": 214,
+          "list_price_tokens_usd": 0.0014587,
+          "provider_reported_usd": 0.001459
+        },
+        {
+          "case_id": "REF-5711",
+          "trial": 1,
+          "passed": false,
+          "tokens_in": 6966,
+          "tokens_out": 489,
+          "list_price_tokens_usd": 0.0033123,
+          "provider_reported_usd": 0.003312
+        },
+        {
+          "case_id": "REF-5711",
+          "trial": 2,
+          "passed": false,
+          "tokens_in": 6966,
+          "tokens_out": 489,
+          "list_price_tokens_usd": 0.0033123,
+          "provider_reported_usd": 0.003312
+        },
+        {
+          "case_id": "REF-5711",
+          "trial": 3,
+          "passed": false,
+          "tokens_in": 6966,
+          "tokens_out": 489,
+          "list_price_tokens_usd": 0.0033123,
+          "provider_reported_usd": 0.002791
+        },
+        {
+          "case_id": "REF-5725",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 4845,
+          "tokens_out": 285,
+          "list_price_tokens_usd": 0.002166,
+          "provider_reported_usd": 0.002166
+        },
+        {
+          "case_id": "REF-5725",
+          "trial": 2,
+          "passed": true,
+          "tokens_in": 4845,
+          "tokens_out": 285,
+          "list_price_tokens_usd": 0.002166,
+          "provider_reported_usd": 0.002166
+        },
+        {
+          "case_id": "REF-5725",
+          "trial": 3,
+          "passed": true,
+          "tokens_in": 4845,
+          "tokens_out": 282,
+          "list_price_tokens_usd": 0.0021585,
+          "provider_reported_usd": 0.002158
+        },
+        {
+          "case_id": "REF-5738",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8937,
+          "tokens_out": 600,
+          "list_price_tokens_usd": 0.0041811,
+          "provider_reported_usd": 0.004181
+        },
+        {
+          "case_id": "REF-6001",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 9271,
+          "tokens_out": 659,
+          "list_price_tokens_usd": 0.0044288,
+          "provider_reported_usd": 0.004429
+        },
+        {
+          "case_id": "REF-6002",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 9035,
+          "tokens_out": 572,
+          "list_price_tokens_usd": 0.0041405,
+          "provider_reported_usd": 0.00362
+        },
+        {
+          "case_id": "REF-6003",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8962,
+          "tokens_out": 554,
+          "list_price_tokens_usd": 0.0040736,
+          "provider_reported_usd": 0.003554
+        },
+        {
+          "case_id": "REF-6004",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8896,
+          "tokens_out": 628,
+          "list_price_tokens_usd": 0.0042388,
+          "provider_reported_usd": 0.003719
+        },
+        {
+          "case_id": "REF-6005",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 9048,
+          "tokens_out": 644,
+          "list_price_tokens_usd": 0.0043244,
+          "provider_reported_usd": 0.004324
+        },
+        {
+          "case_id": "REF-6006",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8893,
+          "tokens_out": 609,
+          "list_price_tokens_usd": 0.0041904,
+          "provider_reported_usd": 0.003671
+        },
+        {
+          "case_id": "REF-6007",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 9074,
+          "tokens_out": 614,
+          "list_price_tokens_usd": 0.0042572,
+          "provider_reported_usd": 0.004257
+        },
+        {
+          "case_id": "REF-6008",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8896,
+          "tokens_out": 535,
+          "list_price_tokens_usd": 0.0040063,
+          "provider_reported_usd": 0.004006
+        },
+        {
+          "case_id": "REF-6009",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8879,
+          "tokens_out": 598,
+          "list_price_tokens_usd": 0.0041587,
+          "provider_reported_usd": 0.004159
+        },
+        {
+          "case_id": "REF-6010",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 9146,
+          "tokens_out": 712,
+          "list_price_tokens_usd": 0.0045238,
+          "provider_reported_usd": 0.004524
+        },
+        {
+          "case_id": "REF-6011",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8991,
+          "tokens_out": 560,
+          "list_price_tokens_usd": 0.0040973,
+          "provider_reported_usd": 0.003577
+        },
+        {
+          "case_id": "REF-6012",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 9161,
+          "tokens_out": 630,
+          "list_price_tokens_usd": 0.0043233,
+          "provider_reported_usd": 0.004323
+        },
+        {
+          "case_id": "REF-6013",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8954,
+          "tokens_out": 538,
+          "list_price_tokens_usd": 0.0040312,
+          "provider_reported_usd": 0.003512
+        },
+        {
+          "case_id": "REF-6014",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8773,
+          "tokens_out": 532,
+          "list_price_tokens_usd": 0.0039619,
+          "provider_reported_usd": 0.003703
+        },
+        {
+          "case_id": "REF-6015",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 9238,
+          "tokens_out": 744,
+          "list_price_tokens_usd": 0.0046314,
+          "provider_reported_usd": 0.00411
+        },
+        {
+          "case_id": "REF-6016",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8814,
+          "tokens_out": 556,
+          "list_price_tokens_usd": 0.0040342,
+          "provider_reported_usd": 0.004034
+        },
+        {
+          "case_id": "REF-6017",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8863,
+          "tokens_out": 587,
+          "list_price_tokens_usd": 0.0041264,
+          "provider_reported_usd": 0.004126
+        },
+        {
+          "case_id": "REF-6018",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8932,
+          "tokens_out": 609,
+          "list_price_tokens_usd": 0.0042021,
+          "provider_reported_usd": 0.004202
+        },
+        {
+          "case_id": "REF-6019",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 9206,
+          "tokens_out": 611,
+          "list_price_tokens_usd": 0.0042893,
+          "provider_reported_usd": 0.003768
+        },
+        {
+          "case_id": "REF-6020",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 9157,
+          "tokens_out": 685,
+          "list_price_tokens_usd": 0.0044596,
+          "provider_reported_usd": 0.00446
+        },
+        {
+          "case_id": "REF-6021",
+          "trial": 1,
+          "passed": false,
+          "tokens_in": 4851,
+          "tokens_out": 357,
+          "list_price_tokens_usd": 0.0023478,
+          "provider_reported_usd": 0.002348
+        },
+        {
+          "case_id": "REF-6022",
+          "trial": 1,
+          "passed": false,
+          "tokens_in": 4813,
+          "tokens_out": 393,
+          "list_price_tokens_usd": 0.0024264,
+          "provider_reported_usd": 0.002426
+        },
+        {
+          "case_id": "REF-6023",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 9094,
+          "tokens_out": 658,
+          "list_price_tokens_usd": 0.0043732,
+          "provider_reported_usd": 0.004373
+        },
+        {
+          "case_id": "REF-6024",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 9241,
+          "tokens_out": 732,
+          "list_price_tokens_usd": 0.0046023,
+          "provider_reported_usd": 0.004081
+        },
+        {
+          "case_id": "REF-6025",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 9025,
+          "tokens_out": 574,
+          "list_price_tokens_usd": 0.0041425,
+          "provider_reported_usd": 0.004143
+        }
+      ],
       "layer_1": {
-        "measured_variable_total_usd": 0.189767,
-        "measured_variable_per_referral_usd": 0.003163
+        "basis": "recorded tokens at dated list prices; no assumed caching discount",
+        "list_token_total_usd": 0.1957525,
+        "variable_per_referral_usd": 0.003262541667,
+        "extra_tool_retrieval_per_referral_usd": 0
       },
       "layer_2": {
-        "fallback_cost_per_failure_usd": 9.17,
-        "expected_fallback_per_referral_usd": 1.681167
+        "fallback_cost_per_failure_usd": 9.166666666667,
+        "expected_fallback_per_referral_usd": 1.680555555556
       },
       "layer_3": {
-        "monthly_referrals": 4000,
-        "monthly_variable_usd": 12.65,
-        "monthly_expected_fallback_usd": 6724.67,
-        "monthly_total_usd": 6737.32
+        "fixed_monthly_usd": 0.0,
+        "scope": "Additional paid prototype services only; full production fixed costs unknown"
       },
-      "expected_total_per_referral_usd": 1.684329,
+      "expected_total_per_referral_usd": 1.683818097222,
+      "monthly": {
+        "referrals": 4000,
+        "variable_usd": 13.050166666667,
+        "fallback_usd": 6722.222222222222,
+        "fixed_usd": 0.0,
+        "total_usd": 6735.272388888889
+      },
+      "provider_comparison": {
+        "recorded_battery_usd": 0.189767,
+        "per_recorded_trial_usd": 0.003162783333,
+        "old_provider_and_rounded_fallback_monthly_usd": 6737.3178,
+        "new_baseline_minus_old_monthly_usd": -2.045411111111,
+        "list_repricing_monthly_effect_usd": 0.399033333333,
+        "exact_labour_monthly_effect_usd": -2.444444444444,
+        "note": "Recorded response charges, not a full account invoice. No measured cache-saving claim."
+      },
       "sensitivity": [
         {
-          "assumed_success_rate": 0.7167,
-          "expected_total_per_referral_usd": 2.601329,
-          "monthly_total_usd": 10405.32
+          "assumed_success_rate": 0.716666666667,
+          "requested_delta_percentage_points": -10.0,
+          "clipped": false,
+          "expected_total_per_referral_usd": 2.600484763889,
+          "monthly_total_usd": 10401.939055555556
         },
         {
-          "assumed_success_rate": 0.8167,
-          "expected_total_per_referral_usd": 1.684329,
-          "monthly_total_usd": 6737.32
+          "assumed_success_rate": 0.816666666667,
+          "requested_delta_percentage_points": 0.0,
+          "clipped": false,
+          "expected_total_per_referral_usd": 1.683818097222,
+          "monthly_total_usd": 6735.272388888889
         },
         {
-          "assumed_success_rate": 0.9167,
-          "expected_total_per_referral_usd": 0.767329,
-          "monthly_total_usd": 3069.32
+          "assumed_success_rate": 0.916666666667,
+          "requested_delta_percentage_points": 10.0,
+          "clipped": false,
+          "expected_total_per_referral_usd": 0.767151430556,
+          "monthly_total_usd": 3068.605722222222
         }
       ]
     },
     {
       "model": "meta-llama/llama-3.3-70b-instruct",
       "source": "evidence/d5_live_meta-llama_llama-3.3-70b-instruct_v2.json",
+      "created_utc": "2026-09-17T10:26:50.084734+00:00",
       "trials": 60,
+      "cases": 40,
+      "code_check_passed": 45,
+      "code_check_success_rate": 0.75,
       "code_check_failures": 15,
-      "code_check_failure_rate": 0.25,
+      "tokens_in": 414337,
+      "tokens_out": 16631,
+      "per_trial": [
+        {
+          "case_id": "REF-5590",
+          "trial": 1,
+          "passed": false,
+          "tokens_in": 4604,
+          "tokens_out": 191,
+          "list_price_tokens_usd": 0.00052152,
+          "provider_reported_usd": 0.000729
+        },
+        {
+          "case_id": "REF-5590",
+          "trial": 2,
+          "passed": false,
+          "tokens_in": 4604,
+          "tokens_out": 186,
+          "list_price_tokens_usd": 0.00051992,
+          "provider_reported_usd": 0.000558
+        },
+        {
+          "case_id": "REF-5590",
+          "trial": 3,
+          "passed": false,
+          "tokens_in": 6427,
+          "tokens_out": 237,
+          "list_price_tokens_usd": 0.00071854,
+          "provider_reported_usd": 0.00078
+        },
+        {
+          "case_id": "REF-5602",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8563,
+          "tokens_out": 338,
+          "list_price_tokens_usd": 0.00096446,
+          "provider_reported_usd": 0.001553
+        },
+        {
+          "case_id": "REF-5614",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 4582,
+          "tokens_out": 173,
+          "list_price_tokens_usd": 0.00051356,
+          "provider_reported_usd": 0.000649
+        },
+        {
+          "case_id": "REF-5614",
+          "trial": 2,
+          "passed": false,
+          "tokens_in": 6529,
+          "tokens_out": 273,
+          "list_price_tokens_usd": 0.00074026,
+          "provider_reported_usd": 0.000959
+        },
+        {
+          "case_id": "REF-5614",
+          "trial": 3,
+          "passed": true,
+          "tokens_in": 4612,
+          "tokens_out": 186,
+          "list_price_tokens_usd": 0.00052072,
+          "provider_reported_usd": 0.000643
+        },
+        {
+          "case_id": "REF-5620",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8297,
+          "tokens_out": 345,
+          "list_price_tokens_usd": 0.0009401,
+          "provider_reported_usd": 0.002588
+        },
+        {
+          "case_id": "REF-5631",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8478,
+          "tokens_out": 355,
+          "list_price_tokens_usd": 0.0009614,
+          "provider_reported_usd": 0.001211
+        },
+        {
+          "case_id": "REF-5645",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8434,
+          "tokens_out": 347,
+          "list_price_tokens_usd": 0.00095444,
+          "provider_reported_usd": 0.001061
+        },
+        {
+          "case_id": "REF-5658",
+          "trial": 1,
+          "passed": false,
+          "tokens_in": 4532,
+          "tokens_out": 172,
+          "list_price_tokens_usd": 0.00050824,
+          "provider_reported_usd": 0.000842
+        },
+        {
+          "case_id": "REF-5658",
+          "trial": 2,
+          "passed": true,
+          "tokens_in": 6490,
+          "tokens_out": 243,
+          "list_price_tokens_usd": 0.00072676,
+          "provider_reported_usd": 0.000727
+        },
+        {
+          "case_id": "REF-5658",
+          "trial": 3,
+          "passed": true,
+          "tokens_in": 4521,
+          "tokens_out": 175,
+          "list_price_tokens_usd": 0.0005081,
+          "provider_reported_usd": 0.000508
+        },
+        {
+          "case_id": "REF-5663",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 4506,
+          "tokens_out": 169,
+          "list_price_tokens_usd": 0.00050468,
+          "provider_reported_usd": 0.000567
+        },
+        {
+          "case_id": "REF-5663",
+          "trial": 2,
+          "passed": true,
+          "tokens_in": 4546,
+          "tokens_out": 179,
+          "list_price_tokens_usd": 0.00051188,
+          "provider_reported_usd": 0.000643
+        },
+        {
+          "case_id": "REF-5663",
+          "trial": 3,
+          "passed": true,
+          "tokens_in": 4547,
+          "tokens_out": 184,
+          "list_price_tokens_usd": 0.00051358,
+          "provider_reported_usd": 0.000617
+        },
+        {
+          "case_id": "REF-5671",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 4492,
+          "tokens_out": 181,
+          "list_price_tokens_usd": 0.00050712,
+          "provider_reported_usd": 0.000507
+        },
+        {
+          "case_id": "REF-5671",
+          "trial": 2,
+          "passed": true,
+          "tokens_in": 4584,
+          "tokens_out": 193,
+          "list_price_tokens_usd": 0.00052016,
+          "provider_reported_usd": 0.000728
+        },
+        {
+          "case_id": "REF-5671",
+          "trial": 3,
+          "passed": true,
+          "tokens_in": 4583,
+          "tokens_out": 211,
+          "list_price_tokens_usd": 0.00052582,
+          "provider_reported_usd": 0.000588
+        },
+        {
+          "case_id": "REF-5684",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 6547,
+          "tokens_out": 295,
+          "list_price_tokens_usd": 0.0007491,
+          "provider_reported_usd": 0.00092
+        },
+        {
+          "case_id": "REF-5684",
+          "trial": 2,
+          "passed": true,
+          "tokens_in": 4627,
+          "tokens_out": 210,
+          "list_price_tokens_usd": 0.0005299,
+          "provider_reported_usd": 0.000658
+        },
+        {
+          "case_id": "REF-5684",
+          "trial": 3,
+          "passed": false,
+          "tokens_in": 17419,
+          "tokens_out": 412,
+          "list_price_tokens_usd": 0.00187374,
+          "provider_reported_usd": 0.002326
+        },
+        {
+          "case_id": "REF-5697",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 6406,
+          "tokens_out": 297,
+          "list_price_tokens_usd": 0.00073564,
+          "provider_reported_usd": 0.001436
+        },
+        {
+          "case_id": "REF-5697",
+          "trial": 2,
+          "passed": true,
+          "tokens_in": 6390,
+          "tokens_out": 289,
+          "list_price_tokens_usd": 0.00073148,
+          "provider_reported_usd": 0.000903
+        },
+        {
+          "case_id": "REF-5697",
+          "trial": 3,
+          "passed": false,
+          "tokens_in": 6435,
+          "tokens_out": 347,
+          "list_price_tokens_usd": 0.00075454,
+          "provider_reported_usd": 0.000957
+        },
+        {
+          "case_id": "REF-5703",
+          "trial": 1,
+          "passed": false,
+          "tokens_in": 6484,
+          "tokens_out": 246,
+          "list_price_tokens_usd": 0.00072712,
+          "provider_reported_usd": 0.001364
+        },
+        {
+          "case_id": "REF-5703",
+          "trial": 2,
+          "passed": true,
+          "tokens_in": 4649,
+          "tokens_out": 250,
+          "list_price_tokens_usd": 0.0005449,
+          "provider_reported_usd": 0.000681
+        },
+        {
+          "case_id": "REF-5703",
+          "trial": 3,
+          "passed": true,
+          "tokens_in": 4621,
+          "tokens_out": 225,
+          "list_price_tokens_usd": 0.0005341,
+          "provider_reported_usd": 0.000664
+        },
+        {
+          "case_id": "REF-5711",
+          "trial": 1,
+          "passed": false,
+          "tokens_in": 6457,
+          "tokens_out": 291,
+          "list_price_tokens_usd": 0.00073882,
+          "provider_reported_usd": 0.000962
+        },
+        {
+          "case_id": "REF-5711",
+          "trial": 2,
+          "passed": false,
+          "tokens_in": 8233,
+          "tokens_out": 316,
+          "list_price_tokens_usd": 0.00092442,
+          "provider_reported_usd": 0.001043
+        },
+        {
+          "case_id": "REF-5711",
+          "trial": 3,
+          "passed": false,
+          "tokens_in": 6542,
+          "tokens_out": 306,
+          "list_price_tokens_usd": 0.00075212,
+          "provider_reported_usd": 0.000868
+        },
+        {
+          "case_id": "REF-5725",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 4537,
+          "tokens_out": 153,
+          "list_price_tokens_usd": 0.00050266,
+          "provider_reported_usd": 0.000905
+        },
+        {
+          "case_id": "REF-5725",
+          "trial": 2,
+          "passed": true,
+          "tokens_in": 4584,
+          "tokens_out": 179,
+          "list_price_tokens_usd": 0.00051568,
+          "provider_reported_usd": 0.000621
+        },
+        {
+          "case_id": "REF-5725",
+          "trial": 3,
+          "passed": false,
+          "tokens_in": 6438,
+          "tokens_out": 269,
+          "list_price_tokens_usd": 0.00072988,
+          "provider_reported_usd": 0.000891
+        },
+        {
+          "case_id": "REF-5738",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8314,
+          "tokens_out": 373,
+          "list_price_tokens_usd": 0.00095076,
+          "provider_reported_usd": 0.002737
+        },
+        {
+          "case_id": "REF-6001",
+          "trial": 1,
+          "passed": false,
+          "tokens_in": 2859,
+          "tokens_out": 107,
+          "list_price_tokens_usd": 0.00032014,
+          "provider_reported_usd": 0.00032
+        },
+        {
+          "case_id": "REF-6002",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8907,
+          "tokens_out": 391,
+          "list_price_tokens_usd": 0.00101582,
+          "provider_reported_usd": 0.002012
+        },
+        {
+          "case_id": "REF-6003",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8270,
+          "tokens_out": 309,
+          "list_price_tokens_usd": 0.00092588,
+          "provider_reported_usd": 0.001108
+        },
+        {
+          "case_id": "REF-6004",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8294,
+          "tokens_out": 305,
+          "list_price_tokens_usd": 0.000927,
+          "provider_reported_usd": 0.002459
+        },
+        {
+          "case_id": "REF-6005",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8276,
+          "tokens_out": 336,
+          "list_price_tokens_usd": 0.00093512,
+          "provider_reported_usd": 0.001147
+        },
+        {
+          "case_id": "REF-6006",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8182,
+          "tokens_out": 315,
+          "list_price_tokens_usd": 0.000919,
+          "provider_reported_usd": 0.001046
+        },
+        {
+          "case_id": "REF-6007",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8184,
+          "tokens_out": 302,
+          "list_price_tokens_usd": 0.00091504,
+          "provider_reported_usd": 0.001833
+        },
+        {
+          "case_id": "REF-6008",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8438,
+          "tokens_out": 378,
+          "list_price_tokens_usd": 0.00096476,
+          "provider_reported_usd": 0.001199
+        },
+        {
+          "case_id": "REF-6009",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8210,
+          "tokens_out": 357,
+          "list_price_tokens_usd": 0.00093524,
+          "provider_reported_usd": 0.001279
+        },
+        {
+          "case_id": "REF-6010",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8324,
+          "tokens_out": 352,
+          "list_price_tokens_usd": 0.00094504,
+          "provider_reported_usd": 0.001217
+        },
+        {
+          "case_id": "REF-6011",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8388,
+          "tokens_out": 319,
+          "list_price_tokens_usd": 0.00094088,
+          "provider_reported_usd": 0.001067
+        },
+        {
+          "case_id": "REF-6012",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8419,
+          "tokens_out": 318,
+          "list_price_tokens_usd": 0.00094366,
+          "provider_reported_usd": 0.001403
+        },
+        {
+          "case_id": "REF-6013",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8336,
+          "tokens_out": 355,
+          "list_price_tokens_usd": 0.0009472,
+          "provider_reported_usd": 0.001213
+        },
+        {
+          "case_id": "REF-6014",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8136,
+          "tokens_out": 302,
+          "list_price_tokens_usd": 0.00091024,
+          "provider_reported_usd": 0.001017
+        },
+        {
+          "case_id": "REF-6015",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8279,
+          "tokens_out": 320,
+          "list_price_tokens_usd": 0.0009303,
+          "provider_reported_usd": 0.001374
+        },
+        {
+          "case_id": "REF-6016",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8301,
+          "tokens_out": 340,
+          "list_price_tokens_usd": 0.0009389,
+          "provider_reported_usd": 0.001067
+        },
+        {
+          "case_id": "REF-6017",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8174,
+          "tokens_out": 296,
+          "list_price_tokens_usd": 0.00091212,
+          "provider_reported_usd": 0.001006
+        },
+        {
+          "case_id": "REF-6018",
+          "trial": 1,
+          "passed": false,
+          "tokens_in": 6334,
+          "tokens_out": 254,
+          "list_price_tokens_usd": 0.00071468,
+          "provider_reported_usd": 0.000878
+        },
+        {
+          "case_id": "REF-6019",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8607,
+          "tokens_out": 352,
+          "list_price_tokens_usd": 0.00097334,
+          "provider_reported_usd": 0.001212
+        },
+        {
+          "case_id": "REF-6020",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8998,
+          "tokens_out": 375,
+          "list_price_tokens_usd": 0.0010198,
+          "provider_reported_usd": 0.001156
+        },
+        {
+          "case_id": "REF-6021",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8528,
+          "tokens_out": 361,
+          "list_price_tokens_usd": 0.00096832,
+          "provider_reported_usd": 0.001109
+        },
+        {
+          "case_id": "REF-6022",
+          "trial": 1,
+          "passed": false,
+          "tokens_in": 4511,
+          "tokens_out": 128,
+          "list_price_tokens_usd": 0.00049206,
+          "provider_reported_usd": 0.000541
+        },
+        {
+          "case_id": "REF-6023",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8202,
+          "tokens_out": 311,
+          "list_price_tokens_usd": 0.00091972,
+          "provider_reported_usd": 0.00092
+        },
+        {
+          "case_id": "REF-6024",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8367,
+          "tokens_out": 343,
+          "list_price_tokens_usd": 0.00094646,
+          "provider_reported_usd": 0.001312
+        },
+        {
+          "case_id": "REF-6025",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8199,
+          "tokens_out": 309,
+          "list_price_tokens_usd": 0.00091878,
+          "provider_reported_usd": 0.001076
+        }
+      ],
       "layer_1": {
-        "measured_variable_total_usd": 0.064365,
-        "measured_variable_per_referral_usd": 0.001073
+        "basis": "recorded tokens at dated list prices; no assumed caching discount",
+        "list_token_total_usd": 0.04675562,
+        "variable_per_referral_usd": 0.000779260333,
+        "extra_tool_retrieval_per_referral_usd": 0
       },
       "layer_2": {
-        "fallback_cost_per_failure_usd": 9.17,
-        "expected_fallback_per_referral_usd": 2.2925
+        "fallback_cost_per_failure_usd": 9.166666666667,
+        "expected_fallback_per_referral_usd": 2.291666666667
       },
       "layer_3": {
-        "monthly_referrals": 4000,
-        "monthly_variable_usd": 4.29,
-        "monthly_expected_fallback_usd": 9170.0,
-        "monthly_total_usd": 9174.29
+        "fixed_monthly_usd": 0.0,
+        "scope": "Additional paid prototype services only; full production fixed costs unknown"
       },
-      "expected_total_per_referral_usd": 2.293573,
+      "expected_total_per_referral_usd": 2.292445927,
+      "monthly": {
+        "referrals": 4000,
+        "variable_usd": 3.117041333333,
+        "fallback_usd": 9166.666666666668,
+        "fixed_usd": 0.0,
+        "total_usd": 9169.783708
+      },
+      "provider_comparison": {
+        "recorded_battery_usd": 0.064365,
+        "per_recorded_trial_usd": 0.00107275,
+        "old_provider_and_rounded_fallback_monthly_usd": 9174.291,
+        "new_baseline_minus_old_monthly_usd": -4.507292,
+        "list_repricing_monthly_effect_usd": -1.173958666667,
+        "exact_labour_monthly_effect_usd": -3.333333333333,
+        "note": "Recorded response charges, not a full account invoice. No measured cache-saving claim."
+      },
       "sensitivity": [
         {
           "assumed_success_rate": 0.65,
-          "expected_total_per_referral_usd": 3.210573,
-          "monthly_total_usd": 12842.29
+          "requested_delta_percentage_points": -10.0,
+          "clipped": false,
+          "expected_total_per_referral_usd": 3.209112593667,
+          "monthly_total_usd": 12836.450374666667
         },
         {
           "assumed_success_rate": 0.75,
-          "expected_total_per_referral_usd": 2.293573,
-          "monthly_total_usd": 9174.29
+          "requested_delta_percentage_points": 0.0,
+          "clipped": false,
+          "expected_total_per_referral_usd": 2.292445927,
+          "monthly_total_usd": 9169.783708
         },
         {
           "assumed_success_rate": 0.85,
-          "expected_total_per_referral_usd": 1.376573,
-          "monthly_total_usd": 5506.29
+          "requested_delta_percentage_points": 10.0,
+          "clipped": false,
+          "expected_total_per_referral_usd": 1.375779260333,
+          "monthly_total_usd": 5503.117041333333
         }
       ]
     },
     {
       "model": "mistralai/mistral-small-24b-instruct-2501",
       "source": "evidence/d5_live_mistralai_mistral-small-24b-instruct-2501_v2.json",
+      "created_utc": "2026-09-17T10:38:31.170141+00:00",
       "trials": 60,
+      "cases": 40,
+      "code_check_passed": 22,
+      "code_check_success_rate": 0.366666666667,
       "code_check_failures": 38,
-      "code_check_failure_rate": 0.633333,
+      "tokens_in": 270648,
+      "tokens_out": 18616,
+      "per_trial": [
+        {
+          "case_id": "REF-5590",
+          "trial": 1,
+          "passed": false,
+          "tokens_in": 3152,
+          "tokens_out": 177,
+          "list_price_tokens_usd": 0.00017176,
+          "provider_reported_usd": 0.000172
+        },
+        {
+          "case_id": "REF-5590",
+          "trial": 2,
+          "passed": false,
+          "tokens_in": 3152,
+          "tokens_out": 176,
+          "list_price_tokens_usd": 0.00017168,
+          "provider_reported_usd": 0.000172
+        },
+        {
+          "case_id": "REF-5590",
+          "trial": 3,
+          "passed": false,
+          "tokens_in": 3049,
+          "tokens_out": 125,
+          "list_price_tokens_usd": 0.00016245,
+          "provider_reported_usd": 0.000162
+        },
+        {
+          "case_id": "REF-5602",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 7346,
+          "tokens_out": 454,
+          "list_price_tokens_usd": 0.00040362,
+          "provider_reported_usd": 0.000404
+        },
+        {
+          "case_id": "REF-5614",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 4847,
+          "tokens_out": 246,
+          "list_price_tokens_usd": 0.00026203,
+          "provider_reported_usd": 0.000262
+        },
+        {
+          "case_id": "REF-5614",
+          "trial": 2,
+          "passed": true,
+          "tokens_in": 3212,
+          "tokens_out": 224,
+          "list_price_tokens_usd": 0.00017852,
+          "provider_reported_usd": 0.000179
+        },
+        {
+          "case_id": "REF-5614",
+          "trial": 3,
+          "passed": true,
+          "tokens_in": 3165,
+          "tokens_out": 197,
+          "list_price_tokens_usd": 0.00017401,
+          "provider_reported_usd": 0.000174
+        },
+        {
+          "case_id": "REF-5620",
+          "trial": 1,
+          "passed": false,
+          "tokens_in": 3140,
+          "tokens_out": 1152,
+          "list_price_tokens_usd": 0.00024916,
+          "provider_reported_usd": 0.000249
+        },
+        {
+          "case_id": "REF-5631",
+          "trial": 1,
+          "passed": false,
+          "tokens_in": 3179,
+          "tokens_out": 224,
+          "list_price_tokens_usd": 0.00017687,
+          "provider_reported_usd": 0.000177
+        },
+        {
+          "case_id": "REF-5645",
+          "trial": 1,
+          "passed": false,
+          "tokens_in": 3175,
+          "tokens_out": 259,
+          "list_price_tokens_usd": 0.00017947,
+          "provider_reported_usd": 0.000179
+        },
+        {
+          "case_id": "REF-5658",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 5038,
+          "tokens_out": 264,
+          "list_price_tokens_usd": 0.00027302,
+          "provider_reported_usd": 0.000273
+        },
+        {
+          "case_id": "REF-5658",
+          "trial": 2,
+          "passed": false,
+          "tokens_in": 3183,
+          "tokens_out": 203,
+          "list_price_tokens_usd": 0.00017539,
+          "provider_reported_usd": 0.000175
+        },
+        {
+          "case_id": "REF-5658",
+          "trial": 3,
+          "passed": false,
+          "tokens_in": 3179,
+          "tokens_out": 237,
+          "list_price_tokens_usd": 0.00017791,
+          "provider_reported_usd": 0.000178
+        },
+        {
+          "case_id": "REF-5663",
+          "trial": 1,
+          "passed": false,
+          "tokens_in": 3135,
+          "tokens_out": 239,
+          "list_price_tokens_usd": 0.00017587,
+          "provider_reported_usd": 0.000176
+        },
+        {
+          "case_id": "REF-5663",
+          "trial": 2,
+          "passed": false,
+          "tokens_in": 3135,
+          "tokens_out": 240,
+          "list_price_tokens_usd": 0.00017595,
+          "provider_reported_usd": 0.000176
+        },
+        {
+          "case_id": "REF-5663",
+          "trial": 3,
+          "passed": true,
+          "tokens_in": 4804,
+          "tokens_out": 308,
+          "list_price_tokens_usd": 0.00026484,
+          "provider_reported_usd": 0.000265
+        },
+        {
+          "case_id": "REF-5671",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 3139,
+          "tokens_out": 238,
+          "list_price_tokens_usd": 0.00017599,
+          "provider_reported_usd": 0.000176
+        },
+        {
+          "case_id": "REF-5671",
+          "trial": 2,
+          "passed": true,
+          "tokens_in": 4821,
+          "tokens_out": 280,
+          "list_price_tokens_usd": 0.00026345,
+          "provider_reported_usd": 0.000263
+        },
+        {
+          "case_id": "REF-5671",
+          "trial": 3,
+          "passed": true,
+          "tokens_in": 3156,
+          "tokens_out": 298,
+          "list_price_tokens_usd": 0.00018164,
+          "provider_reported_usd": 0.000182
+        },
+        {
+          "case_id": "REF-5684",
+          "trial": 1,
+          "passed": false,
+          "tokens_in": 5174,
+          "tokens_out": 363,
+          "list_price_tokens_usd": 0.00028774,
+          "provider_reported_usd": 0.000288
+        },
+        {
+          "case_id": "REF-5684",
+          "trial": 2,
+          "passed": false,
+          "tokens_in": 5198,
+          "tokens_out": 367,
+          "list_price_tokens_usd": 0.00028926,
+          "provider_reported_usd": 0.000289
+        },
+        {
+          "case_id": "REF-5684",
+          "trial": 3,
+          "passed": false,
+          "tokens_in": 6788,
+          "tokens_out": 338,
+          "list_price_tokens_usd": 0.00036644,
+          "provider_reported_usd": 0.000366
+        },
+        {
+          "case_id": "REF-5697",
+          "trial": 1,
+          "passed": false,
+          "tokens_in": 3183,
+          "tokens_out": 236,
+          "list_price_tokens_usd": 0.00017803,
+          "provider_reported_usd": 0.000178
+        },
+        {
+          "case_id": "REF-5697",
+          "trial": 2,
+          "passed": false,
+          "tokens_in": 3182,
+          "tokens_out": 235,
+          "list_price_tokens_usd": 0.0001779,
+          "provider_reported_usd": 0.000178
+        },
+        {
+          "case_id": "REF-5697",
+          "trial": 3,
+          "passed": false,
+          "tokens_in": 3203,
+          "tokens_out": 226,
+          "list_price_tokens_usd": 0.00017823,
+          "provider_reported_usd": 0.000178
+        },
+        {
+          "case_id": "REF-5703",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 3179,
+          "tokens_out": 255,
+          "list_price_tokens_usd": 0.00017935,
+          "provider_reported_usd": 0.000179
+        },
+        {
+          "case_id": "REF-5703",
+          "trial": 2,
+          "passed": true,
+          "tokens_in": 3177,
+          "tokens_out": 258,
+          "list_price_tokens_usd": 0.00017949,
+          "provider_reported_usd": 0.000179
+        },
+        {
+          "case_id": "REF-5703",
+          "trial": 3,
+          "passed": true,
+          "tokens_in": 3202,
+          "tokens_out": 323,
+          "list_price_tokens_usd": 0.00018594,
+          "provider_reported_usd": 0.000186
+        },
+        {
+          "case_id": "REF-5711",
+          "trial": 1,
+          "passed": false,
+          "tokens_in": 3180,
+          "tokens_out": 237,
+          "list_price_tokens_usd": 0.00017796,
+          "provider_reported_usd": 0.000178
+        },
+        {
+          "case_id": "REF-5711",
+          "trial": 2,
+          "passed": false,
+          "tokens_in": 3180,
+          "tokens_out": 221,
+          "list_price_tokens_usd": 0.00017668,
+          "provider_reported_usd": 0.000177
+        },
+        {
+          "case_id": "REF-5711",
+          "trial": 3,
+          "passed": false,
+          "tokens_in": 9274,
+          "tokens_out": 509,
+          "list_price_tokens_usd": 0.00050442,
+          "provider_reported_usd": 0.000504
+        },
+        {
+          "case_id": "REF-5725",
+          "trial": 1,
+          "passed": false,
+          "tokens_in": 3178,
+          "tokens_out": 243,
+          "list_price_tokens_usd": 0.00017834,
+          "provider_reported_usd": 0.000178
+        },
+        {
+          "case_id": "REF-5725",
+          "trial": 2,
+          "passed": false,
+          "tokens_in": 3161,
+          "tokens_out": 220,
+          "list_price_tokens_usd": 0.00017565,
+          "provider_reported_usd": 0.000176
+        },
+        {
+          "case_id": "REF-5725",
+          "trial": 3,
+          "passed": true,
+          "tokens_in": 4809,
+          "tokens_out": 211,
+          "list_price_tokens_usd": 0.00025733,
+          "provider_reported_usd": 0.000257
+        },
+        {
+          "case_id": "REF-5738",
+          "trial": 1,
+          "passed": false,
+          "tokens_in": 3190,
+          "tokens_out": 234,
+          "list_price_tokens_usd": 0.00017822,
+          "provider_reported_usd": 0.000178
+        },
+        {
+          "case_id": "REF-6001",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 7387,
+          "tokens_out": 444,
+          "list_price_tokens_usd": 0.00040487,
+          "provider_reported_usd": 0.000405
+        },
+        {
+          "case_id": "REF-6002",
+          "trial": 1,
+          "passed": false,
+          "tokens_in": 3166,
+          "tokens_out": 248,
+          "list_price_tokens_usd": 0.00017814,
+          "provider_reported_usd": 0.000178
+        },
+        {
+          "case_id": "REF-6003",
+          "trial": 1,
+          "passed": false,
+          "tokens_in": 3177,
+          "tokens_out": 221,
+          "list_price_tokens_usd": 0.00017653,
+          "provider_reported_usd": 0.000177
+        },
+        {
+          "case_id": "REF-6004",
+          "trial": 1,
+          "passed": false,
+          "tokens_in": 3138,
+          "tokens_out": 229,
+          "list_price_tokens_usd": 0.00017522,
+          "provider_reported_usd": 0.000175
+        },
+        {
+          "case_id": "REF-6005",
+          "trial": 1,
+          "passed": false,
+          "tokens_in": 3043,
+          "tokens_out": 126,
+          "list_price_tokens_usd": 0.00016223,
+          "provider_reported_usd": 0.000162
+        },
+        {
+          "case_id": "REF-6006",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8799,
+          "tokens_out": 399,
+          "list_price_tokens_usd": 0.00047187,
+          "provider_reported_usd": 0.000472
+        },
+        {
+          "case_id": "REF-6007",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8736,
+          "tokens_out": 401,
+          "list_price_tokens_usd": 0.00046888,
+          "provider_reported_usd": 0.000469
+        },
+        {
+          "case_id": "REF-6008",
+          "trial": 1,
+          "passed": false,
+          "tokens_in": 3159,
+          "tokens_out": 205,
+          "list_price_tokens_usd": 0.00017435,
+          "provider_reported_usd": 0.000174
+        },
+        {
+          "case_id": "REF-6009",
+          "trial": 1,
+          "passed": false,
+          "tokens_in": 3167,
+          "tokens_out": 257,
+          "list_price_tokens_usd": 0.00017891,
+          "provider_reported_usd": 0.000179
+        },
+        {
+          "case_id": "REF-6010",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8740,
+          "tokens_out": 406,
+          "list_price_tokens_usd": 0.00046948,
+          "provider_reported_usd": 0.000469
+        },
+        {
+          "case_id": "REF-6011",
+          "trial": 1,
+          "passed": false,
+          "tokens_in": 3040,
+          "tokens_out": 121,
+          "list_price_tokens_usd": 0.00016168,
+          "provider_reported_usd": 0.000162
+        },
+        {
+          "case_id": "REF-6012",
+          "trial": 1,
+          "passed": false,
+          "tokens_in": 3171,
+          "tokens_out": 255,
+          "list_price_tokens_usd": 0.00017895,
+          "provider_reported_usd": 0.000179
+        },
+        {
+          "case_id": "REF-6013",
+          "trial": 1,
+          "passed": false,
+          "tokens_in": 3055,
+          "tokens_out": 174,
+          "list_price_tokens_usd": 0.00016667,
+          "provider_reported_usd": 0.000167
+        },
+        {
+          "case_id": "REF-6014",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 9254,
+          "tokens_out": 494,
+          "list_price_tokens_usd": 0.00050222,
+          "provider_reported_usd": 0.000502
+        },
+        {
+          "case_id": "REF-6015",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 7285,
+          "tokens_out": 483,
+          "list_price_tokens_usd": 0.00040289,
+          "provider_reported_usd": 0.000403
+        },
+        {
+          "case_id": "REF-6016",
+          "trial": 1,
+          "passed": false,
+          "tokens_in": 3156,
+          "tokens_out": 251,
+          "list_price_tokens_usd": 0.00017788,
+          "provider_reported_usd": 0.000178
+        },
+        {
+          "case_id": "REF-6017",
+          "trial": 1,
+          "passed": false,
+          "tokens_in": 3156,
+          "tokens_out": 265,
+          "list_price_tokens_usd": 0.000179,
+          "provider_reported_usd": 0.000179
+        },
+        {
+          "case_id": "REF-6018",
+          "trial": 1,
+          "passed": false,
+          "tokens_in": 8955,
+          "tokens_out": 432,
+          "list_price_tokens_usd": 0.00048231,
+          "provider_reported_usd": 0.000482
+        },
+        {
+          "case_id": "REF-6019",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 9132,
+          "tokens_out": 510,
+          "list_price_tokens_usd": 0.0004974,
+          "provider_reported_usd": 0.000497
+        },
+        {
+          "case_id": "REF-6020",
+          "trial": 1,
+          "passed": false,
+          "tokens_in": 3166,
+          "tokens_out": 205,
+          "list_price_tokens_usd": 0.0001747,
+          "provider_reported_usd": 0.000175
+        },
+        {
+          "case_id": "REF-6021",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 8806,
+          "tokens_out": 401,
+          "list_price_tokens_usd": 0.00047238,
+          "provider_reported_usd": 0.000472
+        },
+        {
+          "case_id": "REF-6022",
+          "trial": 1,
+          "passed": false,
+          "tokens_in": 3128,
+          "tokens_out": 217,
+          "list_price_tokens_usd": 0.00017376,
+          "provider_reported_usd": 0.000174
+        },
+        {
+          "case_id": "REF-6023",
+          "trial": 1,
+          "passed": true,
+          "tokens_in": 9214,
+          "tokens_out": 476,
+          "list_price_tokens_usd": 0.00049878,
+          "provider_reported_usd": 0.000499
+        },
+        {
+          "case_id": "REF-6024",
+          "trial": 1,
+          "passed": false,
+          "tokens_in": 3173,
+          "tokens_out": 1152,
+          "list_price_tokens_usd": 0.00025081,
+          "provider_reported_usd": 0.000251
+        },
+        {
+          "case_id": "REF-6025",
+          "trial": 1,
+          "passed": false,
+          "tokens_in": 3180,
+          "tokens_out": 227,
+          "list_price_tokens_usd": 0.00017716,
+          "provider_reported_usd": 0.000177
+        }
+      ],
       "layer_1": {
-        "measured_variable_total_usd": 0.01502,
-        "measured_variable_per_referral_usd": 0.00025
+        "basis": "recorded tokens at dated list prices; no assumed caching discount",
+        "list_token_total_usd": 0.01502168,
+        "variable_per_referral_usd": 0.000250361333,
+        "extra_tool_retrieval_per_referral_usd": 0
       },
       "layer_2": {
-        "fallback_cost_per_failure_usd": 9.17,
-        "expected_fallback_per_referral_usd": 5.807667
+        "fallback_cost_per_failure_usd": 9.166666666667,
+        "expected_fallback_per_referral_usd": 5.805555555556
       },
       "layer_3": {
-        "monthly_referrals": 4000,
-        "monthly_variable_usd": 1.0,
-        "monthly_expected_fallback_usd": 23230.67,
-        "monthly_total_usd": 23231.67
+        "fixed_monthly_usd": 0.0,
+        "scope": "Additional paid prototype services only; full production fixed costs unknown"
       },
-      "expected_total_per_referral_usd": 5.807917,
+      "expected_total_per_referral_usd": 5.805805916889,
+      "monthly": {
+        "referrals": 4000,
+        "variable_usd": 1.001445333333,
+        "fallback_usd": 23222.222222222223,
+        "fixed_usd": 0.0,
+        "total_usd": 23223.223667555558
+      },
+      "provider_comparison": {
+        "recorded_battery_usd": 0.01502,
+        "per_recorded_trial_usd": 0.000250333333,
+        "old_provider_and_rounded_fallback_monthly_usd": 23231.668,
+        "new_baseline_minus_old_monthly_usd": -8.444332444444,
+        "list_repricing_monthly_effect_usd": 0.000112,
+        "exact_labour_monthly_effect_usd": -8.444444444444,
+        "note": "Recorded response charges, not a full account invoice. No measured cache-saving claim."
+      },
       "sensitivity": [
         {
-          "assumed_success_rate": 0.2667,
-          "expected_total_per_referral_usd": 6.724917,
-          "monthly_total_usd": 26899.67
+          "assumed_success_rate": 0.266666666667,
+          "requested_delta_percentage_points": -10.0,
+          "clipped": false,
+          "expected_total_per_referral_usd": 6.722472583556,
+          "monthly_total_usd": 26889.890334222222
         },
         {
-          "assumed_success_rate": 0.3667,
-          "expected_total_per_referral_usd": 5.807917,
-          "monthly_total_usd": 23231.67
+          "assumed_success_rate": 0.366666666667,
+          "requested_delta_percentage_points": 0.0,
+          "clipped": false,
+          "expected_total_per_referral_usd": 5.805805916889,
+          "monthly_total_usd": 23223.223667555558
         },
         {
-          "assumed_success_rate": 0.4667,
-          "expected_total_per_referral_usd": 4.890917,
-          "monthly_total_usd": 19563.67
+          "assumed_success_rate": 0.466666666667,
+          "requested_delta_percentage_points": 10.0,
+          "clipped": false,
+          "expected_total_per_referral_usd": 4.889139250222,
+          "monthly_total_usd": 19556.55700088889
         }
       ]
     }
   ],
+  "recommended_model": "deepseek/deepseek-chat-v3-0324",
+  "recommended_model_separate": {
+    "model": "openai/gpt-4.1-mini",
+    "source": "evidence/d5_live_openai_gpt-4.1-mini_v2_post_timeout_fix_full_2026-09-16.json",
+    "created_utc": "2026-09-16T14:21:06.589435+00:00",
+    "trials": 60,
+    "cases": 40,
+    "code_check_passed": 57,
+    "code_check_success_rate": 0.95,
+    "code_check_failures": 3,
+    "tokens_in": 524686,
+    "tokens_out": 27768,
+    "per_trial": [
+      {
+        "case_id": "REF-5590",
+        "trial": 1,
+        "passed": false,
+        "tokens_in": 5746,
+        "tokens_out": 199,
+        "list_price_tokens_usd": 0.0026168,
+        "provider_reported_usd": 0.001042
+      },
+      {
+        "case_id": "REF-5590",
+        "trial": 2,
+        "passed": false,
+        "tokens_in": 5746,
+        "tokens_out": 230,
+        "list_price_tokens_usd": 0.0026664,
+        "provider_reported_usd": 0.001092
+      },
+      {
+        "case_id": "REF-5590",
+        "trial": 3,
+        "passed": false,
+        "tokens_in": 5746,
+        "tokens_out": 215,
+        "list_price_tokens_usd": 0.0026424,
+        "provider_reported_usd": 0.001183
+      },
+      {
+        "case_id": "REF-5602",
+        "trial": 1,
+        "passed": true,
+        "tokens_in": 10712,
+        "tokens_out": 593,
+        "list_price_tokens_usd": 0.0052336,
+        "provider_reported_usd": 0.003006
+      },
+      {
+        "case_id": "REF-5614",
+        "trial": 1,
+        "passed": true,
+        "tokens_in": 5729,
+        "tokens_out": 289,
+        "list_price_tokens_usd": 0.002754,
+        "provider_reported_usd": 0.001218
+      },
+      {
+        "case_id": "REF-5614",
+        "trial": 2,
+        "passed": true,
+        "tokens_in": 5743,
+        "tokens_out": 305,
+        "list_price_tokens_usd": 0.0027852,
+        "provider_reported_usd": 0.001787
+      },
+      {
+        "case_id": "REF-5614",
+        "trial": 3,
+        "passed": true,
+        "tokens_in": 5729,
+        "tokens_out": 254,
+        "list_price_tokens_usd": 0.002698,
+        "provider_reported_usd": 0.001162
+      },
+      {
+        "case_id": "REF-5620",
+        "trial": 1,
+        "passed": true,
+        "tokens_in": 13136,
+        "tokens_out": 663,
+        "list_price_tokens_usd": 0.0063152,
+        "provider_reported_usd": 0.003013
+      },
+      {
+        "case_id": "REF-5631",
+        "trial": 1,
+        "passed": true,
+        "tokens_in": 10609,
+        "tokens_out": 697,
+        "list_price_tokens_usd": 0.0053588,
+        "provider_reported_usd": 0.003093
+      },
+      {
+        "case_id": "REF-5645",
+        "trial": 1,
+        "passed": true,
+        "tokens_in": 10610,
+        "tokens_out": 613,
+        "list_price_tokens_usd": 0.0052248,
+        "provider_reported_usd": 0.002422
+      },
+      {
+        "case_id": "REF-5658",
+        "trial": 1,
+        "passed": true,
+        "tokens_in": 5722,
+        "tokens_out": 250,
+        "list_price_tokens_usd": 0.0026888,
+        "provider_reported_usd": 0.00169
+      },
+      {
+        "case_id": "REF-5658",
+        "trial": 2,
+        "passed": true,
+        "tokens_in": 5724,
+        "tokens_out": 314,
+        "list_price_tokens_usd": 0.002792,
+        "provider_reported_usd": 0.001717
+      },
+      {
+        "case_id": "REF-5658",
+        "trial": 3,
+        "passed": true,
+        "tokens_in": 5722,
+        "tokens_out": 242,
+        "list_price_tokens_usd": 0.002676,
+        "provider_reported_usd": 0.001716
+      },
+      {
+        "case_id": "REF-5663",
+        "trial": 1,
+        "passed": true,
+        "tokens_in": 5688,
+        "tokens_out": 281,
+        "list_price_tokens_usd": 0.0027248,
+        "provider_reported_usd": 0.001266
+      },
+      {
+        "case_id": "REF-5663",
+        "trial": 2,
+        "passed": true,
+        "tokens_in": 5686,
+        "tokens_out": 271,
+        "list_price_tokens_usd": 0.002708,
+        "provider_reported_usd": 0.00171
+      },
+      {
+        "case_id": "REF-5663",
+        "trial": 3,
+        "passed": true,
+        "tokens_in": 5686,
+        "tokens_out": 274,
+        "list_price_tokens_usd": 0.0027128,
+        "provider_reported_usd": 0.001177
+      },
+      {
+        "case_id": "REF-5671",
+        "trial": 1,
+        "passed": true,
+        "tokens_in": 5695,
+        "tokens_out": 245,
+        "list_price_tokens_usd": 0.00267,
+        "provider_reported_usd": 0.001172
+      },
+      {
+        "case_id": "REF-5671",
+        "trial": 2,
+        "passed": true,
+        "tokens_in": 5695,
+        "tokens_out": 235,
+        "list_price_tokens_usd": 0.002654,
+        "provider_reported_usd": 0.001118
+      },
+      {
+        "case_id": "REF-5671",
+        "trial": 3,
+        "passed": true,
+        "tokens_in": 5695,
+        "tokens_out": 270,
+        "list_price_tokens_usd": 0.00271,
+        "provider_reported_usd": 0.00175
+      },
+      {
+        "case_id": "REF-5684",
+        "trial": 1,
+        "passed": true,
+        "tokens_in": 5763,
+        "tokens_out": 372,
+        "list_price_tokens_usd": 0.0029004,
+        "provider_reported_usd": 0.002363
+      },
+      {
+        "case_id": "REF-5684",
+        "trial": 2,
+        "passed": true,
+        "tokens_in": 5745,
+        "tokens_out": 232,
+        "list_price_tokens_usd": 0.0026692,
+        "provider_reported_usd": 0.001671
+      },
+      {
+        "case_id": "REF-5684",
+        "trial": 3,
+        "passed": true,
+        "tokens_in": 5739,
+        "tokens_out": 327,
+        "list_price_tokens_usd": 0.0028188,
+        "provider_reported_usd": 0.001897
+      },
+      {
+        "case_id": "REF-5697",
+        "trial": 1,
+        "passed": true,
+        "tokens_in": 7983,
+        "tokens_out": 246,
+        "list_price_tokens_usd": 0.0035868,
+        "provider_reported_usd": 0.002012
+      },
+      {
+        "case_id": "REF-5697",
+        "trial": 2,
+        "passed": true,
+        "tokens_in": 7981,
+        "tokens_out": 327,
+        "list_price_tokens_usd": 0.0037156,
+        "provider_reported_usd": 0.003178
+      },
+      {
+        "case_id": "REF-5697",
+        "trial": 3,
+        "passed": true,
+        "tokens_in": 7956,
+        "tokens_out": 309,
+        "list_price_tokens_usd": 0.0036768,
+        "provider_reported_usd": 0.001987
+      },
+      {
+        "case_id": "REF-5703",
+        "trial": 1,
+        "passed": true,
+        "tokens_in": 8271,
+        "tokens_out": 410,
+        "list_price_tokens_usd": 0.0039644,
+        "provider_reported_usd": 0.001852
+      },
+      {
+        "case_id": "REF-5703",
+        "trial": 2,
+        "passed": true,
+        "tokens_in": 8316,
+        "tokens_out": 506,
+        "list_price_tokens_usd": 0.004136,
+        "provider_reported_usd": 0.002485
+      },
+      {
+        "case_id": "REF-5703",
+        "trial": 3,
+        "passed": true,
+        "tokens_in": 8259,
+        "tokens_out": 280,
+        "list_price_tokens_usd": 0.0037516,
+        "provider_reported_usd": 0.002753
+      },
+      {
+        "case_id": "REF-5711",
+        "trial": 1,
+        "passed": true,
+        "tokens_in": 8221,
+        "tokens_out": 366,
+        "list_price_tokens_usd": 0.003874,
+        "provider_reported_usd": 0.0023
+      },
+      {
+        "case_id": "REF-5711",
+        "trial": 2,
+        "passed": true,
+        "tokens_in": 8190,
+        "tokens_out": 398,
+        "list_price_tokens_usd": 0.0039128,
+        "provider_reported_usd": 0.002761
+      },
+      {
+        "case_id": "REF-5711",
+        "trial": 3,
+        "passed": true,
+        "tokens_in": 8189,
+        "tokens_out": 343,
+        "list_price_tokens_usd": 0.0038244,
+        "provider_reported_usd": 0.001712
+      },
+      {
+        "case_id": "REF-5725",
+        "trial": 1,
+        "passed": true,
+        "tokens_in": 5725,
+        "tokens_out": 285,
+        "list_price_tokens_usd": 0.002746,
+        "provider_reported_usd": 0.00121
+      },
+      {
+        "case_id": "REF-5725",
+        "trial": 2,
+        "passed": true,
+        "tokens_in": 5713,
+        "tokens_out": 232,
+        "list_price_tokens_usd": 0.0026564,
+        "provider_reported_usd": 0.001197
+      },
+      {
+        "case_id": "REF-5725",
+        "trial": 3,
+        "passed": true,
+        "tokens_in": 5725,
+        "tokens_out": 294,
+        "list_price_tokens_usd": 0.0027604,
+        "provider_reported_usd": 0.001685
+      },
+      {
+        "case_id": "REF-5738",
+        "trial": 1,
+        "passed": true,
+        "tokens_in": 10521,
+        "tokens_out": 540,
+        "list_price_tokens_usd": 0.0050724,
+        "provider_reported_usd": 0.002845
+      },
+      {
+        "case_id": "REF-6001",
+        "trial": 1,
+        "passed": true,
+        "tokens_in": 10696,
+        "tokens_out": 639,
+        "list_price_tokens_usd": 0.0053008,
+        "provider_reported_usd": 0.003227
+      },
+      {
+        "case_id": "REF-6002",
+        "trial": 1,
+        "passed": true,
+        "tokens_in": 10491,
+        "tokens_out": 570,
+        "list_price_tokens_usd": 0.0051084,
+        "provider_reported_usd": 0.003534
+      },
+      {
+        "case_id": "REF-6003",
+        "trial": 1,
+        "passed": true,
+        "tokens_in": 10503,
+        "tokens_out": 655,
+        "list_price_tokens_usd": 0.0052492,
+        "provider_reported_usd": 0.00306
+      },
+      {
+        "case_id": "REF-6004",
+        "trial": 1,
+        "passed": true,
+        "tokens_in": 10481,
+        "tokens_out": 572,
+        "list_price_tokens_usd": 0.0051076,
+        "provider_reported_usd": 0.002842
+      },
+      {
+        "case_id": "REF-6005",
+        "trial": 1,
+        "passed": true,
+        "tokens_in": 12995,
+        "tokens_out": 673,
+        "list_price_tokens_usd": 0.0062748,
+        "provider_reported_usd": 0.003932
+      },
+      {
+        "case_id": "REF-6006",
+        "trial": 1,
+        "passed": true,
+        "tokens_in": 10501,
+        "tokens_out": 664,
+        "list_price_tokens_usd": 0.0052628,
+        "provider_reported_usd": 0.002997
+      },
+      {
+        "case_id": "REF-6007",
+        "trial": 1,
+        "passed": true,
+        "tokens_in": 10545,
+        "tokens_out": 674,
+        "list_price_tokens_usd": 0.0052964,
+        "provider_reported_usd": 0.003722
+      },
+      {
+        "case_id": "REF-6008",
+        "trial": 1,
+        "passed": true,
+        "tokens_in": 10503,
+        "tokens_out": 572,
+        "list_price_tokens_usd": 0.0051164,
+        "provider_reported_usd": 0.003465
+      },
+      {
+        "case_id": "REF-6009",
+        "trial": 1,
+        "passed": true,
+        "tokens_in": 12844,
+        "tokens_out": 648,
+        "list_price_tokens_usd": 0.0061744,
+        "provider_reported_usd": 0.003333
+      },
+      {
+        "case_id": "REF-6010",
+        "trial": 1,
+        "passed": true,
+        "tokens_in": 10516,
+        "tokens_out": 640,
+        "list_price_tokens_usd": 0.0052304,
+        "provider_reported_usd": 0.002427
+      },
+      {
+        "case_id": "REF-6011",
+        "trial": 1,
+        "passed": true,
+        "tokens_in": 10583,
+        "tokens_out": 643,
+        "list_price_tokens_usd": 0.005262,
+        "provider_reported_usd": 0.003611
+      },
+      {
+        "case_id": "REF-6012",
+        "trial": 1,
+        "passed": true,
+        "tokens_in": 13045,
+        "tokens_out": 809,
+        "list_price_tokens_usd": 0.0065124,
+        "provider_reported_usd": 0.003748
+      },
+      {
+        "case_id": "REF-6013",
+        "trial": 1,
+        "passed": true,
+        "tokens_in": 10480,
+        "tokens_out": 593,
+        "list_price_tokens_usd": 0.0051408,
+        "provider_reported_usd": 0.002798
+      },
+      {
+        "case_id": "REF-6014",
+        "trial": 1,
+        "passed": true,
+        "tokens_in": 10339,
+        "tokens_out": 560,
+        "list_price_tokens_usd": 0.0050316,
+        "provider_reported_usd": 0.002728
+      },
+      {
+        "case_id": "REF-6015",
+        "trial": 1,
+        "passed": true,
+        "tokens_in": 13055,
+        "tokens_out": 794,
+        "list_price_tokens_usd": 0.0064924,
+        "provider_reported_usd": 0.00319
+      },
+      {
+        "case_id": "REF-6016",
+        "trial": 1,
+        "passed": true,
+        "tokens_in": 10471,
+        "tokens_out": 603,
+        "list_price_tokens_usd": 0.0051532,
+        "provider_reported_usd": 0.002811
+      },
+      {
+        "case_id": "REF-6017",
+        "trial": 1,
+        "passed": true,
+        "tokens_in": 10491,
+        "tokens_out": 649,
+        "list_price_tokens_usd": 0.0052348,
+        "provider_reported_usd": 0.003046
+      },
+      {
+        "case_id": "REF-6018",
+        "trial": 1,
+        "passed": true,
+        "tokens_in": 12915,
+        "tokens_out": 804,
+        "list_price_tokens_usd": 0.0064524,
+        "provider_reported_usd": 0.004686
+      },
+      {
+        "case_id": "REF-6019",
+        "trial": 1,
+        "passed": true,
+        "tokens_in": 10744,
+        "tokens_out": 471,
+        "list_price_tokens_usd": 0.0050512,
+        "provider_reported_usd": 0.003016
+      },
+      {
+        "case_id": "REF-6020",
+        "trial": 1,
+        "passed": true,
+        "tokens_in": 10553,
+        "tokens_out": 636,
+        "list_price_tokens_usd": 0.0052388,
+        "provider_reported_usd": 0.003012
+      },
+      {
+        "case_id": "REF-6021",
+        "trial": 1,
+        "passed": true,
+        "tokens_in": 10661,
+        "tokens_out": 620,
+        "list_price_tokens_usd": 0.0052564,
+        "provider_reported_usd": 0.004296
+      },
+      {
+        "case_id": "REF-6022",
+        "trial": 1,
+        "passed": true,
+        "tokens_in": 10559,
+        "tokens_out": 579,
+        "list_price_tokens_usd": 0.00515,
+        "provider_reported_usd": 0.002923
+      },
+      {
+        "case_id": "REF-6023",
+        "trial": 1,
+        "passed": true,
+        "tokens_in": 10591,
+        "tokens_out": 576,
+        "list_price_tokens_usd": 0.005158,
+        "provider_reported_usd": 0.002892
+      },
+      {
+        "case_id": "REF-6024",
+        "trial": 1,
+        "passed": true,
+        "tokens_in": 10526,
+        "tokens_out": 528,
+        "list_price_tokens_usd": 0.0050552,
+        "provider_reported_usd": 0.002713
+      },
+      {
+        "case_id": "REF-6025",
+        "trial": 1,
+        "passed": true,
+        "tokens_in": 10482,
+        "tokens_out": 689,
+        "list_price_tokens_usd": 0.0052952,
+        "provider_reported_usd": 0.003068
+      }
+    ],
+    "layer_1": {
+      "basis": "recorded tokens at dated list prices; no assumed caching discount",
+      "list_token_total_usd": 0.2543032,
+      "variable_per_referral_usd": 0.004238386667,
+      "extra_tool_retrieval_per_referral_usd": 0
+    },
+    "layer_2": {
+      "fallback_cost_per_failure_usd": 9.166666666667,
+      "expected_fallback_per_referral_usd": 0.458333333333
+    },
+    "layer_3": {
+      "fixed_monthly_usd": 0.0,
+      "scope": "Additional paid prototype services only; full production fixed costs unknown"
+    },
+    "expected_total_per_referral_usd": 0.46257172,
+    "monthly": {
+      "referrals": 4000,
+      "variable_usd": 16.953546666667,
+      "fallback_usd": 1833.333333333333,
+      "fixed_usd": 0.0,
+      "total_usd": 1850.28688
+    },
+    "provider_comparison": {
+      "recorded_battery_usd": 0.147319,
+      "per_recorded_trial_usd": 0.002455316667,
+      "old_provider_and_rounded_fallback_monthly_usd": 1843.821266666667,
+      "new_baseline_minus_old_monthly_usd": 6.465613333333,
+      "list_repricing_monthly_effect_usd": 7.13228,
+      "exact_labour_monthly_effect_usd": -0.666666666667,
+      "note": "Recorded response charges, not a full account invoice. No measured cache-saving claim."
+    },
+    "sensitivity": [
+      {
+        "assumed_success_rate": 0.85,
+        "requested_delta_percentage_points": -10.0,
+        "clipped": false,
+        "expected_total_per_referral_usd": 1.379238386667,
+        "monthly_total_usd": 5516.953546666667
+      },
+      {
+        "assumed_success_rate": 0.95,
+        "requested_delta_percentage_points": 0.0,
+        "clipped": false,
+        "expected_total_per_referral_usd": 0.46257172,
+        "monthly_total_usd": 1850.28688
+      },
+      {
+        "assumed_success_rate": 1.0,
+        "requested_delta_percentage_points": 10.0,
+        "clipped": true,
+        "expected_total_per_referral_usd": 0.004238386667,
+        "monthly_total_usd": 16.953546666667
+      }
+    ]
+  },
+  "supplementary_qwen": {
+    "source": "ProblemB_qwen_60trial_evidence.zip",
+    "included_in_final_five": false
+  },
   "break_even": {
     "cheap_model": "mistralai/mistral-small-24b-instruct-2501",
     "dear_model": "deepseek/deepseek-chat-v3-0324",
-    "required_cheap_success_rate": 0.84985,
-    "observed_cheap_success_rate": 0.366667,
-    "formula": "p_cheap = p_dear - (dear_variable - cheap_variable) / failure_cost"
-  }
-} 
+    "required_cheap_success_rate": 0.849798903055,
+    "observed_cheap_success_rate": 0.366666666667,
+    "formula": "1-(E-C)/F"
+  },
+  "limitations": [
+    "No run-time commit or prompt hashes in the live records; same v2 label and schedule alone do not prove all settings identical.",
+    "Human judgement is separate; the 3/10 sample belongs to separate GPT evidence and its exact run mapping needs confirmation.",
+    "Exact paired B prefix and D observation-growth token measurements remain unavailable; character estimates are not measured tokens.",
+    "Monthly per-user spending limit is not evidenced. Existing caps are 8 turns and 60000 tokens per run.",
+    "Failure-only labour proxy excludes routine labour for correct clinical escalation; full production cost is not established."
+  ]
+}
