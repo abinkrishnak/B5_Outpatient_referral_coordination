@@ -20,7 +20,13 @@ live-model evaluations, and a three-layer cost-to-serve model.
 | V1 versus V2 experiment | V2: 48/60, $0.048662 |
 | Completed V2 live models | 5 distinct families |
 | Recommended final-comparison model | DeepSeek Chat V3: 51/60 (85.0%) |
-| Expected monthly cost at 4,000 referrals | $5,508.49 |
+| Baseline monthly cost at 4,000 referrals | $5,508.38 |
+
+D6 uses recorded tokens at dated list prices and exact fallback labour
+(55 × 10/60), plus a prototype-only fixed-fee assumption of zero.
+Provider-reported charges remain a separate comparison, not the baseline.
+See [the cost assumptions and limitations](docs/D6_COST_TO_SERVE.md) and
+[the report section](docs/D6_SECTION4_REPORT.md).
 
 Read [the results dashboard](docs/RESULTS_DASHBOARD.md) first. It presents
 the D0-D7 evidence, model comparison, cost model and controlled failures.

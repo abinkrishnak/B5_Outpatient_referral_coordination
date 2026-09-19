@@ -27,7 +27,13 @@ DeepSeek Chat V3 has the lowest expected cost in our final five-family compariso
 DeepSeek passed 51 of 60 automated checks. Its 417,556 input and 21,236 output tokens yield a list-price inference cost of US$0.002094 per referral. Expected fallback adds US$1.375, giving US$1.377094 per referral and US$5,508.38 monthly. These are benchmark-based estimates, not validated clinical costs. Thirty ordinary cases run once and ten negative cases run three times, so the test weighting does not represent hospital prevalence.
 We assume no additional paid tool, retrieval or monthly infrastructure services for the current prototype. Production maintenance, recurring evaluations, equipment and routine clinical escalation labour are unmeasured and excluded. The saved DeepSeek API charges total US$0.097416; they are kept separate from the US$0.125625 list-price baseline. Different routes or billing treatment may explain differences, but without paired tests we claim neither caching savings nor a measured reasoning-token adjustment.
 At success rates of 75%, 85% and 95%, DeepSeek's monthly baseline is US$9,175.04, US$5,508.38 and US$1,841.71. A ten-percentage-point change therefore moves monthly expected fallback by US$3,666.67. Mistral would need approximately 84.98% success to match DeepSeek's expected cost, versus its observed 36.67%. This comparison is conditional on the observed pass rates and does not establish statistical superiority.
-<img width="1058" height="470" alt="image" src="https://github.com/user-attachments/assets/3ea6f311-ffc8-4815-84e2-1c661cc12221" />
+| Model | Success rate | Token cost / referral | Expected total / referral | Monthly cost at 4,000 |
+|---|---:|---:|---:|---:|
+| DeepSeek Chat V3 | 85.0% | US$0.002094 | US$1.377094 | **US$5,508.38** |
+| Gemini 2.5 Flash | 81.7% | US$0.003263 | US$1.683818 | US$6,735.27 |
+| Claude Haiku 4.5 | 80.0% | US$0.012277 | US$1.845610 | US$7,382.44 |
+| Llama 3.3 70B Instruct | 75.0% | US$0.000779 | US$2.292446 | US$9,169.78 |
+| Mistral Small 24B | 36.7% | US$0.000250 | US$5.805806 | US$23,223.22 |
 
 The four levers are base-prefix size B, turns T, observation growth D and success probability P. The D2 prompt audit reports 5,189 to 5,080 characters, not measured B tokens. Grouping independent tools reduced six calls from six turns to four in a scripted comparison; its 42.9% input-token saving is estimated. A paired measured D comparison remains unavailable. Historical Flash-Lite V1/V2 results fell from 49/60 to 48/60 despite lower token usage, so lower inference cost alone does not establish better total cost. Fallback dominates our model. Code caps are eight turns and 60,000 tokens per run; a monthly per-user cap remains unverified.
 ## 5. The two failures
