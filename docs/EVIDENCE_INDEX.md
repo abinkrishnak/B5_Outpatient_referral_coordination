@@ -10,7 +10,7 @@
 | Evaluation set is 40 cases / 60 trials | `python audit_evaluation_set.py` | `evidence/d4_evaluation_audit.json` |
 | Scripted backend is reproducible | `python run_eval.py` | `results.json` |
 | Five live models were compared | `python summarize_live_results.py` | completed `evidence/d5_live_*.json` files |
-| GPT-4.1 mini is selected | `python cost_to_serve.py` | `evidence/d6_cost_to_serve.json` |
+| DeepSeek has lowest scoped baseline cost among the final five; GPT remains separate | `python cost_to_serve.py` | `evidence/d6_cost_to_serve.json`, `docs/D6_COST_TO_SERVE.md` |
 | Loop-control failure increases cost without changing answer | `python demo_loop_failure.py` | `docs/D7_FAILURES.md` |
 
 Only complete 60-trial live files support D5 and D6 claims. Incomplete provider

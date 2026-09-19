@@ -21,7 +21,7 @@ flowchart TD
 | D3 | 12/12 safety checks pass, including 3 malicious free-text cases | `d3_guardrail_checklist.json` |
 | D4 | 40 cases and 60 trials; scripted 60/60 | `d4_evaluation_audit.json` |
 | D5 | Five complete V2 live batteries | `D5_MODEL_BATTERY.md` |
-| D6 | DeepSeek Chat V3: $5,508.49/month | `d6_cost_to_serve.json` |
+| D6 | DeepSeek Chat V3: $5,508.38/month baseline | `d6_cost_to_serve.json` |
 | D7 | Loop and tool-interface failures reproduced | `D7_FAILURES.md` |
 
 ## V2 poka-yoke decision
@@ -45,17 +45,21 @@ silently looking like a genuine absence of clinic capacity.
 
 ## Five-model V2 battery
 
-| Model | Pass rate | Median turns | Total cost | Expected monthly cost |
+| Model | Pass rate | Median turns | Recorded API battery cost | Baseline monthly cost |
 |---|---:|---:|---:|---:|
-| DeepSeek Chat V3 | **51/60 (85.0%)** | 4.0 | $0.097416 | **$5,508.49** |
-| Gemini 2.5 Flash | 49/60 (81.7%) | 4.0 | $0.189767 | $6,737.32 |
-| Claude Haiku 4.5 | 48/60 (80.0%) | 3.5 | $0.736601 | $7,385.11 |
-| Llama 3.3 70B | 45/60 (75.0%) | 4.0 | $0.064365 | $9,174.29 |
-| Mistral Small 24B | 22/60 (36.7%) | 1.0 | $0.015020 | $23,231.67 |
+| DeepSeek Chat V3 | **51/60 (85.0%)** | 4.0 | $0.097416 | **$5,508.38** |
+| Gemini 2.5 Flash | 49/60 (81.7%) | 4.0 | $0.189767 | $6,735.27 |
+| Claude Haiku 4.5 | 48/60 (80.0%) | 3.5 | $0.736601 | $7,382.44 |
+| Llama 3.3 70B | 45/60 (75.0%) | 4.0 | $0.064365 | $9,169.78 |
+| Mistral Small 24B | 22/60 (36.7%) | 1.0 | $0.015020 | $23,223.22 |
 
-The model token price does not drive the deployment decision. Layer 2 human
-fallback dominates the total, so DeepSeek wins despite not having the lowest
-raw API cost. GPT-4.1 mini is retained as separate supplementary evidence.
+Monthly baseline uses measured tokens at dated list prices, not the recorded
+API charge column; fallback is (1-p) × (55 × 10/60), with zero additional paid
+prototype fixed services. Layer 2 dominates this scoped estimate, so DeepSeek
+has the lowest observed proxy cost. This is not clinical deployment approval.
+GPT-4.1 mini is retained as a separate evaluation. Unmeasured production costs,
+exact paired B/D measurements and the monthly per-user cap remain limitations;
+see D6_COST_TO_SERVE.md.
 
 ## Safety and failure evidence
 
